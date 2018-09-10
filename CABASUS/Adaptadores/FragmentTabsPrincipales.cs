@@ -34,11 +34,11 @@ namespace CABASUS.Adaptadores
                     Vista = inflater.Inflate(Resource.Layout.layoutPagina1, container, false);
                     Vista.FindViewById<LinearLayout>(Resource.Id.linear).SetBackgroundColor(Color.Black);
                     break;
-                case 1:
+                case 1://Se ve CicleView
                     Vista = inflater.Inflate(Resource.Layout.layoutPagina1, container, false);
                     Vista.FindViewById<LinearLayout>(Resource.Id.linear).SetBackgroundColor(Color.Blue);
                     break;
-                case 2:
+                case 2:// Se ve CicleView
                     Vista = inflater.Inflate(Resource.Layout.layoutPagina1, container, false);
                     Vista.FindViewById<LinearLayout>(Resource.Id.linear).SetBackgroundColor(Color.Red);
                     break;

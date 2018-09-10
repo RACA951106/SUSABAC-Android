@@ -10,7 +10,7 @@ namespace CABASUS.Adaptadores
     class AdaptadorTabsPrincipales : FragmentPagerAdapter, ICustomTabProvider
     {
         Activity Actividad = null;
-
+        
         public AdaptadorTabsPrincipales(Android.Support.V4.App.FragmentManager fm, Activity a) : base(fm) { Actividad = a; }
 
         public override int Count

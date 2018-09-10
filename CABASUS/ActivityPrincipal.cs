@@ -6,6 +6,9 @@ using com.refractored;
 using CABASUS.Adaptadores;
 using Android.Widget;
 using System.Timers;
+using System.Collections.Generic;
+using System;
+using Com.Gigamole.Infinitecycleviewpager;
 
 namespace CABASUS
 {
@@ -15,6 +18,8 @@ namespace CABASUS
         PagerSlidingTabStrip TabsPrincipales;
         ViewPager ViewPagerPrincipal;
         FrameLayout SelectorCaballos;
+
+        List<string> listNombreCaballos;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,6 +34,15 @@ namespace CABASUS
             TabsPrincipales.SetViewPager(ViewPagerPrincipal);
             TabsPrincipales.GetChildAt(0).SetMinimumWidth(10);
 
+            llenarListaCaballo();
+            HorizontalInfiniteCycleViewPager cycleViewPager = (HorizontalInfiniteCycleViewPager)FindViewById(Resource.Id.horizontal_viewPager);
+            AdaptadorHorses adaptadorHorse = new AdaptadorHorses(listNombreCaballos, BaseContext);
+            cycleViewPager.Adapter = adaptadorHorse;
+
+            cycleViewPager.PageScrolled += delegate {
+                //Toast.MakeText(this, listNombreCaballos[cycleViewPager.RealItem], ToastLength.Short).Show();
+                cycleViewPager.FindViewById<TextView>(Resource.Id.txtNombreCaballoPicker).Text = listNombreCaballos[cycleViewPager.RealItem];
+            };
 
             ViewPagerPrincipal.PageScrolled += delegate 
             {
@@ -45,6 +59,7 @@ namespace CABASUS
                 {
                     SelectorCaballos.LayoutParameters = new TableLayout.LayoutParams(-1, 0, Relacion);
                     ViewPagerPrincipal.LayoutParameters = new TableLayout.LayoutParams(-1, 0, 90f - Relacion);
+
                 }
                 if (Relacion >= 40f && Relacion <= 60f)  
                 {
@@ -53,6 +68,16 @@ namespace CABASUS
                     ViewPagerPrincipal.LayoutParameters = new TableLayout.LayoutParams(-1, 0, 90f - RelacionInversa);
                 }
             };
+        }
+
+        private void llenarListaCaballo()
+        {
+            listNombreCaballos = new List<string>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                listNombreCaballos.Add("Caballo " + i);
+            }
         }
     }
 }

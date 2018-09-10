@@ -57,6 +57,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adaptadores\AdaptadorHorses.cs" />
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
     <Compile Include="ActivityPrincipal.cs" />
@@ -98,6 +99,9 @@
   <ItemGroup>
     <PackageReference Include="Refractored.PagerSlidingTabStrip">
       <Version>1.1.6</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Android.InfiniteCycleViewPager">
+      <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v4">
