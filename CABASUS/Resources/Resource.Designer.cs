@@ -3686,17 +3686,17 @@ namespace CABASUS
 			// aapt resource value: 0x7f080033
 			public const int CTRL = 2131230771;
 			
-			// aapt resource value: 0x7f08009d
-			public const int CycleViewPagerHorses = 2131230877;
+			// aapt resource value: 0x7f08009e
+			public const int CycleViewPagerHorses = 2131230878;
 			
 			// aapt resource value: 0x7f080034
 			public const int FUNCTION = 2131230772;
 			
-			// aapt resource value: 0x7f0800b7
-			public const int Icon = 2131230903;
+			// aapt resource value: 0x7f0800b8
+			public const int Icon = 2131230904;
 			
-			// aapt resource value: 0x7f0800b6
-			public const int ImagenCaballo = 2131230902;
+			// aapt resource value: 0x7f0800b7
+			public const int ImagenCaballo = 2131230903;
 			
 			// aapt resource value: 0x7f080035
 			public const int META = 2131230773;
@@ -3713,11 +3713,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f08009a
 			public const int TabsPrincipales = 2131230874;
 			
-			// aapt resource value: 0x7f08009c
-			public const int ViewPagerPrincipal = 2131230876;
+			// aapt resource value: 0x7f08009d
+			public const int ViewPagerPrincipal = 2131230877;
 			
-			// aapt resource value: 0x7f0800a5
-			public const int action0 = 2131230885;
+			// aapt resource value: 0x7f0800a6
+			public const int action0 = 2131230886;
 			
 			// aapt resource value: 0x7f08007d
 			public const int action_bar = 2131230845;
@@ -3740,17 +3740,17 @@ namespace CABASUS
 			// aapt resource value: 0x7f08005b
 			public const int action_bar_title = 2131230811;
 			
-			// aapt resource value: 0x7f0800a2
-			public const int action_container = 2131230882;
+			// aapt resource value: 0x7f0800a3
+			public const int action_container = 2131230883;
 			
 			// aapt resource value: 0x7f08007e
 			public const int action_context_bar = 2131230846;
 			
-			// aapt resource value: 0x7f0800a9
-			public const int action_divider = 2131230889;
+			// aapt resource value: 0x7f0800aa
+			public const int action_divider = 2131230890;
 			
-			// aapt resource value: 0x7f0800a3
-			public const int action_image = 2131230883;
+			// aapt resource value: 0x7f0800a4
+			public const int action_image = 2131230884;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -3767,11 +3767,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f08005d
 			public const int action_mode_close_button = 2131230813;
 			
-			// aapt resource value: 0x7f0800a4
-			public const int action_text = 2131230884;
+			// aapt resource value: 0x7f0800a5
+			public const int action_text = 2131230885;
 			
-			// aapt resource value: 0x7f0800b2
-			public const int actions = 2131230898;
+			// aapt resource value: 0x7f0800b3
+			public const int actions = 2131230899;
 			
 			// aapt resource value: 0x7f08005e
 			public const int activity_chooser_view_content = 2131230814;
@@ -3806,14 +3806,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f08003d
 			public const int bottom = 2131230781;
 			
-			// aapt resource value: 0x7f0800a0
-			public const int btnAdd = 2131230880;
+			// aapt resource value: 0x7f0800a1
+			public const int btnAdd = 2131230881;
 			
 			// aapt resource value: 0x7f080064
 			public const int buttonPanel = 2131230820;
 			
-			// aapt resource value: 0x7f0800a6
-			public const int cancel_action = 2131230886;
+			// aapt resource value: 0x7f0800a7
+			public const int cancel_action = 2131230887;
 			
 			// aapt resource value: 0x7f080045
 			public const int center = 2131230789;
@@ -3827,8 +3827,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080074
 			public const int checkbox = 2131230836;
 			
-			// aapt resource value: 0x7f0800ae
-			public const int chronometer = 2131230894;
+			// aapt resource value: 0x7f0800af
+			public const int chronometer = 2131230895;
 			
 			// aapt resource value: 0x7f08004e
 			public const int clip_horizontal = 2131230798;
@@ -3878,8 +3878,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080020
 			public const int disableHome = 2131230752;
 			
-			// aapt resource value: 0x7f08009f
-			public const int editText = 2131230879;
+			// aapt resource value: 0x7f0800a0
+			public const int editText = 2131230880;
 			
 			// aapt resource value: 0x7f08007f
 			public const int edit_query = 2131230847;
@@ -3887,8 +3887,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080030
 			public const int end = 2131230768;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int end_padder = 2131230900;
+			// aapt resource value: 0x7f0800b5
+			public const int end_padder = 2131230901;
 			
 			// aapt resource value: 0x7f08003f
 			public const int enterAlways = 2131230783;
@@ -3929,11 +3929,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f080021
 			public const int homeAsUp = 2131230753;
 			
+			// aapt resource value: 0x7f08009c
+			public const int horizontal_viewPager = 2131230876;
+			
 			// aapt resource value: 0x7f080063
 			public const int icon = 2131230819;
 			
-			// aapt resource value: 0x7f0800b3
-			public const int icon_group = 2131230899;
+			// aapt resource value: 0x7f0800b4
+			public const int icon_group = 2131230900;
 			
 			// aapt resource value: 0x7f08003a
 			public const int ifRoom = 2131230778;
@@ -3941,11 +3944,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f080060
 			public const int image = 2131230816;
 			
-			// aapt resource value: 0x7f08009e
-			public const int imageView = 2131230878;
+			// aapt resource value: 0x7f08009f
+			public const int imageView = 2131230879;
 			
-			// aapt resource value: 0x7f0800af
-			public const int info = 2131230895;
+			// aapt resource value: 0x7f0800b0
+			public const int info = 2131230896;
 			
 			// aapt resource value: 0x7f080059
 			public const int italic = 2131230809;
@@ -3965,8 +3968,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080018
 			public const int line3 = 2131230744;
 			
-			// aapt resource value: 0x7f0800a1
-			public const int linear = 2131230881;
+			// aapt resource value: 0x7f0800a2
+			public const int linear = 2131230882;
 			
 			// aapt resource value: 0x7f08001d
 			public const int listMode = 2131230749;
@@ -3974,14 +3977,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f080062
 			public const int list_item = 2131230818;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int masked = 2131230906;
+			// aapt resource value: 0x7f0800bb
+			public const int masked = 2131230907;
 			
-			// aapt resource value: 0x7f0800a8
-			public const int media_actions = 2131230888;
+			// aapt resource value: 0x7f0800a9
+			public const int media_actions = 2131230889;
 			
-			// aapt resource value: 0x7f0800b8
-			public const int message = 2131230904;
+			// aapt resource value: 0x7f0800b9
+			public const int message = 2131230905;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
@@ -4004,14 +4007,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f08001e
 			public const int normal = 2131230750;
 			
-			// aapt resource value: 0x7f0800b1
-			public const int notification_background = 2131230897;
+			// aapt resource value: 0x7f0800b2
+			public const int notification_background = 2131230898;
+			
+			// aapt resource value: 0x7f0800ac
+			public const int notification_main_column = 2131230892;
 			
 			// aapt resource value: 0x7f0800ab
-			public const int notification_main_column = 2131230891;
-			
-			// aapt resource value: 0x7f0800aa
-			public const int notification_main_column_container = 2131230890;
+			public const int notification_main_column_container = 2131230891;
 			
 			// aapt resource value: 0x7f08004c
 			public const int parallax = 2131230796;
@@ -4031,8 +4034,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080007
 			public const int progress_horizontal = 2131230727;
 			
-			// aapt resource value: 0x7f0800b5
-			public const int psts_tab_title = 2131230901;
+			// aapt resource value: 0x7f0800b6
+			public const int psts_tab_title = 2131230902;
 			
 			// aapt resource value: 0x7f080076
 			public const int radio = 2131230838;
@@ -4040,11 +4043,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f08004a
 			public const int right = 2131230794;
 			
-			// aapt resource value: 0x7f0800b0
-			public const int right_icon = 2131230896;
+			// aapt resource value: 0x7f0800b1
+			public const int right_icon = 2131230897;
 			
-			// aapt resource value: 0x7f0800ac
-			public const int right_side = 2131230892;
+			// aapt resource value: 0x7f0800ad
+			public const int right_side = 2131230893;
 			
 			// aapt resource value: 0x7f08000c
 			public const int save_image_matrix = 2131230732;
@@ -4148,8 +4151,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f08004b
 			public const int start = 2131230795;
 			
-			// aapt resource value: 0x7f0800a7
-			public const int status_bar_latest_event_content = 2131230887;
+			// aapt resource value: 0x7f0800a8
+			public const int status_bar_latest_event_content = 2131230888;
 			
 			// aapt resource value: 0x7f080077
 			public const int submenuarrow = 2131230839;
@@ -4184,8 +4187,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080015
 			public const int textinput_error = 2131230741;
 			
-			// aapt resource value: 0x7f0800ad
-			public const int time = 2131230893;
+			// aapt resource value: 0x7f0800ae
+			public const int time = 2131230894;
 			
 			// aapt resource value: 0x7f08001c
 			public const int title = 2131230748;
@@ -4232,8 +4235,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800b9
-			public const int visible = 2131230905;
+			// aapt resource value: 0x7f0800ba
+			public const int visible = 2131230906;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
