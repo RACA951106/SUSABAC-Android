@@ -5,7 +5,7 @@ using Android.Support.V4.View;
 using com.refractored;
 using CABASUS.Adaptadores;
 using Android.Widget;
-using System.Timers;
+using CABASUS.Fragments;
 
 namespace CABASUS
 {
@@ -29,6 +29,9 @@ namespace CABASUS
             TabsPrincipales.SetViewPager(ViewPagerPrincipal);
             TabsPrincipales.GetChildAt(0).SetMinimumWidth(10);
 
+            FragmentTransaction transaccion = FragmentManager.BeginTransaction();
+            transaccion.Add(Resource.Id.SelectorCaballos, new FragmentCycleHorses());
+            transaccion.Commit();
 
             ViewPagerPrincipal.PageScrolled += delegate 
             {
@@ -53,6 +56,8 @@ namespace CABASUS
                     ViewPagerPrincipal.LayoutParameters = new TableLayout.LayoutParams(-1, 0, 90f - RelacionInversa);
                 }
             };
+
+
         }
     }
 }

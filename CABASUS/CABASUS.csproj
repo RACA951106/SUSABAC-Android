@@ -57,9 +57,11 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
     <Compile Include="ActivityPrincipal.cs" />
+    <Compile Include="Fragments\FragmentCycleHorses.cs" />
     <Compile Include="Fragments\FragmentHorses.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +101,9 @@
     <PackageReference Include="Refractored.PagerSlidingTabStrip">
       <Version>1.1.6</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugins.Android.InfiniteCycleViewPager">
+      <Version>1.0.2</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v4">
       <Version>27.0.2.1</Version>
@@ -110,7 +115,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\CustomTab.axml">
+    <AndroidResource Include="Resources\layout\RowTab.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -139,6 +144,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\LayoutFragmentCycleHorses.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\RowCycle.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -47,7 +47,7 @@ namespace CABASUS.Adaptadores
 
         public View GetCustomTabView(ViewGroup parent, int position)
         {
-            View Vista = Actividad.LayoutInflater.Inflate(Resource.Layout.CustomTab, parent, false);
+            View Vista = Actividad.LayoutInflater.Inflate(Resource.Layout.RowTab, parent, false);
             ImageView Icono = Vista.FindViewById<ImageView>(Resource.Id.Icon);
 
             switch (position)
