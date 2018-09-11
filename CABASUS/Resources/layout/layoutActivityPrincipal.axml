@@ -30,8 +30,21 @@
 			android:id="@+id/SelectorCaballos"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#FFF"
-            android:layout_weight="0"/>
+            android:background="#fff"
+            android:layout_weight="0">
+			<com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
+				android:id="@+id/horizontal_viewPager"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
+				app:icvp_scroll_duration="250"
+				app:icvp_center_page_scale_offset="5dp"
+				app:icvp_min_page_scale_offset="5dp"
+				app:icvp_max_page_scale="0.8"
+				app:icvp_min_page_scale="0.55"
+				app:icvp_medium_scaled="false"
+/>
+		</FrameLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/ViewPagerPrincipal"
