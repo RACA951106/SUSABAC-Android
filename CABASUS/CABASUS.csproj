@@ -62,6 +62,7 @@
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
     <Compile Include="ActivityPrincipal.cs" />
+    <Compile Include="Adaptadores\PagerAdapterLogin.cs" />
     <Compile Include="Fragments\FragmentCycleHorses.cs" />
     <Compile Include="Fragments\FragmentHorses.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -166,12 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Selected_dot.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Tab_selector.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\raw\FondoLogin.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
