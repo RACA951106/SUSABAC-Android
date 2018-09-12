@@ -9,7 +9,7 @@ using CABASUS.Fragments;
 
 namespace CABASUS
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     public class ActivityPrincipal : AppCompatActivity
     {
         PagerSlidingTabStrip TabsPrincipales;
