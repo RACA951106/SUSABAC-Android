@@ -12,14 +12,22 @@ using System;
 using System.Collections.Generic;
 using Android.Support.Design.Widget;
 using System.Timers;
+using Android.Media;
 
 namespace CABASUS
 {
     [Activity(Label = "ActivityLogin", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = true)]
-    public class ActivityLogin : Activity
+    public class ActivityLogin : Activity, MediaPlayer.IOnPreparedListener
     {
         ViewPager ViewPagerLogin;
         TabLayout TabViewPager;
+
+        public void OnPrepared(MediaPlayer mp)
+        {
+            mp.Looping = true;
+            mp.SetVolume(0, 0);
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -27,6 +35,15 @@ namespace CABASUS
 
             var btnCreateAccount = FindViewById<TextView>(Resource.Id.btnCreateAccount);
             var btnLogIn = FindViewById<TextView>(Resource.Id.btnLogIn);
+            var VideoFondo = FindViewById<VideoView>(Resource.Id.FondoVideo);
+
+            VideoFondo.SetOnPreparedListener(this);
+            //VideoFondo.ScaleX = 1.22f;
+            //VideoFondo.ScaleY = 1.22f;
+            var Ruta = "android.resource://CABASUS.CABASUS/" + Resource.Raw.FondoLogin;
+            Android.Net.Uri uri = Android.Net.Uri.Parse(Ruta);
+            VideoFondo.SetVideoURI(uri);
+            VideoFondo.Start();
 
             GradientDrawable gd = new GradientDrawable();
             gd.SetColor(Color.Rgb(246, 128, 25));
