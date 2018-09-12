@@ -35,6 +35,10 @@ namespace CABASUS
             btnLogIn.SetBackgroundDrawable(gd);
 
             ViewPagerLogin = FindViewById<ViewPager>(Resource.Id.ViewPagerLogin);
+            var PagerSeleccionado1 = FindViewById<LinearLayout>(Resource.Id.Seleccionado1);
+            var PagerSeleccionado2 = FindViewById<LinearLayout>(Resource.Id.Seleccionado2);
+            var PagerSeleccionado3 = FindViewById<LinearLayout>(Resource.Id.Seleccionado3);
+            var PagerSeleccionado4 = FindViewById<LinearLayout>(Resource.Id.Seleccionado4);
 
             List<string> datosViewPager = new List<string> {"cuarto", "primero", "segundo", "tercero", "cuarto", "primero" };
             ViewPagerLogin.Adapter = new PagerAdapterLogin(this, datosViewPager);
@@ -79,7 +83,53 @@ namespace CABASUS
                     };
                     T.Start();
                 }
+
+                if (ViewPagerLogin.CurrentItem == 1)
+                {
+                    PagerSeleccionado1.SetBackgroundResource(Resource.Drawable.Selected_dot);
+                    PagerSeleccionado2.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado3.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado4.SetBackgroundResource(Resource.Drawable.Default_dot);
+                }
+                else if (ViewPagerLogin.CurrentItem == 2)
+                {
+                    PagerSeleccionado1.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado2.SetBackgroundResource(Resource.Drawable.Selected_dot);
+                    PagerSeleccionado3.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado4.SetBackgroundResource(Resource.Drawable.Default_dot);
+                }
+                else if (ViewPagerLogin.CurrentItem == 3)
+                {
+                    PagerSeleccionado1.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado2.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado3.SetBackgroundResource(Resource.Drawable.Selected_dot);
+                    PagerSeleccionado4.SetBackgroundResource(Resource.Drawable.Default_dot);
+                }
+                else if (ViewPagerLogin.CurrentItem == 4)
+                {
+                    PagerSeleccionado1.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado2.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado3.SetBackgroundResource(Resource.Drawable.Default_dot);
+                    PagerSeleccionado4.SetBackgroundResource(Resource.Drawable.Selected_dot);
+                }
             };
+            
+            Timer TimerChangePage = new Timer();
+            TimerChangePage.Interval = 3500;
+            TimerChangePage.Enabled = true;
+            TimerChangePage.Elapsed += (s, e) => {
+                RunOnUiThread(() => {
+                    if (ViewPagerLogin.CurrentItem == 1)
+                        ViewPagerLogin.SetCurrentItem(2, true);
+                    else if (ViewPagerLogin.CurrentItem == 2)
+                        ViewPagerLogin.SetCurrentItem(3, true);
+                    else if (ViewPagerLogin.CurrentItem == 3)
+                        ViewPagerLogin.SetCurrentItem(4, true);
+                    else if (ViewPagerLogin.CurrentItem == 4)
+                        ViewPagerLogin.SetCurrentItem(1, false);
+                });
+            };
+            TimerChangePage.Start();
         }
     }
     public class PagerAdapterLogin : PagerAdapter
