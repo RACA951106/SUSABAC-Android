@@ -62,6 +62,7 @@
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
     <Compile Include="ActivityPrincipal.cs" />
+    <Compile Include="Adaptadores\PagerAdapterLogin.cs" />
     <Compile Include="Fragments\FragmentCycleHorses.cs" />
     <Compile Include="Fragments\FragmentHorses.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
