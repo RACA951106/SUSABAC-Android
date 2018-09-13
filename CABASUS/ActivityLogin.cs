@@ -12,7 +12,7 @@ using Android.Media;
 
 namespace CABASUS
 {
-    [Activity(Label = "ActivityLogin", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = true)]
     public class ActivityLogin : Activity, MediaPlayer.IOnPreparedListener
     {
         ViewPager ViewPagerLogin;
@@ -28,6 +28,7 @@ namespace CABASUS
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LayoutActivityLogin);
+            Window.SetStatusBarColor(Color.Black);
 
             #region Casamiento
             var btnCreateAccount = FindViewById<TextView>(Resource.Id.btnCreateAccount);
@@ -37,10 +38,10 @@ namespace CABASUS
             VideoFondo.SetOnPreparedListener(this);
             //VideoFondo.ScaleX = 1.22f;
             //VideoFondo.ScaleY = 1.22f;
-            var Ruta = "android.resource://CABASUS.CABASUS/" + Resource.Raw.FondoLogin;
-            Android.Net.Uri uri = Android.Net.Uri.Parse(Ruta);
-            VideoFondo.SetVideoURI(uri);
-            VideoFondo.Start();
+            //var Ruta = "android.resource://CABASUS.CABASUS/" + Resource.Raw.FondoLogin;
+            //Android.Net.Uri uri = Android.Net.Uri.Parse(Ruta);
+            //VideoFondo.SetVideoURI(uri);
+            //VideoFondo.Start();
             ViewPagerLogin = FindViewById<ViewPager>(Resource.Id.ViewPagerLogin);
             var PagerSeleccionado1 = FindViewById<LinearLayout>(Resource.Id.Seleccionado1);
             var PagerSeleccionado2 = FindViewById<LinearLayout>(Resource.Id.Seleccionado2);
@@ -49,16 +50,21 @@ namespace CABASUS
             #endregion
 
             #region Estilo de botones
-            GradientDrawable gd = new GradientDrawable();
-            gd.SetColor(Color.Rgb(246, 128, 25));
-            gd.SetCornerRadius(500);
-            btnCreateAccount.SetBackgroundDrawable(gd);
-            btnLogIn.SetBackgroundDrawable(gd);
+            GradientDrawable gdCreate = new GradientDrawable();
+            gdCreate.SetColor(Color.Rgb(246, 128, 25));
+            gdCreate.SetCornerRadius(500);
+            btnCreateAccount.SetBackgroundDrawable(gdCreate);
+
+            GradientDrawable gdLogin = new GradientDrawable();
+            gdLogin.SetColor(Color.Rgb(255, 255, 255));
+            gdLogin.SetCornerRadius(500);
+            btnLogIn.SetBackgroundDrawable(gdLogin);
             #endregion
 
             #region Contenido ViewPager
-            List<string> datosViewPager = new List<string> {"cuarto", "primero", "segundo", "tercero", "cuarto", "primero" };
-            ViewPagerLogin.Adapter = new PagerAdapterLogin(this, datosViewPager);
+            List<string> TitulosViewPager = new List<string> {"Share", "Welcome", "Run", "History", "Share", "Welcome" };
+            List<string> datosViewPager = new List<string> { "Info Share", "Info Welcome", "Info Run", "Info History", "Info Share", "Info Welcome" };
+            ViewPagerLogin.Adapter = new PagerAdapterLogin(this, datosViewPager, TitulosViewPager, LayoutInflater);
             ViewPagerLogin.SetCurrentItem(1, false);
             #endregion
 
@@ -150,6 +156,18 @@ namespace CABASUS
                 });
             };
             TimerChangePage.Start();
+            #endregion
+
+            #region crear cuenta
+            btnCreateAccount.Click += delegate {
+                StartActivity(typeof(ActivityRegistroUsuario));
+            };
+            #endregion
+
+            #region iniciar sesion
+            btnLogIn.Click += delegate {
+                StartActivity(typeof(Activity_IniciarSesion));
+            };
             #endregion
         }
     }

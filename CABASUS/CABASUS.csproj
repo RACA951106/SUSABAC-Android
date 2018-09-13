@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivityLogin.cs" />
+    <Compile Include="ActivityRegistroUsuario.cs" />
+    <Compile Include="Activity_IniciarSesion.cs" />
     <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
@@ -167,6 +169,27 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Selected_dot.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layout_InfoLogin.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values-es\strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layout_RegistroUsuario.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\StyleButtomRegistroUsuario.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layout_IniciarSesion.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\raw\" />

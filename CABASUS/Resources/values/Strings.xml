@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">CABASUS</string>
     <string name="action_settings">Settings</string>
+
+  <!--Login-->
+  <string name="create_account">CREATE ACCOUNT</string>
+  <string name="log_in">LOG IN</string>
+  <string name="already_auser">Already a user?</string>
+  
+  <!--Registrar usuarios-->
+  <string name="User_name">User Name</string>
+  <string name="Email">Email</string>
+  <string name="Password">Password</string>
+  <string name="Age">Age</string>
+  <string name="Phone">Phone</string>
+  <string name="Accept">Accept</string>
+  <string name="Conditions">By registering you agree to the terms and conditions of use and privacy policies of CABASUS</string>
+  <string name="Having_trouble">Having trouble logging in? Get help here.</string>
 </resources>

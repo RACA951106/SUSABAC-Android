@@ -1,0 +1,19 @@
+﻿<resources>
+  <string name="app_name">CABASUS</string>
+  <string name="action_settings">Configuración</string>
+
+  <!--Login-->
+  <string name="create_account">CREAR CUENTA</string>
+  <string name="log_in">INICIAR SESIÓN</string>
+  <string name="already_auser">Ya eres usuario?</string>
+  
+  <!--Registro Usuario-->
+  <string name="User_name">Nombre de usuario</string>
+  <string name="Email">Correo electrónico</string>
+  <string name="Password">Contraseña</string>
+  <string name="Age">Edad</string>
+  <string name="Phone">Teléfono</string>
+  <string name="Accept">Aceptar</string>
+  <string name="Conditions">Al registrarse está de acuerdo con los términos y condiciones de uso y políticas de privacidad de CABASUS</string>
+  <string name="Having_trouble">¿Tienes problemas al iniciar? Recuperar contraseña</string>
+</resources>
