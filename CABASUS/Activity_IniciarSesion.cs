@@ -38,6 +38,8 @@ namespace CABASUS
                 StartActivity(typeof(ActivityPrincipal));
                 Finish();
             };
+
+            //Facebook
         }
     }
 }
