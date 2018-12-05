@@ -33,6 +33,7 @@ namespace CABASUS
         {
             throw new NotImplementedException();
         }
+
         Refractored.Controls.CircleImageView Foto;
         string id_usuario;
         #region Tomar Foto e Imagen Galeria
