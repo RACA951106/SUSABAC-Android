@@ -1339,6 +1339,12 @@ namespace CABASUS
 			// aapt resource value: 0x7f05000f
 			public const int tooltip_exit = 2131034127;
 			
+			// aapt resource value: 0x7f050010
+			public const int ucrop_loader_circle_path = 2131034128;
+			
+			// aapt resource value: 0x7f050011
+			public const int ucrop_loader_circle_scale = 2131034129;
+			
 			static Animation()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -1598,6 +1604,18 @@ namespace CABASUS
 			
 			// aapt resource value: 0x7f0100a5
 			public const int checkedTextViewStyle = 2130772133;
+			
+			// aapt resource value: 0x7f01016c
+			public const int civ_border_color = 2130772332;
+			
+			// aapt resource value: 0x7f01016d
+			public const int civ_border_overlay = 2130772333;
+			
+			// aapt resource value: 0x7f01016b
+			public const int civ_border_width = 2130772331;
+			
+			// aapt resource value: 0x7f01016e
+			public const int civ_fill_color = 2130772334;
 			
 			// aapt resource value: 0x7f0100d5
 			public const int closeIcon = 2130772181;
@@ -1869,26 +1887,26 @@ namespace CABASUS
 			// aapt resource value: 0x7f0100d2
 			public const int iconifiedByDefault = 2130772178;
 			
-			// aapt resource value: 0x7f01016b
-			public const int icvp_center_page_scale_offset = 2130772331;
+			// aapt resource value: 0x7f01017f
+			public const int icvp_center_page_scale_offset = 2130772351;
 			
-			// aapt resource value: 0x7f01016c
-			public const int icvp_interpolator = 2130772332;
+			// aapt resource value: 0x7f010180
+			public const int icvp_interpolator = 2130772352;
 			
-			// aapt resource value: 0x7f01016d
-			public const int icvp_max_page_scale = 2130772333;
+			// aapt resource value: 0x7f010181
+			public const int icvp_max_page_scale = 2130772353;
 			
-			// aapt resource value: 0x7f01016e
-			public const int icvp_medium_scaled = 2130772334;
+			// aapt resource value: 0x7f010182
+			public const int icvp_medium_scaled = 2130772354;
 			
-			// aapt resource value: 0x7f01016f
-			public const int icvp_min_page_scale = 2130772335;
+			// aapt resource value: 0x7f010183
+			public const int icvp_min_page_scale = 2130772355;
 			
-			// aapt resource value: 0x7f010170
-			public const int icvp_min_page_scale_offset = 2130772336;
+			// aapt resource value: 0x7f010184
+			public const int icvp_min_page_scale_offset = 2130772356;
 			
-			// aapt resource value: 0x7f010171
-			public const int icvp_scroll_duration = 2130772337;
+			// aapt resource value: 0x7f010185
+			public const int icvp_scroll_duration = 2130772357;
 			
 			// aapt resource value: 0x7f01007c
 			public const int imageButtonStyle = 2130772092;
@@ -2442,6 +2460,54 @@ namespace CABASUS
 			// aapt resource value: 0x7f0100e2
 			public const int trackTintMode = 2130772194;
 			
+			// aapt resource value: 0x7f01016f
+			public const int ucrop_artv_ratio_title = 2130772335;
+			
+			// aapt resource value: 0x7f010170
+			public const int ucrop_artv_ratio_x = 2130772336;
+			
+			// aapt resource value: 0x7f010171
+			public const int ucrop_artv_ratio_y = 2130772337;
+			
+			// aapt resource value: 0x7f010172
+			public const int ucrop_aspect_ratio_x = 2130772338;
+			
+			// aapt resource value: 0x7f010173
+			public const int ucrop_aspect_ratio_y = 2130772339;
+			
+			// aapt resource value: 0x7f010175
+			public const int ucrop_circle_dimmed_layer = 2130772341;
+			
+			// aapt resource value: 0x7f010176
+			public const int ucrop_dimmed_color = 2130772342;
+			
+			// aapt resource value: 0x7f01017d
+			public const int ucrop_frame_color = 2130772349;
+			
+			// aapt resource value: 0x7f01017c
+			public const int ucrop_frame_stroke_size = 2130772348;
+			
+			// aapt resource value: 0x7f010178
+			public const int ucrop_grid_color = 2130772344;
+			
+			// aapt resource value: 0x7f01017a
+			public const int ucrop_grid_column_count = 2130772346;
+			
+			// aapt resource value: 0x7f010179
+			public const int ucrop_grid_row_count = 2130772345;
+			
+			// aapt resource value: 0x7f010177
+			public const int ucrop_grid_stroke_size = 2130772343;
+			
+			// aapt resource value: 0x7f01017e
+			public const int ucrop_show_frame = 2130772350;
+			
+			// aapt resource value: 0x7f01017b
+			public const int ucrop_show_grid = 2130772347;
+			
+			// aapt resource value: 0x7f010174
+			public const int ucrop_show_oval_crop_frame = 2130772340;
+			
 			// aapt resource value: 0x7f010127
 			public const int useCompatPadding = 2130772263;
 			
@@ -2519,44 +2585,44 @@ namespace CABASUS
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0c004c
-			public const int abc_background_cache_hint_selector_material_dark = 2131492940;
+			// aapt resource value: 0x7f0c0059
+			public const int abc_background_cache_hint_selector_material_dark = 2131492953;
 			
-			// aapt resource value: 0x7f0c004d
-			public const int abc_background_cache_hint_selector_material_light = 2131492941;
+			// aapt resource value: 0x7f0c005a
+			public const int abc_background_cache_hint_selector_material_light = 2131492954;
 			
-			// aapt resource value: 0x7f0c004e
-			public const int abc_btn_colored_borderless_text_material = 2131492942;
+			// aapt resource value: 0x7f0c005b
+			public const int abc_btn_colored_borderless_text_material = 2131492955;
 			
-			// aapt resource value: 0x7f0c004f
-			public const int abc_btn_colored_text_material = 2131492943;
+			// aapt resource value: 0x7f0c005c
+			public const int abc_btn_colored_text_material = 2131492956;
 			
-			// aapt resource value: 0x7f0c0050
-			public const int abc_color_highlight_material = 2131492944;
+			// aapt resource value: 0x7f0c005d
+			public const int abc_color_highlight_material = 2131492957;
 			
-			// aapt resource value: 0x7f0c0051
-			public const int abc_hint_foreground_material_dark = 2131492945;
+			// aapt resource value: 0x7f0c005e
+			public const int abc_hint_foreground_material_dark = 2131492958;
 			
-			// aapt resource value: 0x7f0c0052
-			public const int abc_hint_foreground_material_light = 2131492946;
+			// aapt resource value: 0x7f0c005f
+			public const int abc_hint_foreground_material_light = 2131492959;
 			
 			// aapt resource value: 0x7f0c0000
 			public const int abc_input_method_navigation_guard = 2131492864;
 			
-			// aapt resource value: 0x7f0c0053
-			public const int abc_primary_text_disable_only_material_dark = 2131492947;
+			// aapt resource value: 0x7f0c0060
+			public const int abc_primary_text_disable_only_material_dark = 2131492960;
 			
-			// aapt resource value: 0x7f0c0054
-			public const int abc_primary_text_disable_only_material_light = 2131492948;
+			// aapt resource value: 0x7f0c0061
+			public const int abc_primary_text_disable_only_material_light = 2131492961;
 			
-			// aapt resource value: 0x7f0c0055
-			public const int abc_primary_text_material_dark = 2131492949;
+			// aapt resource value: 0x7f0c0062
+			public const int abc_primary_text_material_dark = 2131492962;
 			
-			// aapt resource value: 0x7f0c0056
-			public const int abc_primary_text_material_light = 2131492950;
+			// aapt resource value: 0x7f0c0063
+			public const int abc_primary_text_material_light = 2131492963;
 			
-			// aapt resource value: 0x7f0c0057
-			public const int abc_search_url_text = 2131492951;
+			// aapt resource value: 0x7f0c0064
+			public const int abc_search_url_text = 2131492964;
 			
 			// aapt resource value: 0x7f0c0001
 			public const int abc_search_url_text_normal = 2131492865;
@@ -2567,29 +2633,29 @@ namespace CABASUS
 			// aapt resource value: 0x7f0c0003
 			public const int abc_search_url_text_selected = 2131492867;
 			
-			// aapt resource value: 0x7f0c0058
-			public const int abc_secondary_text_material_dark = 2131492952;
+			// aapt resource value: 0x7f0c0065
+			public const int abc_secondary_text_material_dark = 2131492965;
 			
-			// aapt resource value: 0x7f0c0059
-			public const int abc_secondary_text_material_light = 2131492953;
+			// aapt resource value: 0x7f0c0066
+			public const int abc_secondary_text_material_light = 2131492966;
 			
-			// aapt resource value: 0x7f0c005a
-			public const int abc_tint_btn_checkable = 2131492954;
+			// aapt resource value: 0x7f0c0067
+			public const int abc_tint_btn_checkable = 2131492967;
 			
-			// aapt resource value: 0x7f0c005b
-			public const int abc_tint_default = 2131492955;
+			// aapt resource value: 0x7f0c0068
+			public const int abc_tint_default = 2131492968;
 			
-			// aapt resource value: 0x7f0c005c
-			public const int abc_tint_edittext = 2131492956;
+			// aapt resource value: 0x7f0c0069
+			public const int abc_tint_edittext = 2131492969;
 			
-			// aapt resource value: 0x7f0c005d
-			public const int abc_tint_seek_thumb = 2131492957;
+			// aapt resource value: 0x7f0c006a
+			public const int abc_tint_seek_thumb = 2131492970;
 			
-			// aapt resource value: 0x7f0c005e
-			public const int abc_tint_spinner = 2131492958;
+			// aapt resource value: 0x7f0c006b
+			public const int abc_tint_spinner = 2131492971;
 			
-			// aapt resource value: 0x7f0c005f
-			public const int abc_tint_switch_track = 2131492959;
+			// aapt resource value: 0x7f0c006c
+			public const int abc_tint_switch_track = 2131492972;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int accent_material_dark = 2131492868;
@@ -2633,20 +2699,20 @@ namespace CABASUS
 			// aapt resource value: 0x7f0c0011
 			public const int button_material_light = 2131492881;
 			
-			// aapt resource value: 0x7f0c004a
-			public const int colorAccent = 2131492938;
+			// aapt resource value: 0x7f0c0057
+			public const int colorAccent = 2131492951;
 			
-			// aapt resource value: 0x7f0c0048
-			public const int colorPrimary = 2131492936;
+			// aapt resource value: 0x7f0c0055
+			public const int colorPrimary = 2131492949;
 			
-			// aapt resource value: 0x7f0c0049
-			public const int colorPrimaryDark = 2131492937;
+			// aapt resource value: 0x7f0c0056
+			public const int colorPrimaryDark = 2131492950;
 			
 			// aapt resource value: 0x7f0c003c
 			public const int design_bottom_navigation_shadow_color = 2131492924;
 			
-			// aapt resource value: 0x7f0c0060
-			public const int design_error = 2131492960;
+			// aapt resource value: 0x7f0c006d
+			public const int design_error = 2131492973;
 			
 			// aapt resource value: 0x7f0c003d
 			public const int design_fab_shadow_end_color = 2131492925;
@@ -2672,8 +2738,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f0c0044
 			public const int design_snackbar_background_color = 2131492932;
 			
-			// aapt resource value: 0x7f0c0061
-			public const int design_tint_password_toggle = 2131492961;
+			// aapt resource value: 0x7f0c006e
+			public const int design_tint_password_toggle = 2131492974;
 			
 			// aapt resource value: 0x7f0c0012
 			public const int dim_foreground_disabled_material_dark = 2131492882;
@@ -2702,8 +2768,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f0c001a
 			public const int highlighted_text_material_light = 2131492890;
 			
-			// aapt resource value: 0x7f0c004b
-			public const int ic_launcher_background = 2131492939;
+			// aapt resource value: 0x7f0c0058
+			public const int ic_launcher_background = 2131492952;
 			
 			// aapt resource value: 0x7f0c001b
 			public const int material_blue_grey_800 = 2131492891;
@@ -2801,11 +2867,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f0c0036
 			public const int switch_thumb_disabled_material_light = 2131492918;
 			
-			// aapt resource value: 0x7f0c0062
-			public const int switch_thumb_material_dark = 2131492962;
+			// aapt resource value: 0x7f0c006f
+			public const int switch_thumb_material_dark = 2131492975;
 			
-			// aapt resource value: 0x7f0c0063
-			public const int switch_thumb_material_light = 2131492963;
+			// aapt resource value: 0x7f0c0070
+			public const int switch_thumb_material_light = 2131492976;
 			
 			// aapt resource value: 0x7f0c0037
 			public const int switch_thumb_normal_material_dark = 2131492919;
@@ -2818,6 +2884,48 @@ namespace CABASUS
 			
 			// aapt resource value: 0x7f0c003a
 			public const int tooltip_background_light = 2131492922;
+			
+			// aapt resource value: 0x7f0c0048
+			public const int ucrop_color_crop_background = 2131492936;
+			
+			// aapt resource value: 0x7f0c0049
+			public const int ucrop_color_default_crop_frame = 2131492937;
+			
+			// aapt resource value: 0x7f0c004a
+			public const int ucrop_color_default_crop_grid = 2131492938;
+			
+			// aapt resource value: 0x7f0c004b
+			public const int ucrop_color_default_dimmed = 2131492939;
+			
+			// aapt resource value: 0x7f0c004c
+			public const int ucrop_color_default_logo = 2131492940;
+			
+			// aapt resource value: 0x7f0c004d
+			public const int ucrop_color_progress_wheel_line = 2131492941;
+			
+			// aapt resource value: 0x7f0c004e
+			public const int ucrop_color_statusbar = 2131492942;
+			
+			// aapt resource value: 0x7f0c004f
+			public const int ucrop_color_toolbar = 2131492943;
+			
+			// aapt resource value: 0x7f0c0050
+			public const int ucrop_color_toolbar_widget = 2131492944;
+			
+			// aapt resource value: 0x7f0c0051
+			public const int ucrop_color_widget = 2131492945;
+			
+			// aapt resource value: 0x7f0c0052
+			public const int ucrop_color_widget_active = 2131492946;
+			
+			// aapt resource value: 0x7f0c0053
+			public const int ucrop_color_widget_background = 2131492947;
+			
+			// aapt resource value: 0x7f0c0054
+			public const int ucrop_color_widget_text = 2131492948;
+			
+			// aapt resource value: 0x7f0c0071
+			public const int ucrop_scale_text_view_selector = 2131492977;
 			
 			static Color()
 			{
@@ -3297,6 +3405,60 @@ namespace CABASUS
 			// aapt resource value: 0x7f070060
 			public const int tooltip_y_offset_touch = 2131165280;
 			
+			// aapt resource value: 0x7f07009b
+			public const int ucrop_default_crop_frame_stoke_width = 2131165339;
+			
+			// aapt resource value: 0x7f07009c
+			public const int ucrop_default_crop_grid_stoke_width = 2131165340;
+			
+			// aapt resource value: 0x7f07009d
+			public const int ucrop_default_crop_rect_corner_touch_area_line_length = 2131165341;
+			
+			// aapt resource value: 0x7f07009e
+			public const int ucrop_default_crop_rect_corner_touch_threshold = 2131165342;
+			
+			// aapt resource value: 0x7f07009f
+			public const int ucrop_default_crop_rect_min_size = 2131165343;
+			
+			// aapt resource value: 0x7f0700a0
+			public const int ucrop_height_crop_aspect_ratio_text = 2131165344;
+			
+			// aapt resource value: 0x7f0700a1
+			public const int ucrop_height_divider_shadow = 2131165345;
+			
+			// aapt resource value: 0x7f0700a2
+			public const int ucrop_height_horizontal_wheel_progress_line = 2131165346;
+			
+			// aapt resource value: 0x7f0700a3
+			public const int ucrop_height_wrapper_controls = 2131165347;
+			
+			// aapt resource value: 0x7f0700a4
+			public const int ucrop_height_wrapper_states = 2131165348;
+			
+			// aapt resource value: 0x7f0700a5
+			public const int ucrop_margin_horizontal_wheel_progress_line = 2131165349;
+			
+			// aapt resource value: 0x7f0700a6
+			public const int ucrop_margit_top_widget_text = 2131165350;
+			
+			// aapt resource value: 0x7f0700a7
+			public const int ucrop_padding_crop_frame = 2131165351;
+			
+			// aapt resource value: 0x7f0700a8
+			public const int ucrop_progress_size = 2131165352;
+			
+			// aapt resource value: 0x7f0700a9
+			public const int ucrop_size_dot_scale_text_view = 2131165353;
+			
+			// aapt resource value: 0x7f0700aa
+			public const int ucrop_size_wrapper_rotate_button = 2131165354;
+			
+			// aapt resource value: 0x7f0700ab
+			public const int ucrop_text_size_widget_text = 2131165355;
+			
+			// aapt resource value: 0x7f0700ac
+			public const int ucrop_width_horizontal_wheel_progress_line = 2131165356;
+			
 			static Dimension()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -3562,26 +3724,26 @@ namespace CABASUS
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020075
-			public const int avd_hide_password_1 = 2130837621;
+			// aapt resource value: 0x7f020084
+			public const int avd_hide_password_1 = 2130837636;
 			
-			// aapt resource value: 0x7f020076
-			public const int avd_hide_password_2 = 2130837622;
+			// aapt resource value: 0x7f020085
+			public const int avd_hide_password_2 = 2130837637;
 			
-			// aapt resource value: 0x7f020077
-			public const int avd_hide_password_3 = 2130837623;
+			// aapt resource value: 0x7f020086
+			public const int avd_hide_password_3 = 2130837638;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f020078
-			public const int avd_show_password_1 = 2130837624;
+			// aapt resource value: 0x7f020087
+			public const int avd_show_password_1 = 2130837639;
 			
-			// aapt resource value: 0x7f020079
-			public const int avd_show_password_2 = 2130837625;
+			// aapt resource value: 0x7f020088
+			public const int avd_show_password_2 = 2130837640;
 			
-			// aapt resource value: 0x7f02007a
-			public const int avd_show_password_3 = 2130837626;
+			// aapt resource value: 0x7f020089
+			public const int avd_show_password_3 = 2130837641;
 			
 			// aapt resource value: 0x7f020055
 			public const int bell_icon = 2130837589;
@@ -3611,73 +3773,118 @@ namespace CABASUS
 			public const int design_snackbar_background = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int horse_icon = 2130837598;
+			public const int dialog_button_selector = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int lupa_icon = 2130837599;
+			public const int dialog_container = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int map_icon = 2130837600;
+			public const int dialog_divider = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int menu_icon = 2130837601;
+			public const int horse_icon = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int navigation_empty_icon = 2130837602;
+			public const int lupa_icon = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int notification_action_background = 2130837603;
+			public const int map_icon = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int notification_bg = 2130837604;
+			public const int menu_icon = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int notification_bg_low = 2130837605;
+			public const int navigation_empty_icon = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int notification_bg_low_normal = 2130837606;
+			public const int notification_action_background = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int notification_bg_low_pressed = 2130837607;
+			public const int notification_bg = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int notification_bg_normal = 2130837608;
+			public const int notification_bg_low = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int notification_bg_normal_pressed = 2130837609;
+			public const int notification_bg_low_normal = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int notification_icon_background = 2130837610;
-			
-			// aapt resource value: 0x7f020073
-			public const int notification_template_icon_bg = 2130837619;
-			
-			// aapt resource value: 0x7f020074
-			public const int notification_template_icon_low_bg = 2130837620;
+			public const int notification_bg_low_pressed = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int notification_tile_bg = 2130837611;
+			public const int notification_bg_normal = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int notify_panel_notification_icon_bg = 2130837612;
+			public const int notification_bg_normal_pressed = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int psts_background_tab = 2130837613;
+			public const int notification_icon_background = 2130837613;
+			
+			// aapt resource value: 0x7f020082
+			public const int notification_template_icon_bg = 2130837634;
+			
+			// aapt resource value: 0x7f020083
+			public const int notification_template_icon_low_bg = 2130837635;
 			
 			// aapt resource value: 0x7f02006e
-			public const int Selected_dot = 2130837614;
+			public const int notification_tile_bg = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int StyleButtomRegistroUsuario = 2130837615;
+			public const int notify_panel_notification_icon_bg = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int timeline_icon = 2130837616;
+			public const int psts_background_tab = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int tooltip_frame_dark = 2130837617;
+			public const int Selected_dot = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int tooltip_frame_light = 2130837618;
+			public const int StyleButtomRegistroUsuario = 2130837618;
+			
+			// aapt resource value: 0x7f020073
+			public const int timeline_icon = 2130837619;
+			
+			// aapt resource value: 0x7f020074
+			public const int tooltip_frame_dark = 2130837620;
+			
+			// aapt resource value: 0x7f020075
+			public const int tooltip_frame_light = 2130837621;
+			
+			// aapt resource value: 0x7f020076
+			public const int ucrop_ic_angle = 2130837622;
+			
+			// aapt resource value: 0x7f020077
+			public const int ucrop_ic_crop = 2130837623;
+			
+			// aapt resource value: 0x7f020078
+			public const int ucrop_ic_cross = 2130837624;
+			
+			// aapt resource value: 0x7f020079
+			public const int ucrop_ic_done = 2130837625;
+			
+			// aapt resource value: 0x7f02007a
+			public const int ucrop_ic_next = 2130837626;
+			
+			// aapt resource value: 0x7f02007b
+			public const int ucrop_ic_reset = 2130837627;
+			
+			// aapt resource value: 0x7f02007c
+			public const int ucrop_ic_rotate = 2130837628;
+			
+			// aapt resource value: 0x7f02007d
+			public const int ucrop_ic_scale = 2130837629;
+			
+			// aapt resource value: 0x7f02007e
+			public const int ucrop_shadow_upside = 2130837630;
+			
+			// aapt resource value: 0x7f02007f
+			public const int ucrop_vector_ic_crop = 2130837631;
+			
+			// aapt resource value: 0x7f020080
+			public const int ucrop_vector_loader = 2130837632;
+			
+			// aapt resource value: 0x7f020081
+			public const int ucrop_vector_loader_animated = 2130837633;
 			
 			static Drawable()
 			{
@@ -3698,20 +3905,20 @@ namespace CABASUS
 			// aapt resource value: 0x7f080033
 			public const int CTRL = 2131230771;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int CycleViewPagerHorses = 2131230900;
+			// aapt resource value: 0x7f0800ba
+			public const int CycleViewPagerHorses = 2131230906;
 			
 			// aapt resource value: 0x7f080034
 			public const int FUNCTION = 2131230772;
 			
-			// aapt resource value: 0x7f0800a7
-			public const int FondoVideo = 2131230887;
+			// aapt resource value: 0x7f0800ad
+			public const int FondoVideo = 2131230893;
 			
-			// aapt resource value: 0x7f0800ce
-			public const int Icon = 2131230926;
+			// aapt resource value: 0x7f0800d4
+			public const int Icon = 2131230932;
 			
-			// aapt resource value: 0x7f0800cd
-			public const int ImagenCaballo = 2131230925;
+			// aapt resource value: 0x7f0800d3
+			public const int ImagenCaballo = 2131230931;
 			
 			// aapt resource value: 0x7f080035
 			public const int META = 2131230773;
@@ -3722,32 +3929,32 @@ namespace CABASUS
 			// aapt resource value: 0x7f080037
 			public const int SYM = 2131230775;
 			
-			// aapt resource value: 0x7f0800aa
-			public const int Seleccionado1 = 2131230890;
-			
-			// aapt resource value: 0x7f0800ab
-			public const int Seleccionado2 = 2131230891;
-			
-			// aapt resource value: 0x7f0800ac
-			public const int Seleccionado3 = 2131230892;
-			
-			// aapt resource value: 0x7f0800ad
-			public const int Seleccionado4 = 2131230893;
+			// aapt resource value: 0x7f0800b0
+			public const int Seleccionado1 = 2131230896;
 			
 			// aapt resource value: 0x7f0800b1
-			public const int SelectorCaballos = 2131230897;
+			public const int Seleccionado2 = 2131230897;
 			
-			// aapt resource value: 0x7f0800b0
-			public const int TabsPrincipales = 2131230896;
-			
-			// aapt resource value: 0x7f0800a9
-			public const int ViewPagerLogin = 2131230889;
+			// aapt resource value: 0x7f0800b2
+			public const int Seleccionado3 = 2131230898;
 			
 			// aapt resource value: 0x7f0800b3
-			public const int ViewPagerPrincipal = 2131230899;
+			public const int Seleccionado4 = 2131230899;
 			
-			// aapt resource value: 0x7f0800bc
-			public const int action0 = 2131230908;
+			// aapt resource value: 0x7f0800b7
+			public const int SelectorCaballos = 2131230903;
+			
+			// aapt resource value: 0x7f0800b6
+			public const int TabsPrincipales = 2131230902;
+			
+			// aapt resource value: 0x7f0800af
+			public const int ViewPagerLogin = 2131230895;
+			
+			// aapt resource value: 0x7f0800b9
+			public const int ViewPagerPrincipal = 2131230905;
+			
+			// aapt resource value: 0x7f0800c2
+			public const int action0 = 2131230914;
 			
 			// aapt resource value: 0x7f08007d
 			public const int action_bar = 2131230845;
@@ -3770,17 +3977,17 @@ namespace CABASUS
 			// aapt resource value: 0x7f08005b
 			public const int action_bar_title = 2131230811;
 			
-			// aapt resource value: 0x7f0800b9
-			public const int action_container = 2131230905;
+			// aapt resource value: 0x7f0800bf
+			public const int action_container = 2131230911;
 			
 			// aapt resource value: 0x7f08007e
 			public const int action_context_bar = 2131230846;
 			
-			// aapt resource value: 0x7f0800c0
-			public const int action_divider = 2131230912;
+			// aapt resource value: 0x7f0800c6
+			public const int action_divider = 2131230918;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int action_image = 2131230906;
+			// aapt resource value: 0x7f0800c0
+			public const int action_image = 2131230912;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -3797,11 +4004,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f08005d
 			public const int action_mode_close_button = 2131230813;
 			
-			// aapt resource value: 0x7f0800bb
-			public const int action_text = 2131230907;
+			// aapt resource value: 0x7f0800c1
+			public const int action_text = 2131230913;
 			
-			// aapt resource value: 0x7f0800c9
-			public const int actions = 2131230921;
+			// aapt resource value: 0x7f0800cf
+			public const int actions = 2131230927;
 			
 			// aapt resource value: 0x7f08005e
 			public const int activity_chooser_view_content = 2131230814;
@@ -3833,29 +4040,44 @@ namespace CABASUS
 			// aapt resource value: 0x7f08005a
 			public const int bold = 2131230810;
 			
+			// aapt resource value: 0x7f08009c
+			public const int botonera = 2131230876;
+			
 			// aapt resource value: 0x7f08003d
 			public const int bottom = 2131230781;
 			
-			// aapt resource value: 0x7f0800b7
-			public const int btnAdd = 2131230903;
+			// aapt resource value: 0x7f0800bd
+			public const int btnAdd = 2131230909;
 			
-			// aapt resource value: 0x7f0800ae
-			public const int btnCreateAccount = 2131230894;
+			// aapt resource value: 0x7f08009d
+			public const int btnCamara = 2131230877;
+			
+			// aapt resource value: 0x7f08009f
+			public const int btnCancel = 2131230879;
+			
+			// aapt resource value: 0x7f0800b4
+			public const int btnCreateAccount = 2131230900;
 			
 			// aapt resource value: 0x7f08009e
-			public const int btnIniciarSesionLogIn = 2131230878;
+			public const int btnGalery = 2131230878;
 			
-			// aapt resource value: 0x7f0800a5
-			public const int btnListoRegistroUsuario = 2131230885;
+			// aapt resource value: 0x7f0800a4
+			public const int btnIniciarSesionLogIn = 2131230884;
 			
-			// aapt resource value: 0x7f0800af
-			public const int btnLogIn = 2131230895;
+			// aapt resource value: 0x7f0800b5
+			public const int btnLogIn = 2131230901;
+			
+			// aapt resource value: 0x7f0800ab
+			public const int btnRegistroUsuario = 2131230891;
+			
+			// aapt resource value: 0x7f0800a6
+			public const int btnfoto = 2131230886;
 			
 			// aapt resource value: 0x7f080064
 			public const int buttonPanel = 2131230820;
 			
-			// aapt resource value: 0x7f0800bd
-			public const int cancel_action = 2131230909;
+			// aapt resource value: 0x7f0800c3
+			public const int cancel_action = 2131230915;
 			
 			// aapt resource value: 0x7f080045
 			public const int center = 2131230789;
@@ -3869,8 +4091,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080074
 			public const int checkbox = 2131230836;
 			
-			// aapt resource value: 0x7f0800c5
-			public const int chronometer = 2131230917;
+			// aapt resource value: 0x7f0800cb
+			public const int chronometer = 2131230923;
 			
 			// aapt resource value: 0x7f08004e
 			public const int clip_horizontal = 2131230798;
@@ -3920,8 +4142,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f080020
 			public const int disableHome = 2131230752;
 			
-			// aapt resource value: 0x7f0800b6
-			public const int editText = 2131230902;
+			// aapt resource value: 0x7f08009b
+			public const int divider = 2131230875;
+			
+			// aapt resource value: 0x7f0800bc
+			public const int editText = 2131230908;
 			
 			// aapt resource value: 0x7f08007f
 			public const int edit_query = 2131230847;
@@ -3929,8 +4154,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080030
 			public const int end = 2131230768;
 			
-			// aapt resource value: 0x7f0800cb
-			public const int end_padder = 2131230923;
+			// aapt resource value: 0x7f0800d1
+			public const int end_padder = 2131230929;
 			
 			// aapt resource value: 0x7f08003f
 			public const int enterAlways = 2131230783;
@@ -3971,14 +4196,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f080021
 			public const int homeAsUp = 2131230753;
 			
-			// aapt resource value: 0x7f0800b2
-			public const int horizontal_viewPager = 2131230898;
+			// aapt resource value: 0x7f0800b8
+			public const int horizontal_viewPager = 2131230904;
 			
 			// aapt resource value: 0x7f080063
 			public const int icon = 2131230819;
 			
-			// aapt resource value: 0x7f0800ca
-			public const int icon_group = 2131230922;
+			// aapt resource value: 0x7f0800d0
+			public const int icon_group = 2131230928;
 			
 			// aapt resource value: 0x7f08003a
 			public const int ifRoom = 2131230778;
@@ -3986,14 +4211,29 @@ namespace CABASUS
 			// aapt resource value: 0x7f080060
 			public const int image = 2131230816;
 			
-			// aapt resource value: 0x7f0800b5
-			public const int imageView = 2131230901;
+			// aapt resource value: 0x7f0800bb
+			public const int imageView = 2131230907;
 			
-			// aapt resource value: 0x7f0800a8
-			public const int imgLogoLogin = 2131230888;
+			// aapt resource value: 0x7f0800ed
+			public const int image_view_crop = 2131230957;
 			
-			// aapt resource value: 0x7f0800c6
-			public const int info = 2131230918;
+			// aapt resource value: 0x7f0800db
+			public const int image_view_logo = 2131230939;
+			
+			// aapt resource value: 0x7f0800e4
+			public const int image_view_state_aspect_ratio = 2131230948;
+			
+			// aapt resource value: 0x7f0800e6
+			public const int image_view_state_rotate = 2131230950;
+			
+			// aapt resource value: 0x7f0800e2
+			public const int image_view_state_scale = 2131230946;
+			
+			// aapt resource value: 0x7f0800ae
+			public const int imgLogoLogin = 2131230894;
+			
+			// aapt resource value: 0x7f0800cc
+			public const int info = 2131230924;
 			
 			// aapt resource value: 0x7f080059
 			public const int italic = 2131230809;
@@ -4004,6 +4244,15 @@ namespace CABASUS
 			// aapt resource value: 0x7f08008d
 			public const int largeLabel = 2131230861;
 			
+			// aapt resource value: 0x7f0800de
+			public const int layout_aspect_ratio = 2131230942;
+			
+			// aapt resource value: 0x7f0800df
+			public const int layout_rotate_wheel = 2131230943;
+			
+			// aapt resource value: 0x7f0800e0
+			public const int layout_scale_wheel = 2131230944;
+			
 			// aapt resource value: 0x7f080049
 			public const int left = 2131230793;
 			
@@ -4013,8 +4262,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080018
 			public const int line3 = 2131230744;
 			
-			// aapt resource value: 0x7f0800b8
-			public const int linear = 2131230904;
+			// aapt resource value: 0x7f0800be
+			public const int linear = 2131230910;
 			
 			// aapt resource value: 0x7f08001d
 			public const int listMode = 2131230749;
@@ -4022,14 +4271,20 @@ namespace CABASUS
 			// aapt resource value: 0x7f080062
 			public const int list_item = 2131230818;
 			
-			// aapt resource value: 0x7f0800d1
-			public const int masked = 2131230929;
+			// aapt resource value: 0x7f0800f0
+			public const int masked = 2131230960;
 			
-			// aapt resource value: 0x7f0800bf
-			public const int media_actions = 2131230911;
+			// aapt resource value: 0x7f0800c5
+			public const int media_actions = 2131230917;
 			
-			// aapt resource value: 0x7f0800cf
-			public const int message = 2131230927;
+			// aapt resource value: 0x7f0800f1
+			public const int menu_crop = 2131230961;
+			
+			// aapt resource value: 0x7f0800f2
+			public const int menu_loader = 2131230962;
+			
+			// aapt resource value: 0x7f0800d5
+			public const int message = 2131230933;
 			
 			// aapt resource value: 0x7f080031
 			public const int middle = 2131230769;
@@ -4052,14 +4307,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f08001e
 			public const int normal = 2131230750;
 			
+			// aapt resource value: 0x7f0800ce
+			public const int notification_background = 2131230926;
+			
 			// aapt resource value: 0x7f0800c8
-			public const int notification_background = 2131230920;
+			public const int notification_main_column = 2131230920;
 			
-			// aapt resource value: 0x7f0800c2
-			public const int notification_main_column = 2131230914;
-			
-			// aapt resource value: 0x7f0800c1
-			public const int notification_main_column_container = 2131230913;
+			// aapt resource value: 0x7f0800c7
+			public const int notification_main_column_container = 2131230919;
 			
 			// aapt resource value: 0x7f08004c
 			public const int parallax = 2131230796;
@@ -4079,8 +4334,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f080007
 			public const int progress_horizontal = 2131230727;
 			
-			// aapt resource value: 0x7f0800cc
-			public const int psts_tab_title = 2131230924;
+			// aapt resource value: 0x7f0800d2
+			public const int psts_tab_title = 2131230930;
 			
 			// aapt resource value: 0x7f080076
 			public const int radio = 2131230838;
@@ -4088,11 +4343,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f08004a
 			public const int right = 2131230794;
 			
-			// aapt resource value: 0x7f0800c7
-			public const int right_icon = 2131230919;
+			// aapt resource value: 0x7f0800cd
+			public const int right_icon = 2131230925;
 			
-			// aapt resource value: 0x7f0800c3
-			public const int right_side = 2131230915;
+			// aapt resource value: 0x7f0800c9
+			public const int right_side = 2131230921;
+			
+			// aapt resource value: 0x7f0800e8
+			public const int rotate_scroll_wheel = 2131230952;
 			
 			// aapt resource value: 0x7f08000c
 			public const int save_image_matrix = 2131230732;
@@ -4102,6 +4360,9 @@ namespace CABASUS
 			
 			// aapt resource value: 0x7f08000e
 			public const int save_scale_type = 2131230734;
+			
+			// aapt resource value: 0x7f0800ec
+			public const int scale_scroll_wheel = 2131230956;
 			
 			// aapt resource value: 0x7f080029
 			public const int screen = 2131230761;
@@ -4196,8 +4457,17 @@ namespace CABASUS
 			// aapt resource value: 0x7f08004b
 			public const int start = 2131230795;
 			
-			// aapt resource value: 0x7f0800be
-			public const int status_bar_latest_event_content = 2131230910;
+			// aapt resource value: 0x7f0800e3
+			public const int state_aspect_ratio = 2131230947;
+			
+			// aapt resource value: 0x7f0800e5
+			public const int state_rotate = 2131230949;
+			
+			// aapt resource value: 0x7f0800e1
+			public const int state_scale = 2131230945;
+			
+			// aapt resource value: 0x7f0800c4
+			public const int status_bar_latest_event_content = 2131230916;
 			
 			// aapt resource value: 0x7f080077
 			public const int submenuarrow = 2131230839;
@@ -4226,14 +4496,20 @@ namespace CABASUS
 			// aapt resource value: 0x7f080099
 			public const int text_input_password_toggle = 2131230873;
 			
+			// aapt resource value: 0x7f0800e7
+			public const int text_view_rotate = 2131230951;
+			
+			// aapt resource value: 0x7f0800eb
+			public const int text_view_scale = 2131230955;
+			
 			// aapt resource value: 0x7f080014
 			public const int textinput_counter = 2131230740;
 			
 			// aapt resource value: 0x7f080015
 			public const int textinput_error = 2131230741;
 			
-			// aapt resource value: 0x7f0800c4
-			public const int time = 2131230916;
+			// aapt resource value: 0x7f0800ca
+			public const int time = 2131230922;
 			
 			// aapt resource value: 0x7f08001c
 			public const int title = 2131230748;
@@ -4243,6 +4519,15 @@ namespace CABASUS
 			
 			// aapt resource value: 0x7f080070
 			public const int title_template = 2131230832;
+			
+			// aapt resource value: 0x7f08009a
+			public const int titulo = 2131230874;
+			
+			// aapt resource value: 0x7f0800d7
+			public const int toolbar = 2131230935;
+			
+			// aapt resource value: 0x7f0800d8
+			public const int toolbar_title = 2131230936;
 			
 			// aapt resource value: 0x7f08003e
 			public const int top = 2131230782;
@@ -4268,38 +4553,44 @@ namespace CABASUS
 			// aapt resource value: 0x7f080013
 			public const int transition_transform = 2131230739;
 			
-			// aapt resource value: 0x7f08009d
-			public const int txtContrasenaLogIn = 2131230877;
-			
-			// aapt resource value: 0x7f0800a2
-			public const int txtContrasenaRegistroUsuario = 2131230882;
-			
-			// aapt resource value: 0x7f08009b
-			public const int txtCuerpoInfoLogin = 2131230875;
-			
 			// aapt resource value: 0x7f0800a3
-			public const int txtEdadRegistroUsuario = 2131230883;
+			public const int txtContrasenaLogIn = 2131230883;
+			
+			// aapt resource value: 0x7f0800a9
+			public const int txtContrasenaRegistroUsuario = 2131230889;
 			
 			// aapt resource value: 0x7f0800a1
-			public const int txtEmailRegistroUsuario = 2131230881;
+			public const int txtCuerpoInfoLogin = 2131230881;
 			
-			// aapt resource value: 0x7f08009f
-			public const int txtRecuperarContrasena = 2131230879;
+			// aapt resource value: 0x7f0800aa
+			public const int txtEdadRegistroUsuario = 2131230890;
 			
-			// aapt resource value: 0x7f0800a4
-			public const int txtTelefonoRegistroUsuario = 2131230884;
+			// aapt resource value: 0x7f0800a8
+			public const int txtEmailRegistroUsuario = 2131230888;
 			
-			// aapt resource value: 0x7f0800a6
-			public const int txtTerminosRegistroUsuario = 2131230886;
+			// aapt resource value: 0x7f0800a5
+			public const int txtRecuperarContrasena = 2131230885;
 			
-			// aapt resource value: 0x7f08009a
-			public const int txtTituloInfoLogin = 2131230874;
-			
-			// aapt resource value: 0x7f08009c
-			public const int txtUserNameLogIn = 2131230876;
+			// aapt resource value: 0x7f0800ac
+			public const int txtTerminosRegistroUsuario = 2131230892;
 			
 			// aapt resource value: 0x7f0800a0
-			public const int txtUserNameRegistro = 2131230880;
+			public const int txtTituloInfoLogin = 2131230880;
+			
+			// aapt resource value: 0x7f0800a2
+			public const int txtUserNameLogIn = 2131230882;
+			
+			// aapt resource value: 0x7f0800a7
+			public const int txtUserNameRegistro = 2131230887;
+			
+			// aapt resource value: 0x7f0800dc
+			public const int ucrop = 2131230940;
+			
+			// aapt resource value: 0x7f0800d9
+			public const int ucrop_frame = 2131230937;
+			
+			// aapt resource value: 0x7f0800d6
+			public const int ucrop_photobox = 2131230934;
 			
 			// aapt resource value: 0x7f08002d
 			public const int uniform = 2131230765;
@@ -4313,14 +4604,29 @@ namespace CABASUS
 			// aapt resource value: 0x7f080016
 			public const int view_offset_helper = 2131230742;
 			
-			// aapt resource value: 0x7f0800d0
-			public const int visible = 2131230928;
+			// aapt resource value: 0x7f0800ee
+			public const int view_overlay = 2131230958;
+			
+			// aapt resource value: 0x7f0800ef
+			public const int visible = 2131230959;
 			
 			// aapt resource value: 0x7f08003c
 			public const int withText = 2131230780;
 			
 			// aapt resource value: 0x7f08002e
 			public const int wrap_content = 2131230766;
+			
+			// aapt resource value: 0x7f0800da
+			public const int wrapper_controls = 2131230938;
+			
+			// aapt resource value: 0x7f0800e9
+			public const int wrapper_reset_rotate = 2131230953;
+			
+			// aapt resource value: 0x7f0800ea
+			public const int wrapper_rotate_by_angle = 2131230954;
+			
+			// aapt resource value: 0x7f0800dd
+			public const int wrapper_states = 2131230941;
 			
 			static Id()
 			{
@@ -4364,6 +4670,9 @@ namespace CABASUS
 			
 			// aapt resource value: 0x7f0d0009
 			public const int status_bar_notification_info_maxnum = 2131558409;
+			
+			// aapt resource value: 0x7f0d000a
+			public const int ucrop_progress_loading_anim_time = 2131558410;
 			
 			static Integer()
 			{
@@ -4499,97 +4808,118 @@ namespace CABASUS
 			public const int design_text_input_password_icon = 2130968615;
 			
 			// aapt resource value: 0x7f040028
-			public const int layout_InfoLogin = 2130968616;
+			public const int layout_CustomAlert = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int layout_IniciarSesion = 2130968617;
+			public const int layout_InfoLogin = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int layout_RegistroUsuario = 2130968618;
+			public const int layout_IniciarSesion = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int LayoutActivityLogin = 2130968619;
+			public const int layout_RegistroUsuario = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int LayoutActivityPrincipal = 2130968620;
+			public const int LayoutActivityLogin = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int LayoutFragmentCycleHorses = 2130968621;
+			public const int LayoutActivityPrincipal = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int LayoutFragmentHorses = 2130968622;
+			public const int LayoutFragmentCycleHorses = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int layoutPagina1 = 2130968623;
+			public const int LayoutFragmentHorses = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int notification_action = 2130968624;
+			public const int layoutPagina1 = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int notification_action_tombstone = 2130968625;
+			public const int notification_action = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int notification_media_action = 2130968626;
+			public const int notification_action_tombstone = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int notification_media_cancel_action = 2130968627;
+			public const int notification_media_action = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int notification_template_big_media = 2130968628;
+			public const int notification_media_cancel_action = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int notification_template_big_media_custom = 2130968629;
+			public const int notification_template_big_media = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int notification_template_big_media_narrow = 2130968630;
+			public const int notification_template_big_media_custom = 2130968630;
 			
 			// aapt resource value: 0x7f040037
-			public const int notification_template_big_media_narrow_custom = 2130968631;
+			public const int notification_template_big_media_narrow = 2130968631;
 			
 			// aapt resource value: 0x7f040038
-			public const int notification_template_custom_big = 2130968632;
+			public const int notification_template_big_media_narrow_custom = 2130968632;
 			
 			// aapt resource value: 0x7f040039
-			public const int notification_template_icon_group = 2130968633;
+			public const int notification_template_custom_big = 2130968633;
 			
 			// aapt resource value: 0x7f04003a
-			public const int notification_template_lines_media = 2130968634;
+			public const int notification_template_icon_group = 2130968634;
 			
 			// aapt resource value: 0x7f04003b
-			public const int notification_template_media = 2130968635;
+			public const int notification_template_lines_media = 2130968635;
 			
 			// aapt resource value: 0x7f04003c
-			public const int notification_template_media_custom = 2130968636;
+			public const int notification_template_media = 2130968636;
 			
 			// aapt resource value: 0x7f04003d
-			public const int notification_template_part_chronometer = 2130968637;
+			public const int notification_template_media_custom = 2130968637;
 			
 			// aapt resource value: 0x7f04003e
-			public const int notification_template_part_time = 2130968638;
+			public const int notification_template_part_chronometer = 2130968638;
 			
 			// aapt resource value: 0x7f04003f
-			public const int psts_tab = 2130968639;
+			public const int notification_template_part_time = 2130968639;
 			
 			// aapt resource value: 0x7f040040
-			public const int RowCycle = 2130968640;
+			public const int psts_tab = 2130968640;
 			
 			// aapt resource value: 0x7f040041
-			public const int RowTab = 2130968641;
+			public const int RowCycle = 2130968641;
 			
 			// aapt resource value: 0x7f040042
-			public const int select_dialog_item_material = 2130968642;
+			public const int RowTab = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int select_dialog_multichoice_material = 2130968643;
+			public const int select_dialog_item_material = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int select_dialog_singlechoice_material = 2130968644;
+			public const int select_dialog_multichoice_material = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int support_simple_spinner_dropdown_item = 2130968645;
+			public const int select_dialog_singlechoice_material = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int tooltip = 2130968646;
+			public const int support_simple_spinner_dropdown_item = 2130968646;
+			
+			// aapt resource value: 0x7f040047
+			public const int tooltip = 2130968647;
+			
+			// aapt resource value: 0x7f040048
+			public const int ucrop_activity_photobox = 2130968648;
+			
+			// aapt resource value: 0x7f040049
+			public const int ucrop_aspect_ratio = 2130968649;
+			
+			// aapt resource value: 0x7f04004a
+			public const int ucrop_controls = 2130968650;
+			
+			// aapt resource value: 0x7f04004b
+			public const int ucrop_layout_rotate_wheel = 2130968651;
+			
+			// aapt resource value: 0x7f04004c
+			public const int ucrop_layout_scale_wheel = 2130968652;
+			
+			// aapt resource value: 0x7f04004d
+			public const int ucrop_view = 2130968653;
 			
 			static Layout()
 			{
@@ -4597,6 +4927,22 @@ namespace CABASUS
 			}
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f0e0000
+			public const int ucrop_menu_activity = 2131623936;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
 			{
 			}
 		}
@@ -4626,29 +4972,50 @@ namespace CABASUS
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f090031
-			public const int Accept = 2131296305;
+			// aapt resource value: 0x7f090037
+			public const int Accept = 2131296311;
 			
-			// aapt resource value: 0x7f09002f
-			public const int Age = 2131296303;
+			// aapt resource value: 0x7f090035
+			public const int Age = 2131296309;
 			
-			// aapt resource value: 0x7f090032
-			public const int Conditions = 2131296306;
-			
-			// aapt resource value: 0x7f09002d
-			public const int Email = 2131296301;
-			
-			// aapt resource value: 0x7f090033
-			public const int Having_trouble = 2131296307;
+			// aapt resource value: 0x7f090040
+			public const int Camera = 2131296320;
 			
 			// aapt resource value: 0x7f09002e
-			public const int Password = 2131296302;
+			public const int Cancel = 2131296302;
 			
-			// aapt resource value: 0x7f090030
-			public const int Phone = 2131296304;
+			// aapt resource value: 0x7f090038
+			public const int Conditions = 2131296312;
 			
-			// aapt resource value: 0x7f09002c
-			public const int User_name = 2131296300;
+			// aapt resource value: 0x7f090033
+			public const int Email = 2131296307;
+			
+			// aapt resource value: 0x7f090041
+			public const int Galery = 2131296321;
+			
+			// aapt resource value: 0x7f090039
+			public const int Having_trouble = 2131296313;
+			
+			// aapt resource value: 0x7f09003a
+			public const int Image_too_small = 2131296314;
+			
+			// aapt resource value: 0x7f090034
+			public const int Password = 2131296308;
+			
+			// aapt resource value: 0x7f090036
+			public const int Phone = 2131296310;
+			
+			// aapt resource value: 0x7f09003f
+			public const int Select_an_option = 2131296319;
+			
+			// aapt resource value: 0x7f09003e
+			public const int The_information = 2131296318;
+			
+			// aapt resource value: 0x7f090032
+			public const int User_name = 2131296306;
+			
+			// aapt resource value: 0x7f09003c
+			public const int You_cant_recover_image = 2131296316;
 			
 			// aapt resource value: 0x7f090000
 			public const int abc_action_bar_home_description = 2131296256;
@@ -4737,14 +5104,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f090010
 			public const int abc_toolbar_collapse_description = 2131296272;
 			
-			// aapt resource value: 0x7f090028
-			public const int action_settings = 2131296296;
+			// aapt resource value: 0x7f09002d
+			public const int action_settings = 2131296301;
 			
-			// aapt resource value: 0x7f09002b
-			public const int already_auser = 2131296299;
+			// aapt resource value: 0x7f090031
+			public const int already_auser = 2131296305;
 			
-			// aapt resource value: 0x7f090027
-			public const int app_name = 2131296295;
+			// aapt resource value: 0x7f09002c
+			public const int app_name = 2131296300;
 			
 			// aapt resource value: 0x7f09001e
 			public const int appbar_scrolling_view_behavior = 2131296286;
@@ -4755,11 +5122,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f090020
 			public const int character_counter_pattern = 2131296288;
 			
-			// aapt resource value: 0x7f090029
-			public const int create_account = 2131296297;
+			// aapt resource value: 0x7f09002f
+			public const int create_account = 2131296303;
 			
-			// aapt resource value: 0x7f09002a
-			public const int log_in = 2131296298;
+			// aapt resource value: 0x7f09003b
+			public const int image_with_192 = 2131296315;
+			
+			// aapt resource value: 0x7f090030
+			public const int log_in = 2131296304;
 			
 			// aapt resource value: 0x7f090021
 			public const int password_toggle_content_description = 2131296289;
@@ -4779,8 +5149,26 @@ namespace CABASUS
 			// aapt resource value: 0x7f090011
 			public const int search_menu_title = 2131296273;
 			
+			// aapt resource value: 0x7f09003d
+			public const int select_image = 2131296317;
+			
 			// aapt resource value: 0x7f090026
 			public const int status_bar_notification_info_overflow = 2131296294;
+			
+			// aapt resource value: 0x7f09002a
+			public const int ucrop_error_input_data_is_absent = 2131296298;
+			
+			// aapt resource value: 0x7f090027
+			public const int ucrop_label_edit_photo = 2131296295;
+			
+			// aapt resource value: 0x7f090028
+			public const int ucrop_label_original = 2131296296;
+			
+			// aapt resource value: 0x7f090029
+			public const int ucrop_menu_crop = 2131296297;
+			
+			// aapt resource value: 0x7f09002b
+			public const int ucrop_mutate_exception_hint = 2131296299;
 			
 			static String()
 			{
@@ -4813,8 +5201,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f0a015f
 			public const int Animation_Design_BottomSheetDialog = 2131362143;
 			
-			// aapt resource value: 0x7f0a0180
-			public const int AppTheme = 2131362176;
+			// aapt resource value: 0x7f0a0185
+			public const int AppTheme = 2131362181;
 			
 			// aapt resource value: 0x7f0a009a
 			public const int Base_AlertDialog_AppCompat = 2131361946;
@@ -5656,6 +6044,9 @@ namespace CABASUS
 			// aapt resource value: 0x7f0a0106
 			public const int Theme_AppCompat_NoActionBar = 2131362054;
 			
+			// aapt resource value: 0x7f0a0187
+			public const int Theme_Custom_Dark = 2131362183;
+			
 			// aapt resource value: 0x7f0a0169
 			public const int Theme_Design = 2131362153;
 			
@@ -5694,6 +6085,9 @@ namespace CABASUS
 			
 			// aapt resource value: 0x7f0a010d
 			public const int ThemeOverlay_AppCompat_Light = 2131362061;
+			
+			// aapt resource value: 0x7f0a0186
+			public const int Theme_Dialog_Translucent = 2131362182;
 			
 			// aapt resource value: 0x7f0a010e
 			public const int Widget_AppCompat_ActionBar = 2131362062;
@@ -5949,6 +6343,21 @@ namespace CABASUS
 			
 			// aapt resource value: 0x7f0a0178
 			public const int Widget_Design_TextInputLayout = 2131362168;
+			
+			// aapt resource value: 0x7f0a0180
+			public const int ucrop_ImageViewWidgetIcon = 2131362176;
+			
+			// aapt resource value: 0x7f0a0181
+			public const int ucrop_TextViewCropAspectRatio = 2131362177;
+			
+			// aapt resource value: 0x7f0a0182
+			public const int ucrop_TextViewWidgetText = 2131362178;
+			
+			// aapt resource value: 0x7f0a0183
+			public const int ucrop_WrapperIconState = 2131362179;
+			
+			// aapt resource value: 0x7f0a0184
+			public const int ucrop_WrapperRotateButton = 2131362180;
 			
 			static Style()
 			{
@@ -6823,6 +7232,24 @@ namespace CABASUS
 			// aapt resource value: 0
 			public const int ButtonBarLayout_allowStacking = 0;
 			
+			public static int[] CircleImageView = new int[] {
+					2130772331,
+					2130772332,
+					2130772333,
+					2130772334};
+			
+			// aapt resource value: 1
+			public const int CircleImageView_civ_border_color = 1;
+			
+			// aapt resource value: 2
+			public const int CircleImageView_civ_border_overlay = 2;
+			
+			// aapt resource value: 0
+			public const int CircleImageView_civ_border_width = 0;
+			
+			// aapt resource value: 3
+			public const int CircleImageView_civ_fill_color = 3;
+			
 			public static int[] CollapsingToolbarLayout = new int[] {
 					2130771980,
 					2130772231,
@@ -7122,13 +7549,13 @@ namespace CABASUS
 			public const int ForegroundLinearLayout_foregroundInsidePadding = 2;
 			
 			public static int[] HorizontalInfiniteCycleViewPager = new int[] {
-					2130772331,
-					2130772332,
-					2130772333,
-					2130772334,
-					2130772335,
-					2130772336,
-					2130772337};
+					2130772351,
+					2130772352,
+					2130772353,
+					2130772354,
+					2130772355,
+					2130772356,
+					2130772357};
 			
 			// aapt resource value: 0
 			public const int HorizontalInfiniteCycleViewPager_icvp_center_page_scale_offset = 0;
@@ -8058,13 +8485,13 @@ namespace CABASUS
 			public const int Toolbar_titleTextColor = 27;
 			
 			public static int[] VerticalInfiniteCycleViewPager = new int[] {
-					2130772331,
-					2130772332,
-					2130772333,
-					2130772334,
-					2130772335,
-					2130772336,
-					2130772337};
+					2130772351,
+					2130772352,
+					2130772353,
+					2130772354,
+					2130772355,
+					2130772356,
+					2130772357};
 			
 			// aapt resource value: 0
 			public const int VerticalInfiniteCycleViewPager_icvp_center_page_scale_offset = 0;
@@ -8136,6 +8563,74 @@ namespace CABASUS
 			
 			// aapt resource value: 1
 			public const int ViewStubCompat_android_layout = 1;
+			
+			public static int[] ucrop_AspectRatioTextView = new int[] {
+					2130772335,
+					2130772336,
+					2130772337};
+			
+			// aapt resource value: 0
+			public const int ucrop_AspectRatioTextView_ucrop_artv_ratio_title = 0;
+			
+			// aapt resource value: 1
+			public const int ucrop_AspectRatioTextView_ucrop_artv_ratio_x = 1;
+			
+			// aapt resource value: 2
+			public const int ucrop_AspectRatioTextView_ucrop_artv_ratio_y = 2;
+			
+			public static int[] ucrop_UCropView = new int[] {
+					2130772338,
+					2130772339,
+					2130772340,
+					2130772341,
+					2130772342,
+					2130772343,
+					2130772344,
+					2130772345,
+					2130772346,
+					2130772347,
+					2130772348,
+					2130772349,
+					2130772350};
+			
+			// aapt resource value: 0
+			public const int ucrop_UCropView_ucrop_aspect_ratio_x = 0;
+			
+			// aapt resource value: 1
+			public const int ucrop_UCropView_ucrop_aspect_ratio_y = 1;
+			
+			// aapt resource value: 3
+			public const int ucrop_UCropView_ucrop_circle_dimmed_layer = 3;
+			
+			// aapt resource value: 4
+			public const int ucrop_UCropView_ucrop_dimmed_color = 4;
+			
+			// aapt resource value: 11
+			public const int ucrop_UCropView_ucrop_frame_color = 11;
+			
+			// aapt resource value: 10
+			public const int ucrop_UCropView_ucrop_frame_stroke_size = 10;
+			
+			// aapt resource value: 6
+			public const int ucrop_UCropView_ucrop_grid_color = 6;
+			
+			// aapt resource value: 8
+			public const int ucrop_UCropView_ucrop_grid_column_count = 8;
+			
+			// aapt resource value: 7
+			public const int ucrop_UCropView_ucrop_grid_row_count = 7;
+			
+			// aapt resource value: 5
+			public const int ucrop_UCropView_ucrop_grid_stroke_size = 5;
+			
+			// aapt resource value: 12
+			public const int ucrop_UCropView_ucrop_show_frame = 12;
+			
+			// aapt resource value: 9
+			public const int ucrop_UCropView_ucrop_show_grid = 9;
+			
+			// aapt resource value: 2
+			public const int ucrop_UCropView_ucrop_show_oval_crop_frame = 2;
 			
 			static Styleable()
 			{

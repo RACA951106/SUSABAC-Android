@@ -7,4 +7,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+  
+  <style name="Theme_Dialog_Translucent" parent="android:Theme.Dialog">
+    <item name="android:windowBackground">@android:color/transparent</item>
+  </style>
+  
+  <style name="Theme.Custom.Dark" parent="Theme.AppCompat.NoActionBar">
+
+    <item name="actionBarStyle">@style/Theme.AppCompat</item>
+
+  </style>
 </resources>

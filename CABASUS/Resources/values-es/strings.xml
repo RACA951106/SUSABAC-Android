@@ -1,6 +1,7 @@
 ﻿<resources>
   <string name="app_name">CABASUS</string>
   <string name="action_settings">Configuración</string>
+  <string name="Cancel">	Cacelar	</string>
 
   <!--Login-->
   <string name="create_account">CREAR CUENTA</string>
@@ -16,4 +17,14 @@
   <string name="Accept">Aceptar</string>
   <string name="Conditions">Al registrarse está de acuerdo con los términos y condiciones de uso y políticas de privacidad de CABASUS</string>
   <string name="Having_trouble">¿Tienes problemas al iniciar? Recuperar contraseña</string>
+
+  <!--Camara-->
+  <string name="Image_too_small"> Imagen demasiado pequeña </string>
+  <string name="image_with_192"> Se necesita una imagen con 192 pixeles de alto y ancho </string>
+  <string name="You_cant_recover_image"> No puedes recuperar la imagen seleccionada </string>
+  <string name="select_image">Seleciona imagen</string>
+  <string name="The_information"> La información no fue encontrada </string>
+  <string name="Select_an_option">	Seleccione una opcion	</string>
+  <string name="Camera">	Camara	</string>
+  <string name="Galery">	Galeria	</string>
 </resources>

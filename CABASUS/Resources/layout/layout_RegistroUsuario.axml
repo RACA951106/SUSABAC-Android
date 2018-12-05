@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF">
@@ -13,9 +14,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" />
+                android:layout_height="100dp"
+                android:orientation="vertical"
+                android:gravity="center">
+               <refractored.controls.CircleImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:civ_border_width="2dp"
+					app:civ_border_color="#CB1E1E"
+                    android:id="@+id/btnfoto" />
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -29,6 +38,7 @@
                 android:layout_height="40dp"
                 android:textColor="#000"
                 android:gravity="center"
+                android:lines="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtUserNameRegistro"
@@ -46,6 +56,8 @@
                 android:layout_height="40dp"
                 android:textColor="#000"
                 android:gravity="center"
+                android:lines="1"
+                android:inputType="textEmailAddress"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtEmailRegistroUsuario"
@@ -62,10 +74,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="#000"
+                android:lines="1"
                 android:gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtContrasenaRegistroUsuario"
+                android:inputType="textPassword"
                 android:background="@drawable/stylebuttomregistrousuario" />
             <TextView
                 android:layout_width="match_parent"
@@ -81,25 +95,9 @@
                 android:textColor="#000"
                 android:gravity="center"
                 android:layout_marginLeft="10dp"
+                android:lines="1"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtEdadRegistroUsuario"
-                android:background="@drawable/stylebuttomregistrousuario" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="@string/Phone"
-                android:textColor="#000"
-                android:gravity="center|left"
-                android:layout_marginLeft="15dp"
-                android:textSize="20dp" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textColor="#000"
-                android:gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:id="@+id/txtTelefonoRegistroUsuario"
                 android:background="@drawable/stylebuttomregistrousuario" />
             <TextView
                 android:layout_width="match_parent"
@@ -112,7 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:id="@+id/btnListoRegistroUsuario" />
+                android:id="@+id/btnRegistroUsuario" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

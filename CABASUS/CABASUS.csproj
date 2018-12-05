@@ -52,6 +52,7 @@
   <ItemGroup>
     <Reference Include="Mono.Android.Export" />
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
@@ -67,12 +68,23 @@
     <Compile Include="Adaptadores\PagerAdapterLogin.cs" />
     <Compile Include="Fragments\FragmentCycleHorses.cs" />
     <Compile Include="Fragments\FragmentHorses.cs" />
+    <Compile Include="Modelos\actividades.cs" />
+    <Compile Include="Modelos\caballos.cs" />
+    <Compile Include="Modelos\compartidos.cs" />
+    <Compile Include="Modelos\diarios.cs" />
+    <Compile Include="Modelos\fotos.cs" />
+    <Compile Include="Modelos\login.cs" />
+    <Compile Include="Modelos\usuarios.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShareInside.cs" />
+    <Compile Include="VerificarInternet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -102,8 +114,20 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Naxam.uCrop.Droid">
+      <Version>2.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Refractored.Controls.CircleImageView">
+      <Version>1.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Refractored.PagerSlidingTabStrip">
       <Version>1.1.6</Version>
+    </PackageReference>
+    <PackageReference Include="WindowsAzure.Storage">
+      <Version>9.3.3</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Android.InfiniteCycleViewPager">
       <Version>1.0.2</Version>
@@ -193,6 +217,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\raw\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layout_CustomAlert.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\dialog_container.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\dialog_divider.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\dialog_button_selector.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
