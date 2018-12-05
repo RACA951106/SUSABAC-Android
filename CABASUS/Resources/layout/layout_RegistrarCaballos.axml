@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="insideOverlay"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/Horse_Name"
+                android:textColor="#000"
+                android:gravity="center|left"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/txtHorseNameRegistro"
+                android:background="@drawable/stylebuttomregistrousuario" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/Weight"
+                android:textColor="#000"
+                android:gravity="center|left"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/txtWeightRegistro"
+                android:background="@drawable/stylebuttomregistrousuario" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/Height"
+                android:textColor="#000"
+                android:gravity="center|left"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/txtHeightRegistro"
+                android:background="@drawable/stylebuttomregistrousuario" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/Breed"
+                android:textColor="#000"
+                android:gravity="center|left"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/txtBreedRegistro"
+                android:background="@drawable/stylebuttomregistrousuario" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/DOB"
+                android:textColor="#000"
+                android:gravity="center|left"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/txtDOBRegistro"
+                android:background="@drawable/stylebuttomregistrousuario" />
+			<TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/Gender"
+                android:textColor="#000"
+                android:gravity="center|left"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/txtGenderRegistro"
+                android:background="@drawable/stylebuttomregistrousuario" />
+			<TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/Oat"
+                android:textColor="#000"
+                android:gravity="center|left"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/txtOatRegistro"
+                android:background="@drawable/stylebuttomregistrousuario" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="#FFF"
+                android:text="@string/Accept"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+				android:layout_marginBottom="15dp"
+                android:id="@+id/btnListoRegistroCaballos" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

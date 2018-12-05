@@ -1,4 +1,5 @@
-﻿using Android.Graphics;
+﻿using Android.Content;
+using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Support.V4.App;
@@ -23,8 +24,13 @@ namespace CABASUS.Fragments
             GradientDrawable gd = new GradientDrawable();
             gd.SetColor(Color.Rgb(246, 128, 25));
             gd.SetCornerRadius(1000);
-            Vista.FindViewById<ImageView>(Resource.Id.btnAdd).SetBackgroundDrawable(gd);
 
+            var btnAgregar = Vista.FindViewById<ImageView>(Resource.Id.btnAdd);
+            btnAgregar.SetBackgroundDrawable(gd);
+            btnAgregar.Click += delegate {
+                var intent = new Intent(Activity, typeof(Activity_RegistroCaballos));
+                StartActivity(intent);
+            };
             return Vista;
         }
     }

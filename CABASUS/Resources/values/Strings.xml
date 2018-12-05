@@ -27,4 +27,13 @@
   <string name="Select_an_option">	Select an option	</string>
   <string name="Camera">	Camera	</string>
   <string name="Galery">	Gallery	</string>
+
+<!--Registrar Caballos-->
+  <string name="Horse_Name">Horse Name</string>
+  <string name="Weight">Weight</string>
+  <string name="Height">Height</string>
+  <string name="Breed">Breed</string>
+  <string name="DOB">DOB</string>
+  <string name="Gender">Gender</string>
+  <string name="Oat">Oat</string>
 </resources>

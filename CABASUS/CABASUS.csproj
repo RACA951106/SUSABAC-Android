@@ -61,6 +61,7 @@
     <Compile Include="ActivityLogin.cs" />
     <Compile Include="ActivityRegistroUsuario.cs" />
     <Compile Include="Activity_IniciarSesion.cs" />
+    <Compile Include="Activity_RegistroCaballos.cs" />
     <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
@@ -229,6 +230,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\dialog_button_selector.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layout_RegistrarCaballos.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
