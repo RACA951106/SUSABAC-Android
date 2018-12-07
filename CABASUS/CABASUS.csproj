@@ -72,9 +72,11 @@
     <Compile Include="Modelos\actividades.cs" />
     <Compile Include="Modelos\caballos.cs" />
     <Compile Include="Modelos\compartidos.cs" />
+    <Compile Include="Modelos\ConsumoAPIS.cs" />
     <Compile Include="Modelos\diarios.cs" />
     <Compile Include="Modelos\fotos.cs" />
     <Compile Include="Modelos\login.cs" />
+    <Compile Include="Modelos\Token.cs" />
     <Compile Include="Modelos\usuarios.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,4 +13,10 @@ namespace CABASUS.Modelos
         public string tokenFB { get; set; }
         public string fecha_nacimiento { get; set; }
     }
+
+    public class ConsultarEmail
+    {
+        public string email { get; set; }
+        public string contrasena { get; set; }
+    }
 }

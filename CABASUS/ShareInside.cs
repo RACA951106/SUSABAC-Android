@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -16,9 +20,11 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
+using CABASUS.Modelos;
 using Java.Lang;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Newtonsoft.Json;
 using static Android.App.DatePickerDialog;
 
 namespace CABASUS
@@ -47,32 +53,156 @@ namespace CABASUS
 
         public async Task<string> SubirImagen(string Contenedor, string Nombre, Android.Net.Uri RutaArchivo)
         {
-            CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=susabac;AccountKey=p6EvYU5CRlr7U3nXEp0A+Q/M1ZRtReQjomO8EwaBJ00LxKoo/7MG/m7aX7pbdJGGcJ0HcYGzn6LM7lFYbMeR+g==;EndpointSuffix=core.windows.net");
-            CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
-            CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(Contenedor);
-
-            if (await cloudBlobContainer.CreateIfNotExistsAsync())
+            if (HayConexion())
             {
-                await cloudBlobContainer.SetPermissionsAsync(new BlobContainerPermissions
+                CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=susabac;AccountKey=p6EvYU5CRlr7U3nXEp0A+Q/M1ZRtReQjomO8EwaBJ00LxKoo/7MG/m7aX7pbdJGGcJ0HcYGzn6LM7lFYbMeR+g==;EndpointSuffix=core.windows.net");
+                CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+                CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(Contenedor);
+
+                if (await cloudBlobContainer.CreateIfNotExistsAsync())
                 {
-                    PublicAccess = BlobContainerPublicAccessType.Blob
-                });
-            }
+                    await cloudBlobContainer.SetPermissionsAsync(new BlobContainerPermissions
+                    {
+                        PublicAccess = BlobContainerPublicAccessType.Blob
+                    });
+                }
 
-            CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(Nombre + ".jpg");
-            cloudBlockBlob.Properties.ContentType = "image/jpg";
+                CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(Nombre + ".jpg");
+                cloudBlockBlob.Properties.ContentType = "image/jpg";
 
-            try
-            {
-                await cloudBlockBlob.UploadFromFileAsync(RutaArchivo.Path);
-                return cloudBlockBlob.Uri.AbsoluteUri;
+                try
+                {
+                    await cloudBlockBlob.UploadFromFileAsync(RutaArchivo.Path);
+                    return cloudBlockBlob.Uri.AbsoluteUri;
+                }
+                catch (System.Exception ex)
+                {
+                    return "No hay conexion";
+                }
             }
-            catch (System.Exception ex)
+            else
             {
-                var mensaje = ex.Message;
-                return "Error";
+                return "No hay conexion";
             }
         }
+
+        public void FormatoFecha(EditText txtDOB)
+        {
+            var noLetras = txtDOB.Text.Replace("/", "");
+            noLetras = noLetras.Replace(" ", "");
+            try
+            {
+                int.Parse(noLetras);
+
+                if (txtDOB.Text.Length == 2)
+                {
+                    txtDOB.Text += " / ";
+                }
+                if (txtDOB.Text.Length == 7)
+                {
+                    txtDOB.Text += " / ";
+                }
+                if (txtDOB.Text.Length >= 15)
+                {
+                    txtDOB.Text = txtDOB.Text.Substring(0, txtDOB.Text.Length - 1);
+                }
+                if (txtDOB.Text.Length == 4)
+                {
+                    txtDOB.Text = txtDOB.Text = txtDOB.Text.Substring(0, txtDOB.Text.Length - 4);
+                }
+                if (txtDOB.Text.Length == 9)
+                {
+                    txtDOB.Text = txtDOB.Text = txtDOB.Text.Substring(0, txtDOB.Text.Length - 4);
+                }
+                txtDOB.SetSelection(txtDOB.Text.Length);
+            }
+            catch
+            {
+                txtDOB.Hint = "DD/MM/YYYY";
+            }
+        }
+
+        public void Guardar_Email_Contrasena(string email, string contrasena)
+        {
+            var guardartoken = new ConsultarEmail();
+            guardartoken.email = email;
+            guardartoken.contrasena = contrasena;
+            var serializador = new XmlSerializer(typeof(ConsultarEmail));
+            var Escritura = new StreamWriter(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ConsultarEmail.xml"));
+            serializador.Serialize(Escritura, guardartoken);
+            Escritura.Close();
+        }
+        private ConsultarEmail Consultar_Email_Contrasena()
+        {
+            var serializador = new XmlSerializer(typeof(ConsultarEmail));
+            var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ConsultarEmail.xml"));
+            var datos = (ConsultarEmail)serializador.Deserialize(Lectura);
+            Lectura.Close();
+            return datos;
+        }
+        public void GuardarToken(Token tokens)
+        {
+            var guardartoken = new Token();
+            guardartoken.token = tokens.token;
+            guardartoken.expiration = tokens.expiration;
+            var serializador = new XmlSerializer(typeof(Token));
+            var Escritura = new StreamWriter(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Token.xml"));
+            serializador.Serialize(Escritura, guardartoken);
+            Escritura.Close();
+        }
+        private string ConsultarExpiracion()
+        {
+            var serializador = new XmlSerializer(typeof(Token));
+            var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Token.xml"));
+            var datos = (Token)serializador.Deserialize(Lectura);
+            Lectura.Close();
+            return datos.expiration;
+        }
+        public async Task<string> ConsultarTokenAsync()
+        {
+            var expiracion = Convert.ToDateTime(ConsultarExpiracion());
+            var fechaactual = DateTime.Now;
+            if (fechaactual >= expiracion)
+            {
+                login log = new login()
+                {
+                    usuario = Consultar_Email_Contrasena().email,
+                    contrasena = Consultar_Email_Contrasena().contrasena,
+                    TokenFB = "dsfsdf",
+                    SO = "Android",
+                    id_dispositivo = Build.Serial
+                };
+                if (HayConexion())
+                {
+                    await LogearUsuario(log);
+                }
+            }
+            var serializador = new XmlSerializer(typeof(Token));
+            var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Token.xml"));
+            var datos = (Token)serializador.Deserialize(Lectura);
+            Lectura.Close();
+            return datos.token;
+        }
+        public async Task<string> LogearUsuario(login log)
+        {
+            string url = "http://192.168.1.73:5001/api/account/Login";
+            var json = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
+            HttpClient cliente = new HttpClient();
+            var respuesta = await cliente.PostAsync(url, json);
+            respuesta.EnsureSuccessStatusCode();
+            if (respuesta.IsSuccessStatusCode)
+            {
+                var contenido = await respuesta.Content.ReadAsStringAsync();
+                var cont = JsonConvert.DeserializeObject<Token>(contenido);
+                GuardarToken(cont);
+                return "Logeado";
+            }
+            else
+            {
+                return await respuesta.Content.ReadAsStringAsync();
+            }
+        }
+
     }
     public class ObtenerDialogFecha
     {

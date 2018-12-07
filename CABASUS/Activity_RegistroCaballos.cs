@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
-
+using System.Text.RegularExpressions;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -15,6 +17,7 @@ using Android.Views;
 using Android.Widget;
 using Com.Yalantis.Ucrop;
 using Java.Lang;
+using Newtonsoft.Json;
 using Uri = Android.Net.Uri;
 
 namespace CABASUS
@@ -51,11 +54,11 @@ namespace CABASUS
             var txtWeight = FindViewById<EditText>(Resource.Id.txtWeightRegistro);
             var txtHeight = FindViewById<EditText>(Resource.Id.txtHeightRegistro);
             var txtBreed = FindViewById<TextView>(Resource.Id.txtBreedRegistro);
-            var txtDOB = FindViewById<TextView>(Resource.Id.txtDOBRegistro);
+            var txtDOB = FindViewById<EditText>(Resource.Id.txtDOBRegistro);
             var txtGender = FindViewById<TextView>(Resource.Id.txtGenderRegistro);
             var txtOat = FindViewById<EditText>(Resource.Id.txtOatRegistro);
             #endregion
-
+            
             Foto.Click += delegate
             {
                 Dialog alertar = new Dialog(this, Resource.Style.Theme_Dialog_Translucent);
@@ -85,29 +88,63 @@ namespace CABASUS
                     alertar.Dismiss();
                 };
             };
-            txtBreed.Click += delegate { };
-            txtDOB.Click += delegate {
-                //Java.Util.Calendar calendar = Java.Util.Calendar.Instance;
-                //int year = calendar.Get(Java.Util.CalendarField.Year);
-                //int month = calendar.Get(Java.Util.CalendarField.Month);
-                //int day_of_month = calendar.Get(Java.Util.CalendarField.DayOfMonth);
-                //DatePickerDialog dialog;
 
-                //dialog = new DatePickerDialog(this, Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert,
-                //onDateSetListener, year, month, day_of_month);
-                //dialog.Show();
+            txtDOB.TextChanged += delegate
+            {
+                new ShareInside().FormatoFecha(txtDOB);
             };
+            txtDOB.Click += delegate { txtDOB.SetSelection(txtDOB.Text.Length); };
+            //txtDOB.Focusable = false;
+            txtDOB.MovementMethod = null;
+
+            txtBreed.Click += delegate { };
             txtGender.Click += delegate { };
             txtListo.Click += async delegate {
+                Modelos.caballos ModeloCaballos = new Modelos.caballos()
+                {
+                    nombre = "Francisco",
+                    peso = 2.5,
+                    altura = 3.6,
+                    raza = 4,
+                    fecha_nacimiento = "2018-05-06",
+                    genero = 4,
+                    avena = 10
+                };
                 try
                 {
-                    string url_imagen = await new ShareInside().SubirImagen("caballos", "caballo", cameraUri);
-                    Toast.MakeText(this, url_imagen, ToastLength.Long).Show();
+                    string id_caballo = await new Modelos.ConsumoAPIS().RegistrarCaballos(ModeloCaballos);
+                    if (id_caballo == "No hay conexion")
+                    {
+                        Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+                    }
+                    else
+                    {
+                        string url_imagen = await new ShareInside().SubirImagen("caballos", id_caballo, cameraUri);
+                        if (url_imagen == "No hay conexion")
+                        {
+                            Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+                        }
+                        else
+                        {
+                            Modelos.caballos FotoCaballo = new Modelos.caballos()
+                            {
+                                id_caballo = id_caballo,
+                                foto = url_imagen
+                            };
+                            if (await new Modelos.ConsumoAPIS().ActualizarFotoCaballo(FotoCaballo) == "No hay conexion")
+                            {
+                                Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+                            }
+                            else
+                            {
+                                Toast.MakeText(this, "Datos del caballo guardados correctamente", ToastLength.Short).Show();
+                            }
+                        }
+                    }
                 }
-                catch (System.Exception)
+                catch (System.Exception ex)
                 {
-
-                    throw;
+                    Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
                 }
             };
         }

@@ -58,6 +58,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtWeightRegistro"
+				android:inputType="numberDecimal"
                 android:background="@drawable/stylebuttomregistrousuario" />
             <TextView
                 android:layout_width="match_parent"
@@ -75,6 +76,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtHeightRegistro"
+				android:inputType="numberDecimal"
                 android:background="@drawable/stylebuttomregistrousuario" />
             <TextView
                 android:layout_width="match_parent"
@@ -101,7 +103,7 @@
                 android:gravity="center|left"
                 android:layout_marginLeft="15dp"
                 android:textSize="20dp" />
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="#000"
@@ -109,6 +111,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtDOBRegistro"
+				android:inputType="date"
                 android:background="@drawable/stylebuttomregistrousuario" />
 			<TextView
                 android:layout_width="match_parent"
@@ -143,6 +146,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtOatRegistro"
+				android:inputType="number"
                 android:background="@drawable/stylebuttomregistrousuario" />
             <TextView
                 android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +22,7 @@ using System.Xml;
 using Newtonsoft.Json;
 using System.Net.Http;
 using Android.Webkit;
+using System.Text.RegularExpressions;
 
 namespace CABASUS
 {
@@ -33,7 +34,6 @@ namespace CABASUS
         {
             throw new NotImplementedException();
         }
-
         Refractored.Controls.CircleImageView Foto;
         string id_usuario;
         #region Tomar Foto e Imagen Galeria
@@ -126,13 +126,64 @@ namespace CABASUS
             {
                 try
                 {
-                     string url_imagen = await new ShareInside().SubirImagen("usuarios", "usuarioandroid", cameraUri);
-                    Toast.MakeText(this, url_imagen, ToastLength.Long).Show();
-                }
-                catch (System.Exception)
-                {
+                    if (string.IsNullOrWhiteSpace(txtUserName.Text) && string.IsNullOrWhiteSpace(txtContrasena.Text) && string.IsNullOrWhiteSpace(txtEmail.Text))
+                    {
+                        Toast.MakeText(this, "Campos vacios verifica la información", ToastLength.Short).Show();
+                    }
+                    else if (!validar_email(txtEmail))
+                    {
+                        Toast.MakeText(this, "Verifica Email", ToastLength.Short).Show();
+                    }
+                    else
+                    {
+                        string url = "http://192.168.1.73:5001/api/Account/registrar";
+                        string formato = "application/json";
+                        usuarios usuarios = new usuarios()
+                        {
+                            id_usuario = "",
+                            nombre = txtUserName.Text,
+                            email = txtEmail.Text,
+                            contrasena = txtContrasena.Text,
+                            foto = "",
+                            id_dispositivo = Build.Serial,
+                            SO = "Android",
+                            tokenFB = "algo",
+                            fecha_nacimiento = txtEdad.Text
+                        };
+                        var json = new StringContent(JsonConvert.SerializeObject(usuarios), Encoding.UTF8, formato);
+                        HttpClient cliente = new HttpClient();
+                        if (new ShareInside().HayConexion())
+                        {
+                            var respuesta = await cliente.PostAsync(url, json);
+                            respuesta.EnsureSuccessStatusCode();
+                            if (respuesta.IsSuccessStatusCode)
+                            {
+                                var contenido = await respuesta.Content.ReadAsStringAsync();
 
-                    throw;
+
+
+                                var cont = JsonConvert.DeserializeObject<Token>(contenido);
+                                new ShareInside().GuardarToken(cont);
+                                new ShareInside().Guardar_Email_Contrasena(txtEmail.Text, txtContrasena.Text);
+
+
+                            }
+                            else
+                            {
+                                var id = await respuesta.Content.ReadAsStringAsync();
+                                Toast.MakeText(this, id, ToastLength.Short).Show();
+
+                            }
+                        }
+                        else
+                            Toast.MakeText(this, "Tu conexion es inestable", ToastLength.Short).Show();
+                    }
+
+                }
+                catch (System.Exception ex)
+                {
+                    Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+
                 }
             };
         }
@@ -279,5 +330,24 @@ namespace CABASUS
             }
         }
 
+        private bool validar_email(EditText txt_email)
+        {
+            Regex email = new Regex(@"^([0-9a-zA-Z]" + //Start with a digit or alphabetical
+                                           @"([\+\-_\.][0-9a-zA-Z]+)*" + // No continuous or ending +-_. chars in email
+                                           @")+" +
+                                           @"@(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z0-9]{2,17})$");
+            if (email.IsMatch(txt_email.Text))
+                return true;
+            else
+                return false;
+        }
+        //private string Obtener_idusuario(string token)
+        //{
+        //    var handler = new JwtSecurityTokenHandler();
+
+        //    var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+        //    var jti = tokenS.Claims.First(claim => claim.Type == "id").Value;
+        //    return jti;
+        //}
     }
 }
