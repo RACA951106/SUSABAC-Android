@@ -166,7 +166,7 @@ namespace CABASUS
 
             #region iniciar sesion
             btnLogIn.Click += delegate {
-                StartActivity(typeof(Activity_IniciarSesion));
+                 StartActivity(typeof(Activity_IniciarSesion));
             };
             #endregion
         }

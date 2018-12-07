@@ -15,14 +15,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
-using static Android.App.DatePickerDialog;
 using static CABASUS.ObtenerDialogFecha;
 using CABASUS.Modelos;
-using System.Xml;
 using Newtonsoft.Json;
 using System.Net.Http;
-using Android.Webkit;
 using System.Text.RegularExpressions;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace CABASUS
 {
@@ -140,11 +138,9 @@ namespace CABASUS
                         string formato = "application/json";
                         usuarios usuarios = new usuarios()
                         {
-                            id_usuario = "",
                             nombre = txtUserName.Text,
                             email = txtEmail.Text,
                             contrasena = txtContrasena.Text,
-                            foto = "",
                             id_dispositivo = Build.Serial,
                             SO = "Android",
                             tokenFB = "algo",
@@ -159,14 +155,23 @@ namespace CABASUS
                             if (respuesta.IsSuccessStatusCode)
                             {
                                 var contenido = await respuesta.Content.ReadAsStringAsync();
-
-
-
                                 var cont = JsonConvert.DeserializeObject<Token>(contenido);
+                                if (cameraUri != null)
+                                {
+                                    var url_foto = await new ShareInside().SubirImagen("usuarios", Obtener_idusuario(cont.token), cameraUri);
+                                    var server = "http://192.168.1.73:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
+                                    cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", cont.token);
+                                    respuesta = await cliente.GetAsync(server);
+                                    var content = await respuesta.Content.ReadAsStringAsync();
+                                    if (respuesta.IsSuccessStatusCode)
+                                        Console.WriteLine("Datos Guardados");
+                                    else
+                                        Console.WriteLine("no se pudo actualizar la foto");
+                                }
+                                else
+                                Console.WriteLine("Campo imagen null");
                                 new ShareInside().GuardarToken(cont);
                                 new ShareInside().Guardar_Email_Contrasena(txtEmail.Text, txtContrasena.Text);
-
-
                             }
                             else
                             {
@@ -341,13 +346,13 @@ namespace CABASUS
             else
                 return false;
         }
-        //private string Obtener_idusuario(string token)
-        //{
-        //    var handler = new JwtSecurityTokenHandler();
 
-        //    var tokenS = handler.ReadToken(token) as JwtSecurityToken;
-        //    var jti = tokenS.Claims.First(claim => claim.Type == "id").Value;
-        //    return jti;
-        //}
+        private string Obtener_idusuario(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+            var jti = tokenS.Claims.First(claim => claim.Type == "id").Value;
+            return jti;
+        }
     }
 }
