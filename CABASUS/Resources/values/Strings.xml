@@ -36,4 +36,12 @@
   <string name="DOB">DOB</string>
   <string name="Gender">Gender</string>
   <string name="Oat">Oat</string>
+  <string name="Kg">Kg</string>
+  <string name="Mts">Mts</string>
+  <string name="Choose_one">Choose one</string>
+  <string name="Optional">Optional</string>
+  <string name="Horse">Horse</string>
+  <string name="Search">Search</string>
+  <string name="There_are_empty_fields">There are empty fields, verify the information.</string>
+  <string name="Incorrect_date_field">Incorrect date field</string>
 </resources>

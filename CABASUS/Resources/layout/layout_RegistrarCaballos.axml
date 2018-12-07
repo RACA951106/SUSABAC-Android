@@ -59,7 +59,8 @@
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtWeightRegistro"
 				android:inputType="numberDecimal"
-                android:background="@drawable/stylebuttomregistrousuario" />
+                android:background="@drawable/stylebuttomregistrousuario" 
+				android:hint="@string/Kg"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -77,7 +78,8 @@
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtHeightRegistro"
 				android:inputType="numberDecimal"
-                android:background="@drawable/stylebuttomregistrousuario" />
+                android:background="@drawable/stylebuttomregistrousuario"
+				android:hint="@string/Mts"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -94,7 +96,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtBreedRegistro"
-                android:background="@drawable/stylebuttomregistrousuario" />
+                android:background="@drawable/stylebuttomregistrousuario"
+				android:hint="@string/Choose_one"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -112,7 +115,8 @@
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtDOBRegistro"
 				android:inputType="date"
-                android:background="@drawable/stylebuttomregistrousuario" />
+                android:background="@drawable/stylebuttomregistrousuario" 
+				android:hint="DD/MM/YYYY"/>
 			<TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -129,7 +133,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtGenderRegistro"
-                android:background="@drawable/stylebuttomregistrousuario" />
+                android:background="@drawable/stylebuttomregistrousuario"
+				android:hint="@string/Optional"/>
 			<TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -147,7 +152,8 @@
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtOatRegistro"
 				android:inputType="number"
-                android:background="@drawable/stylebuttomregistrousuario" />
+                android:background="@drawable/stylebuttomregistrousuario"
+				android:hint="@string/Kg"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

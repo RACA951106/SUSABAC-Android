@@ -121,7 +121,7 @@ namespace CABASUS
                 txtDOB.Hint = "DD/MM/YYYY";
             }
         }
-
+        
         public void Guardar_Email_Contrasena(string email, string contrasena)
         {
             var guardartoken = new ConsultarEmail();
@@ -203,6 +203,34 @@ namespace CABASUS
             }
         }
 
+        public void CopyDocuments(string FileName, string AssetsFileName)
+        {
+            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string dbPath = System.IO.Path.Combine(path, FileName);
+
+            try
+            {
+                if (!File.Exists(dbPath))
+                {
+                    using (var br = new BinaryReader(Application.Context.Assets.Open(AssetsFileName)))
+                    {
+                        using (var bw = new BinaryWriter(new FileStream(dbPath, FileMode.Create)))
+                        {
+                            byte[] buffer = new byte[2048];
+                            int length = 0;
+                            while ((length = br.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                bw.Write(buffer, 0, length);
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
     public class ObtenerDialogFecha
     {

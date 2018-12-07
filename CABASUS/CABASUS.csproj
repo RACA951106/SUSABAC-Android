@@ -63,6 +63,7 @@
     <Compile Include="Activity_IniciarSesion.cs" />
     <Compile Include="Activity_RegistroCaballos.cs" />
     <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
+    <Compile Include="Adaptadores\AdaptadorRazas.cs" />
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
     <Compile Include="ActivityPrincipal.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Modelos\diarios.cs" />
     <Compile Include="Modelos\fotos.cs" />
     <Compile Include="Modelos\login.cs" />
+    <Compile Include="Modelos\Razas.cs" />
     <Compile Include="Modelos\Token.cs" />
     <Compile Include="Modelos\usuarios.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="VerificarInternet.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\RazasGender.db" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
@@ -128,6 +131,9 @@
     </PackageReference>
     <PackageReference Include="Refractored.PagerSlidingTabStrip">
       <Version>1.1.6</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.5.231</Version>
     </PackageReference>
     <PackageReference Include="WindowsAzure.Storage">
       <Version>9.3.3</Version>
@@ -235,6 +241,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\layout_RegistrarCaballos.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\DialogoRazas.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ItemRazas.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\DialogoGender.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ItemGender.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\SetiBreed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\SettingsSearch.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
