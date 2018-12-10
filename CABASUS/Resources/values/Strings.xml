@@ -44,4 +44,8 @@
   <string name="Search">Search</string>
   <string name="There_are_empty_fields">There are empty fields, verify the information.</string>
   <string name="Incorrect_date_field">Incorrect date field</string>
+  <string name="Filly">Filly</string>
+  <string name="Gelding">Gelding</string>
+  <string name="Mare">Mare</string>
+  <string name="Stallion">Stallion</string>
 </resources>

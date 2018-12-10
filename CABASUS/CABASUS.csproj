@@ -64,6 +64,7 @@
     <Compile Include="Activity_IniciarSesion.cs" />
     <Compile Include="Activity_RegistroCaballos.cs" />
     <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
+    <Compile Include="Adaptadores\AdaptadorGender.cs" />
     <Compile Include="Adaptadores\AdaptadorRazas.cs" />
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />

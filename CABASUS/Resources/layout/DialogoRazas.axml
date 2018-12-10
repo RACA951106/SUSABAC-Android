@@ -47,5 +47,6 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:scrollbarStyle="insideOverlay"
-        android:overScrollMode="never" />
+        android:overScrollMode="never" 
+		android:layout_marginBottom="3dp"/>
 </LinearLayout>

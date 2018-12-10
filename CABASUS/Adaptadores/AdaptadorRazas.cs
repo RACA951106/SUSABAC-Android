@@ -17,7 +17,6 @@ namespace CABASUS.Adaptadores
     {
         List<Razas> items;
         Activity context;
-        LayoutInflater li;
         Dialog dlg;
         TextView bds;
         public AdaptadorRazas(Activity context, List<Razas> items, Dialog d, TextView bre) : base()
@@ -28,29 +27,13 @@ namespace CABASUS.Adaptadores
             bds = bre;
         }
 
-        public override Java.Lang.Object GetItem(int position)
-        {
-            return position;
-        }
-
-        public override long GetItemId(int position)
-        {
-            return position;
-        }
-
-        public override Razas this[int position]
-        {
-            get { return items[position]; }
-        }
-
-        public override int Count
-        {
-            get { return items.Count; }
-        }
+        public override Java.Lang.Object GetItem(int position){return position;}
+        public override long GetItemId(int position){return position;}
+        public override Razas this[int position]{get { return items[position]; }}
+        public override int Count{get { return items.Count; }}
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-
             var item = items[position];
             View view = convertView;
             view = context.LayoutInflater.Inflate(Resource.Layout.ItemRazas, null);
