@@ -48,4 +48,7 @@
   <string name="Gelding">Gelding</string>
   <string name="Mare">Mare</string>
   <string name="Stallion">Stallion</string>
+  <string name="Reset_your_password">Reset your password</string>
+  <string name="Enter_the_email_address">Enter the email address you used to register. We will send you a message with your password</string>
+  <string name="Send">Send</string>
 </resources>

@@ -38,6 +38,19 @@ namespace CABASUS
                 StartActivity(typeof(ActivityPrincipal));
                 Finish();
             };
+
+            RecuperarContrasena.Click += delegate {
+                Dialog alertar = new Dialog(this, Resource.Style.Theme_Dialog_Translucent);
+                alertar.RequestWindowFeature(1);
+                alertar.SetCancelable(true);
+                alertar.SetContentView(Resource.Layout.DialogoRecuperarContrasena);
+                var btnSendPassword = alertar.FindViewById<TextView>(Resource.Id.btnSendPassword);
+                GradientDrawable gdCreate = new GradientDrawable();
+                gdCreate.SetColor(Color.Rgb(246, 128, 25));
+                gdCreate.SetCornerRadius(500);
+                btnSendPassword.SetBackgroundDrawable(gdCreate);
+                alertar.Show();
+            };
         }
     }
 }
