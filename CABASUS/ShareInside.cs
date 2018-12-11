@@ -160,46 +160,68 @@ namespace CABASUS
         }
         public async Task<string> ConsultarTokenAsync()
         {
-            var expiracion = Convert.ToDateTime(ConsultarExpiracion());
-            var fechaactual = DateTime.Now;
-            if (fechaactual >= expiracion)
+            try
             {
-                login log = new login()
+                var expiracion = Convert.ToDateTime(ConsultarExpiracion());
+                var fechaactual = DateTime.Now;
+                if (fechaactual >= expiracion)
                 {
-                    usuario = Consultar_Email_Contrasena().email,
-                    contrasena = Consultar_Email_Contrasena().contrasena,
-                    TokenFB = "dsfsdf",
-                    SO = "Android",
-                    id_dispositivo = Build.Serial
-                };
-                if (HayConexion())
-                {
-                    await LogearUsuario(log);
+                    login log = new login()
+                    {
+                        usuario = Consultar_Email_Contrasena().email,
+                        contrasena = Consultar_Email_Contrasena().contrasena,
+                        TokenFB = "dsfsdf",
+                        SO = "Android",
+                        id_dispositivo = Build.Serial
+                    };
+                    if (HayConexion())
+                    {
+                        await LogearUsuario(log);
+                    }
                 }
+                var serializador = new XmlSerializer(typeof(Token));
+                var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Token.xml"));
+                var datos = (Token)serializador.Deserialize(Lectura);
+                Lectura.Close();
+                return datos.token;
             }
-            var serializador = new XmlSerializer(typeof(Token));
-            var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Token.xml"));
-            var datos = (Token)serializador.Deserialize(Lectura);
-            Lectura.Close();
-            return datos.token;
+            catch (System.Exception)
+            {
+                return "";
+            }
         }
         public async Task<string> LogearUsuario(login log)
         {
-            string url = "http://192.168.1.73:5001/api/account/Login";
-            var json = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
-            HttpClient cliente = new HttpClient();
-            var respuesta = await cliente.PostAsync(url, json);
-            respuesta.EnsureSuccessStatusCode();
-            if (respuesta.IsSuccessStatusCode)
+            var contenido = "";
+            try
             {
-                var contenido = await respuesta.Content.ReadAsStringAsync();
-                var cont = JsonConvert.DeserializeObject<Token>(contenido);
-                GuardarToken(cont);
-                return "Logeado";
+                if (HayConexion())
+                {
+                    string url = "http://192.168.0.10:5001/api/account/Login";
+                    var json = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
+                    HttpClient cliente = new HttpClient();
+                    cliente.Timeout = TimeSpan.FromSeconds(20);
+                    var respuesta = await cliente.PostAsync(url, json);
+                    respuesta.EnsureSuccessStatusCode();
+                    if (respuesta.IsSuccessStatusCode)
+                    {
+                        contenido = await respuesta.Content.ReadAsStringAsync();
+                        var cont = JsonConvert.DeserializeObject<Token>(contenido);
+                        GuardarToken(cont);
+                        Guardar_Email_Contrasena(log.usuario, log.contrasena);
+                        return "Logeado";
+                    }
+                    else
+                    {
+                        return await respuesta.Content.ReadAsStringAsync();
+                    }
+                }
+                else
+                    return "No hay conexion";
             }
-            else
+            catch (System.Exception)
             {
-                return await respuesta.Content.ReadAsStringAsync();
+                return "Usuario o contraseña incorrecto";
             }
         }
 
@@ -283,41 +305,7 @@ namespace CABASUS
                 mAlertDialog = builder.Show();
             }
         }
-        public class PickerDate : Java.Lang.Object, IOnDateSetListener
-        {
-            Button textoDate;
-            TextView textoDateDiario;
-
-            public PickerDate(Button textoDate)
-            {
-                this.textoDate = textoDate;
-            }
-
-            public PickerDate(TextView textoDateDiario)
-            {
-                this.textoDateDiario = textoDateDiario;
-            }
-
-            void IOnDateSetListener.OnDateSet(DatePicker view, int year, int month, int dayOfMonth)
-            {
-                string m = (month + 1).ToString(), d = dayOfMonth.ToString();
-
-                if (m.Length <= 1)
-                    m = "0" + (month + 1).ToString();
-                if (d.Length <= 1)
-                    d = "0" + dayOfMonth.ToString();
-
-                try { textoDate.Text = year.ToString() + "/" + m + "/" + d; } catch (System.Exception) { }
-                try
-                {
-                    double Mes = (double.Parse(m) + 1);
-                    if (Mes < 10)
-                        m = "0" + Mes.ToString();
-                    textoDateDiario.Text = d + "-" + m + "-" + year.ToString();
-                }
-                catch (System.Exception) { }
-            }
-        }
+      
     }
     
 }

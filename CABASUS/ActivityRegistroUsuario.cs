@@ -27,13 +27,12 @@ namespace CABASUS
     [Activity(Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     public class ActivityRegistroUsuario : BaseActivity, IDialogInterfaceOnClickListener
     {
-        PickerDate onDateSetListener;
         public void OnClick(IDialogInterface dialog, int which)
         {
             throw new NotImplementedException();
         }
         Refractored.Controls.CircleImageView Foto;
-        string id_usuario;
+        ProgressBar progress;
         #region Tomar Foto e Imagen Galeria
 
         int camrequestcode = 100;
@@ -50,18 +49,20 @@ namespace CABASUS
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.layout_RegistroUsuario);
-            Window.SetStatusBarColor(Color.Rgb(246, 128, 25));
-            Window.SetNavigationBarColor(Color.Rgb(246, 128, 25));
+            Window.SetStatusBarColor(Color.Black);
+            Window.SetNavigationBarColor(Color.Black);
 
             var txtUserName = FindViewById<EditText>(Resource.Id.txtUserNameRegistro);
             var txtEmail = FindViewById<EditText>(Resource.Id.txtEmailRegistroUsuario);
             var txtContrasena = FindViewById<EditText>(Resource.Id.txtContrasenaRegistroUsuario);
-            var txtEdad = FindViewById<TextView>(Resource.Id.txtEdadRegistroUsuario);
+            var txtEdad = FindViewById<EditText>(Resource.Id.txtEdadRegistroUsuario);
             var Terminos = FindViewById<TextView>(Resource.Id.txtTerminosRegistroUsuario);
             var btnaceptar = FindViewById<TextView>(Resource.Id.btnRegistroUsuario);
             Foto = FindViewById<Refractored.Controls.CircleImageView>(Resource.Id.btnfoto);
+            progress = FindViewById<ProgressBar>(Resource.Id.progressBar);
+            progress.IndeterminateDrawable.SetColorFilter(Android.Graphics.Color.Rgb(207, 147, 0), Android.Graphics.PorterDuff.Mode.Multiply);
             GradientDrawable gdCreate = new GradientDrawable();
-            gdCreate.SetColor(Color.Rgb(246, 128, 25));
+            gdCreate.SetColor(Color.Rgb(203, 30, 30));
             gdCreate.SetCornerRadius(500);
             btnaceptar.SetBackgroundDrawable(gdCreate);
 
@@ -71,21 +72,8 @@ namespace CABASUS
             Foto.SetImageBitmap(bitDrawableImage);
 
             #region Obtener edad
-            txtEdad.Click += delegate
-            {
-                Java.Util.Calendar calendar = Java.Util.Calendar.Instance;
-                int year = calendar.Get(Java.Util.CalendarField.Year);
-                int month = calendar.Get(Java.Util.CalendarField.Month);
-                int day_of_month = calendar.Get(Java.Util.CalendarField.DayOfMonth);
-
-                DatePickerDialog dialog = new DatePickerDialog(this, Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert,
-                   onDateSetListener, year, month, day_of_month);
-
-                dialog.DatePicker.MaxDate = JavaSystem.CurrentTimeMillis();
-
-                dialog.Show();
-            };
-            onDateSetListener = new PickerDate(txtEdad);
+            txtEdad.TextChanged += delegate { new ShareInside().FormatoFecha(txtEdad); };
+            txtEdad.Click += delegate { txtEdad.SetSelection(txtEdad.Text.Length); };
             #endregion
 
             #region Obtener Foto
@@ -122,9 +110,11 @@ namespace CABASUS
 
             btnaceptar.Click += async delegate 
             {
+                var contenido = "";
+                var fechavalidacion = true;
                 try
                 {
-                    if (string.IsNullOrWhiteSpace(txtUserName.Text) && string.IsNullOrWhiteSpace(txtContrasena.Text) && string.IsNullOrWhiteSpace(txtEmail.Text))
+                    if (string.IsNullOrWhiteSpace(txtUserName.Text) || string.IsNullOrWhiteSpace(txtContrasena.Text) || string.IsNullOrWhiteSpace(txtEmail.Text))
                     {
                         Toast.MakeText(this, "Campos vacios verifica la información", ToastLength.Short).Show();
                     }
@@ -132,63 +122,96 @@ namespace CABASUS
                     {
                         Toast.MakeText(this, "Verifica Email", ToastLength.Short).Show();
                     }
-                    else
+                    else 
                     {
-                        string url = "http://192.168.1.73:5001/api/Account/registrar";
-                        string formato = "application/json";
-                        usuarios usuarios = new usuarios()
+                        if (txtEdad.Text.Length > 0)
                         {
-                            nombre = txtUserName.Text,
-                            email = txtEmail.Text,
-                            contrasena = txtContrasena.Text,
-                            id_dispositivo = Build.Serial,
-                            SO = "Android",
-                            tokenFB = "algo",
-                            fecha_nacimiento = txtEdad.Text
-                        };
-                        var json = new StringContent(JsonConvert.SerializeObject(usuarios), Encoding.UTF8, formato);
-                        HttpClient cliente = new HttpClient();
-                        if (new ShareInside().HayConexion())
-                        {
-                            var respuesta = await cliente.PostAsync(url, json);
-                            respuesta.EnsureSuccessStatusCode();
-                            if (respuesta.IsSuccessStatusCode)
+                            try
                             {
-                                var contenido = await respuesta.Content.ReadAsStringAsync();
-                                var cont = JsonConvert.DeserializeObject<Token>(contenido);
-                                if (cameraUri != null)
-                                {
-                                    var url_foto = await new ShareInside().SubirImagen("usuarios", Obtener_idusuario(cont.token), cameraUri);
-                                    var server = "http://192.168.1.73:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
-                                    cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", cont.token);
-                                    respuesta = await cliente.GetAsync(server);
-                                    var content = await respuesta.Content.ReadAsStringAsync();
-                                    if (respuesta.IsSuccessStatusCode)
-                                        Console.WriteLine("Datos Guardados");
-                                    else
-                                        Console.WriteLine("no se pudo actualizar la foto");
-                                }
-                                else
-                                Console.WriteLine("Campo imagen null");
-                                new ShareInside().GuardarToken(cont);
-                                new ShareInside().Guardar_Email_Contrasena(txtEmail.Text, txtContrasena.Text);
+                                Convert.ToDateTime(txtEdad.Text);
+                                if (Convert.ToDateTime(txtEdad.Text) > DateTime.Now)
+                                    fechavalidacion = false;
                             }
-                            else
+                            catch (System.Exception)
                             {
-                                var id = await respuesta.Content.ReadAsStringAsync();
-                                Toast.MakeText(this, id, ToastLength.Short).Show();
-
+                                fechavalidacion = false;
                             }
                         }
+                        #region Insertar datos y foto de usuario
+                        if (fechavalidacion == true)
+                        {
+                            string url = "http://192.168.0.10:5001/api/Account/registrar";
+                            string formato = "application/json";
+                            usuarios usuarios = new usuarios()
+                            {
+                                nombre = txtUserName.Text,
+                                email = txtEmail.Text,
+                                contrasena = txtContrasena.Text,
+                                id_dispositivo = Build.Serial,
+                                SO = "Android",
+                                tokenFB = "algo",
+                                fecha_nacimiento = txtEdad.Text
+                            };
+                            var json = new StringContent(JsonConvert.SerializeObject(usuarios), Encoding.UTF8, formato);
+                            HttpClient cliente = new HttpClient();
+                            cliente.Timeout = TimeSpan.FromSeconds(20);
+                            if (new ShareInside().HayConexion())
+                            {
+                                progress.Visibility = Android.Views.ViewStates.Visible;
+                                Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                var respuesta = await cliente.PostAsync(url, json);
+                                contenido = await respuesta.Content.ReadAsStringAsync();
+                                respuesta.EnsureSuccessStatusCode();
+                                if (respuesta.IsSuccessStatusCode)
+                                {
+                                    var cont = JsonConvert.DeserializeObject<Token>(contenido);
+                                    if (cameraUri != null)
+                                    {
+                                        var url_foto = await new ShareInside().SubirImagen("usuarios", Obtener_idusuario(cont.token), cameraUri);
+                                        var server = "http://192.168.0.10:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
+                                        cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", cont.token);
+                                        respuesta = await cliente.GetAsync(server);
+                                        var content = await respuesta.Content.ReadAsStringAsync();
+                                        if (respuesta.IsSuccessStatusCode)
+                                        {
+                                            Console.WriteLine("Datos Guardados");
+                                        }
+                                        else
+                                            Console.WriteLine("no se pudo actualizar la foto");
+                                    }
+                                    else
+                                        Console.WriteLine("Campo imagen null");
+                                    new ShareInside().GuardarToken(cont);
+                                    new ShareInside().Guardar_Email_Contrasena(txtEmail.Text, txtContrasena.Text);
+                                    txtUserName.Text = "";
+                                    txtEmail.Text = "";
+                                    txtContrasena.Text = "";
+                                    txtEdad.Text = "";
+                                    progress.Visibility = Android.Views.ViewStates.Invisible;
+                                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                }
+                                else
+                                {
+                                    Toast.MakeText(this, contenido, ToastLength.Short).Show();
+                                    progress.Visibility = Android.Views.ViewStates.Invisible;
+                                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                }
+                            }
+                            else
+                                Toast.MakeText(this, "Tu conexion es inestable", ToastLength.Short).Show();
+                        }
                         else
-                            Toast.MakeText(this, "Tu conexion es inestable", ToastLength.Short).Show();
+                        {
+                            Toast.MakeText(this, "La fecha no es valida", ToastLength.Short).Show();
+                        }
+                        #endregion
                     }
-
                 }
                 catch (System.Exception ex)
                 {
-                    Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
-
+                    Toast.MakeText(this, contenido, ToastLength.Short).Show();
+                    progress.Visibility = Android.Views.ViewStates.Invisible;
+                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                 }
             };
         }
@@ -201,6 +224,7 @@ namespace CABASUS
             intent.PutExtra("return data", true);
             StartActivityForResult(intent, camrequestcode);
         }
+
         public void crearRutaImagen()
         {
             Java.IO.File _dir = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "CABASUS");

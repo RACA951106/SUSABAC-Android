@@ -51,7 +51,7 @@ namespace CABASUS
 
             #region Estilo de botones
             GradientDrawable gdCreate = new GradientDrawable();
-            gdCreate.SetColor(Color.Rgb(246, 128, 25));
+            gdCreate.SetColor(Color.Rgb(203,30,30));
             gdCreate.SetCornerRadius(500);
             btnCreateAccount.SetBackgroundDrawable(gdCreate);
 

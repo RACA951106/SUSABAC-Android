@@ -12,7 +12,7 @@
   <string name="User_name">Nombre de usuario</string>
   <string name="Email">Correo electrónico</string>
   <string name="Password">Contraseña</string>
-  <string name="Age">Edad</string>
+  <string name="Age">Fecha de nacimiento</string>
   <string name="Phone">Teléfono</string>
   <string name="Accept">Aceptar</string>
   <string name="Conditions">Al registrarse está de acuerdo con los términos y condiciones de uso y políticas de privacidad de CABASUS</string>

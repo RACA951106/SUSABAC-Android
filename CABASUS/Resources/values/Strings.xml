@@ -12,7 +12,7 @@
   <string name="User_name">User Name</string>
   <string name="Email">Email</string>
   <string name="Password">Password</string>
-  <string name="Age">Age</string>
+  <string name="Age">DOB</string>
   <string name="Phone">Phone</string>
   <string name="Accept">Accept</string>
   <string name="Conditions">By registering you agree to the terms and conditions of use and privacy policies of CABASUS</string>

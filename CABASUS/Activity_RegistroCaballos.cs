@@ -15,11 +15,12 @@ using Uri = Android.Net.Uri;
 using CABASUS.Adaptadores;
 using Android.Text;
 using System;
+using static CABASUS.ObtenerDialogFecha;
 
 namespace CABASUS
 {
     [Activity(Label = "Activity_RegistroCaballos")]
-    public class Activity_RegistroCaballos : Activity
+    public class Activity_RegistroCaballos : BaseActivity
     {
         Refractored.Controls.CircleImageView Foto;
         private const int REQUEST_SELECT_PICTURE = 0x01;
@@ -35,8 +36,8 @@ namespace CABASUS
             base.OnCreate(savedInstanceState);
             #region FindViewById Elementos generales
             SetContentView(Resource.Layout.layout_RegistrarCaballos);
-            Window.SetStatusBarColor(Color.Rgb(246, 128, 25));
-            Window.SetNavigationBarColor(Color.Rgb(246, 128, 25));
+            Window.SetStatusBarColor(Color.Black);
+            Window.SetNavigationBarColor(Color.Black);
 
             new ShareInside().CopyDocuments("RazasGender.sqlite", "RazasGender.db");
 

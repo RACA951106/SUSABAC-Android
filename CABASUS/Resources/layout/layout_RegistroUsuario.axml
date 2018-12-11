@@ -89,15 +89,17 @@
                 android:gravity="center|left"
                 android:layout_marginLeft="15dp"
                 android:textSize="20dp" />
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="#000"
                 android:gravity="center"
                 android:layout_marginLeft="10dp"
+				android:inputType="date"
                 android:lines="1"
                 android:layout_marginRight="10dp"
                 android:id="@+id/txtEdadRegistroUsuario"
+				android:hint="DD/MM/YYYY"
                 android:background="@drawable/stylebuttomregistrousuario" />
             <TextView
                 android:layout_width="match_parent"
@@ -125,4 +127,13 @@
                 android:id="@+id/txtTerminosRegistroUsuario" />
         </LinearLayout>
     </ScrollView>
+	<ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone">
+    </ProgressBar>
 </RelativeLayout>
