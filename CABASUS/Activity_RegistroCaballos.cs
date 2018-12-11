@@ -15,7 +15,8 @@ using Uri = Android.Net.Uri;
 using CABASUS.Adaptadores;
 using Android.Text;
 using System;
-using static CABASUS.ObtenerDialogFecha;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CABASUS
 {
@@ -40,13 +41,11 @@ namespace CABASUS
             Window.SetNavigationBarColor(Color.Black);
 
             new ShareInside().CopyDocuments("RazasGender.sqlite", "RazasGender.db");
-
             var txtListo = FindViewById<TextView>(Resource.Id.btnListoRegistroCaballos);
             GradientDrawable gdCreate = new GradientDrawable();
             gdCreate.SetColor(Color.Rgb(246, 128, 25));
             gdCreate.SetCornerRadius(500);
             txtListo.SetBackgroundDrawable(gdCreate);
-
             Foto = FindViewById<Refractored.Controls.CircleImageView>(Resource.Id.btnfotoCaballo);
             Drawable drawableImage = GetDrawable(Resource.Drawable.horse_icon);
             Bitmap bitDrawableImage = ((BitmapDrawable)drawableImage).Bitmap;
@@ -59,7 +58,7 @@ namespace CABASUS
             var txtGender = FindViewById<TextView>(Resource.Id.txtGenderRegistro);
             var txtOat = FindViewById<EditText>(Resource.Id.txtOatRegistro);
             #endregion
-            
+            #region Clicks elementos
             Foto.Click += delegate
             {
                 Dialog alertar = new Dialog(this, Resource.Style.Theme_Dialog_Translucent);
@@ -83,10 +82,8 @@ namespace CABASUS
                     alertar.Dismiss();
                 };
             };
-
             txtDOB.TextChanged += delegate{ new ShareInside().FormatoFecha(txtDOB); };
             txtDOB.Click += delegate { txtDOB.SetSelection(txtDOB.Text.Length); };
-            
             txtBreed.Click += delegate {
                 Dialog alertar = new Dialog(this, Resource.Style.Theme_Dialog_Translucent);
                 alertar.RequestWindowFeature(1);
@@ -104,15 +101,40 @@ namespace CABASUS
                 };
                 alertar.Show();
             };
-            txtGender.Click += delegate { };
+            txtGender.Click += delegate {
+                Dialog alertar = new Dialog(this, Resource.Style.Theme_Dialog_Translucent);
+                alertar.RequestWindowFeature(1);
+                alertar.SetCancelable(true);
+                alertar.SetContentView(Resource.Layout.DialogoGender);
+                List<string> consulta = new List<string>() { GetText(Resource.String.Filly), GetText(Resource.String.Gelding), GetText(Resource.String.Mare), GetText(Resource.String.Stallion) };
+                textListView = alertar.FindViewById<ListView>(Resource.Id.Listagender);
+                textListView.Adapter = new AdaptadorGender(this, consulta, alertar, txtGender);
+                alertar.Show();
+            };
             txtListo.Click += async delegate {
+                #region progress
+                ProgressBar progressBar = new ProgressBar(this, null, Android.Resource.Attribute.ProgressBarStyleLarge);
+                RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(200, 200);
+                p.AddRule(LayoutRules.CenterInParent);
+                progressBar.IndeterminateDrawable.SetColorFilter(Color.Rgb(246, 128, 25), PorterDuff.Mode.Multiply);
+                FindViewById<RelativeLayout>(Resource.Id.PantallaRegistroCaballos).AddView(progressBar, p);
+                progressBar.Visibility = Android.Views.ViewStates.Visible;
+                Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                await Task.Delay(500);
+                #endregion
                 if (string.IsNullOrEmpty(txtHorseName.Text) || string.IsNullOrEmpty(txtWeight.Text) || string.IsNullOrEmpty(txtHeight.Text) || string.IsNullOrEmpty(txtBreed.Text) || string.IsNullOrEmpty(txtDOB.Text) || string.IsNullOrEmpty(txtOat.Text))
+                {
+                    progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                     Toast.MakeText(this, Resource.String.There_are_empty_fields, ToastLength.Short).Show();
+                }
                 else
                 {
                     try
                     {
                         Convert.ToDateTime(txtDOB.Text);
+                        if (txtGender.Tag == null)
+                            txtGender.Tag = 0;
                         Modelos.caballos ModeloCaballos = new Modelos.caballos()
                         {
                             nombre = txtHorseName.Text,
@@ -120,7 +142,7 @@ namespace CABASUS
                             altura = double.Parse(txtHeight.Text),
                             raza = int.Parse(txtBreed.Tag.ToString()),
                             fecha_nacimiento = Convert.ToDateTime(txtDOB.Text).ToString("yyyy-MM-dd"),
-                            genero = 4,
+                            genero = int.Parse(txtGender.Tag.ToString()),
                             avena = int.Parse(txtOat.Text)
                         };
                         try
@@ -128,6 +150,8 @@ namespace CABASUS
                             string id_caballo = await new Modelos.ConsumoAPIS().RegistrarCaballos(ModeloCaballos);
                             if (id_caballo == "No hay conexion")
                             {
+                                progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                                 Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
                             }
                             else
@@ -137,6 +161,8 @@ namespace CABASUS
                                     string url_imagen = await new ShareInside().SubirImagen("caballos", id_caballo, cameraUri);
                                     if (url_imagen == "No hay conexion")
                                     {
+                                        progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                                         Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
                                     }
                                     else
@@ -148,29 +174,42 @@ namespace CABASUS
                                         };
                                         if (await new Modelos.ConsumoAPIS().ActualizarFotoCaballo(FotoCaballo) == "No hay conexion")
                                         {
+                                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                                             Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
                                         }
                                         else
                                         {
+                                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                                             Toast.MakeText(this, "Datos del caballo guardados correctamente", ToastLength.Short).Show();
                                         }
                                     }
                                 }
                                 else
-                                    Toast.MakeText(this, "Foto por default", ToastLength.Short).Show();
+                                {
+                                    progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                    Toast.MakeText(this, "Datos guardados con foto por default", ToastLength.Short).Show();
+                                }
                             }
                         }
                         catch (System.Exception ex)
                         {
+                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                             Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
                         }
                     }
                     catch (System.Exception)
                     {
+                        progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                         Toast.MakeText(this, Resource.String.Incorrect_date_field, ToastLength.Short).Show();
                     }
                 }
             };
+            #endregion
         }
 
         private void openCamara()

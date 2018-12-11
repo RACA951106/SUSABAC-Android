@@ -64,6 +64,7 @@
     <Compile Include="Activity_IniciarSesion.cs" />
     <Compile Include="Activity_RegistroCaballos.cs" />
     <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
+    <Compile Include="Adaptadores\AdaptadorGender.cs" />
     <Compile Include="Adaptadores\AdaptadorRazas.cs" />
     <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
     <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
@@ -266,6 +267,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\SettingsSearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\DialogoRecuperarContrasena.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

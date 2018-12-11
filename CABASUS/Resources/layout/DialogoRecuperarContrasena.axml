@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/dialogoRecuperarContrasena">
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:background="#FFF"
+		android:orientation="vertical"
+		android:layout_margin="30dp">
+		<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textColor="#000"
+		android:gravity="center"
+		android:text="@string/Reset_your_password"
+		android:layout_margin="5dp"
+		android:textSize="20dp"/>
+		<TextView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textColor="#000"
+			android:layout_gravity="center"
+			android:text="@string/Enter_the_email_address"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"
+			android:textSize="15dp"/>
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:text="@string/Email"
+			android:textColor="#000"
+			android:gravity="center|left"
+			android:layout_marginTop="5dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"
+			android:textSize="15dp"/>
+		<EditText
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:textColor="#000"
+			android:gravity="center"
+			android:layout_marginTop="5dp"
+			android:layout_marginLeft="15dp"
+			android:layout_marginRight="15dp"
+			android:id="@+id/txtEmailRecuperarContrasena"
+			android:background="@drawable/stylebuttomregistrousuario" />
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:textSize="20dp"
+			android:textStyle="bold"
+			android:textColor="#FFF"
+			android:text="@string/Send"
+			android:gravity="center"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginBottom="15dp"
+			android:id="@+id/btnSendPassword" />
+	</LinearLayout>
+
+</RelativeLayout>

@@ -44,4 +44,17 @@
   <string name="Search">Search</string>
   <string name="There_are_empty_fields">There are empty fields, verify the information.</string>
   <string name="Incorrect_date_field">Incorrect date field</string>
+  <string name="Filly">Filly</string>
+  <string name="Gelding">Gelding</string>
+  <string name="Mare">Mare</string>
+  <string name="Stallion">Stallion</string>
+
+  <!--Recuperar contraseña-->
+  <string name="Reset_your_password">Reset your password</string>
+  <string name="Enter_the_email_address">Enter the email address you used to register. We will send you a message with your password</string>
+  <string name="Send">Send</string>
+  <string name="Empty_email_field">Empty email field</string>
+  <string name="The_mail_could_not_be_sent">The mail could not be sent</string>
+  <string name="New_password_sent">New password sent, check your email</string>
+  <string name="No_internet_connection">No internet connection</string>
 </resources>
