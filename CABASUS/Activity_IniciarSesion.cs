@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
@@ -21,6 +15,7 @@ namespace CABASUS
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.layout_IniciarSesion);
+
             Window.SetStatusBarColor(Color.Rgb(246, 128, 25));
             Window.SetNavigationBarColor(Color.Rgb(246, 128, 25));
 
@@ -45,10 +40,51 @@ namespace CABASUS
                 alertar.SetCancelable(true);
                 alertar.SetContentView(Resource.Layout.DialogoRecuperarContrasena);
                 var btnSendPassword = alertar.FindViewById<TextView>(Resource.Id.btnSendPassword);
+                var txtEmail = alertar.FindViewById<TextView>(Resource.Id.txtEmailRecuperarContrasena);
                 GradientDrawable gdCreate = new GradientDrawable();
                 gdCreate.SetColor(Color.Rgb(246, 128, 25));
                 gdCreate.SetCornerRadius(500);
                 btnSendPassword.SetBackgroundDrawable(gdCreate);
+                btnSendPassword.Click += async delegate {
+                    if (!string.IsNullOrEmpty(txtEmail.Text))
+                    {
+                        #region progress
+                        ProgressBar progressBar = new ProgressBar(this, null, Android.Resource.Attribute.ProgressBarStyleLarge);
+                        RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(100, 100);
+                        p.AddRule(LayoutRules.CenterInParent);
+                        progressBar.IndeterminateDrawable.SetColorFilter(Color.Rgb(246, 128, 25), PorterDuff.Mode.Multiply);
+                        alertar.FindViewById<RelativeLayout>(Resource.Id.dialogoRecuperarContrasena).AddView(progressBar, p);
+                        progressBar.Visibility = Android.Views.ViewStates.Visible;
+                        Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                        await Task.Delay(500);
+                        #endregion
+                        var sendEmail = await new Modelos.ConsumoAPIS().RecuperarContrasena(txtEmail.Text, 1);
+                        if (sendEmail == "No hay conexion")
+                        {
+                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                            Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
+                        }
+                        else
+                        {
+                            if (bool.Parse(sendEmail))
+                            {
+                                progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                alertar.Dismiss();
+                                Toast.MakeText(this, GetText(Resource.String.New_password_sent), ToastLength.Short).Show();
+                            }
+                            else
+                            {
+                                progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                Toast.MakeText(this, GetText(Resource.String.The_mail_could_not_be_sent), ToastLength.Short).Show();
+                            }
+                        }
+                    }
+                    else
+                        Toast.MakeText(this, GetText(Resource.String.Empty_email_field), ToastLength.Short).Show();
+                };
                 alertar.Show();
             };
         }

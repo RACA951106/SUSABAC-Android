@@ -49,5 +49,23 @@ namespace CABASUS.Modelos
             else
                 return "No hay conexion";
         }
+
+        public async System.Threading.Tasks.Task<string> RecuperarContrasena(string email, int idioma)
+        {
+            if (new ShareInside().HayConexion())
+            {
+                string server = "http://192.168.0.22:5001/api/Account/recuperarPass?email=" + email+"&idioma="+idioma;
+                HttpClient cliente = new HttpClient();
+                cliente.Timeout = TimeSpan.FromSeconds(20);
+                var consulta = await cliente.GetAsync(server);
+                consulta.EnsureSuccessStatusCode();
+                if (consulta.IsSuccessStatusCode)
+                    return await consulta.Content.ReadAsStringAsync();
+                else
+                    return "No hay conexion";
+            }
+            else
+                return "No hay conexion";
+        }
     }
 }

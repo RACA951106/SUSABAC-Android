@@ -5095,6 +5095,9 @@ namespace CABASUS
 			// aapt resource value: 0x7f090033
 			public const int Email = 2131296307;
 			
+			// aapt resource value: 0x7f090058
+			public const int Empty_email_field = 2131296344;
+			
 			// aapt resource value: 0x7f090056
 			public const int Enter_the_email_address = 2131296342;
 			
@@ -5137,6 +5140,12 @@ namespace CABASUS
 			// aapt resource value: 0x7f09004a
 			public const int Mts = 2131296330;
 			
+			// aapt resource value: 0x7f09005a
+			public const int New_password_sent = 2131296346;
+			
+			// aapt resource value: 0x7f09005b
+			public const int No_internet_connection = 2131296347;
+			
 			// aapt resource value: 0x7f090048
 			public const int Oat = 2131296328;
 			
@@ -5166,6 +5175,9 @@ namespace CABASUS
 			
 			// aapt resource value: 0x7f09003e
 			public const int The_information = 2131296318;
+			
+			// aapt resource value: 0x7f090059
+			public const int The_mail_could_not_be_sent = 2131296345;
 			
 			// aapt resource value: 0x7f09004f
 			public const int There_are_empty_fields = 2131296335;
