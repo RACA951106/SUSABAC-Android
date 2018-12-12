@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
 
 namespace CABASUS
 {
@@ -45,6 +46,7 @@ namespace CABASUS
         private const string SAMPLE_CROPPED_IMAGE_NAME = "SampleCropImage";
 
         #endregion
+        string actualizar="1";
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -60,7 +62,7 @@ namespace CABASUS
             var btnaceptar = FindViewById<TextView>(Resource.Id.btnRegistroUsuario);
             Foto = FindViewById<Refractored.Controls.CircleImageView>(Resource.Id.btnfoto);
             progress = FindViewById<ProgressBar>(Resource.Id.progressBar);
-            progress.IndeterminateDrawable.SetColorFilter(Android.Graphics.Color.Rgb(207, 147, 0), Android.Graphics.PorterDuff.Mode.Multiply);
+            progress.IndeterminateDrawable.SetColorFilter(Android.Graphics.Color.Rgb(203,30,30), Android.Graphics.PorterDuff.Mode.Multiply);
             GradientDrawable gdCreate = new GradientDrawable();
             gdCreate.SetColor(Color.Rgb(203, 30, 30));
             gdCreate.SetCornerRadius(500);
@@ -111,6 +113,7 @@ namespace CABASUS
             btnaceptar.Click += async delegate 
             {
                 var contenido = "";
+                var url_foto = "";
                 var fechavalidacion = true;
                 try
                 {
@@ -155,50 +158,66 @@ namespace CABASUS
                             var json = new StringContent(JsonConvert.SerializeObject(usuarios), Encoding.UTF8, formato);
                             HttpClient cliente = new HttpClient();
                             cliente.Timeout = TimeSpan.FromSeconds(20);
-                            if (new ShareInside().HayConexion())
+                            if (actualizar != "1")
                             {
-                                progress.Visibility = Android.Views.ViewStates.Visible;
-                                Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                                var respuesta = await cliente.PostAsync(url, json);
-                                contenido = await respuesta.Content.ReadAsStringAsync();
-                                respuesta.EnsureSuccessStatusCode();
-                                if (respuesta.IsSuccessStatusCode)
+                                if (new ShareInside().HayConexion())
                                 {
-                                    var cont = JsonConvert.DeserializeObject<Token>(contenido);
-                                    if (cameraUri != null)
+                                    progress.Visibility = Android.Views.ViewStates.Visible;
+                                    Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                    var respuesta = await cliente.PostAsync(url, json);
+                                    contenido = await respuesta.Content.ReadAsStringAsync();
+                                    respuesta.EnsureSuccessStatusCode();
+                                    if (respuesta.IsSuccessStatusCode)
                                     {
-                                        var url_foto = await new ShareInside().SubirImagen("usuarios", Obtener_idusuario(cont.token), cameraUri);
-                                        var server = "http://192.168.0.10:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
-                                        cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", cont.token);
-                                        respuesta = await cliente.GetAsync(server);
-                                        var content = await respuesta.Content.ReadAsStringAsync();
-                                        if (respuesta.IsSuccessStatusCode)
+                                        var cont = JsonConvert.DeserializeObject<Token>(contenido);
+                                        if (cameraUri != null)
                                         {
-                                            Console.WriteLine("Datos Guardados");
+                                            url_foto = await new ShareInside().SubirImagen("usuarios", Obtener_idusuario(cont.token), cameraUri);
+                                            var server = "http://192.168.0.10:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
+                                            cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", cont.token);
+                                            respuesta = await cliente.GetAsync(server);
+                                            var content = await respuesta.Content.ReadAsStringAsync();
+                                            if (respuesta.IsSuccessStatusCode)
+                                            {
+                                                Console.WriteLine("Datos Guardados");
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("no se pudo actualizar la foto");
+                                                url_foto = "foto";
+                                            }
                                         }
                                         else
-                                            Console.WriteLine("no se pudo actualizar la foto");
+                                        {
+                                            url_foto = "foto";
+                                            Console.WriteLine("Campo imagen null");
+                                        }
+                                        usuarios.foto = url_foto;
+                                        usuarios.id_usuario = Obtener_idusuario(cont.token);
+                                        new ShareInside().GuardarToken(cont);
+                                        new ShareInside().Guardar_DatosUsuario(usuarios);
+                                        new ShareInside().Guardar_Email_Contrasena(txtEmail.Text, txtContrasena.Text);
+                                        txtUserName.Text = "";
+                                        txtEmail.Text = "";
+                                        txtContrasena.Text = "";
+                                        txtEdad.Text = "";
+                                        progress.Visibility = Android.Views.ViewStates.Invisible;
+                                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                                     }
                                     else
-                                        Console.WriteLine("Campo imagen null");
-                                    new ShareInside().GuardarToken(cont);
-                                    new ShareInside().Guardar_Email_Contrasena(txtEmail.Text, txtContrasena.Text);
-                                    txtUserName.Text = "";
-                                    txtEmail.Text = "";
-                                    txtContrasena.Text = "";
-                                    txtEdad.Text = "";
-                                    progress.Visibility = Android.Views.ViewStates.Invisible;
-                                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                    {
+                                        Toast.MakeText(this, contenido, ToastLength.Short).Show();
+                                        progress.Visibility = Android.Views.ViewStates.Invisible;
+                                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                                    }
                                 }
                                 else
-                                {
-                                    Toast.MakeText(this, contenido, ToastLength.Short).Show();
-                                    progress.Visibility = Android.Views.ViewStates.Invisible;
-                                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                                }
+                                    Toast.MakeText(this, "Tu conexion es inestable", ToastLength.Short).Show();
                             }
                             else
-                                Toast.MakeText(this, "Tu conexion es inestable", ToastLength.Short).Show();
+                            {
+                                ActualizarDatosUsuario(usuarios);
+                            }
                         }
                         else
                         {
@@ -214,8 +233,73 @@ namespace CABASUS
                     Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                 }
             };
+            if (actualizar=="1")
+            {
+                var datos = new ShareInside().Consultar_DatosUsuario();
+                txtUserName.Text = datos.nombre;
+                txtEmail.Text = datos.email;
+                txtEmail.Enabled = false;
+                txtEmail.Alpha = 0.5f;
+                txtContrasena.Text = datos.contrasena;
+                txtEdad.Text = datos.fecha_nacimiento;
+
+            }
         }
-        
+
+        private async Task ActualizarDatosUsuario(usuarios usuarios)
+        {
+            var contenido = "";
+            try
+            {
+                var datos = new ShareInside().Consultar_DatosUsuario();
+                string url = "http://192.168.0.10:5001/api/Usuario/actualizar";
+                HttpClient cliente = new HttpClient();
+                cliente.Timeout = TimeSpan.FromSeconds(20);
+                if (new ShareInside().HayConexion())
+                {
+                    progress.Visibility = Android.Views.ViewStates.Visible;
+                    Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                    if (cameraUri != null)
+                    {
+                        var url_foto = await new ShareInside().SubirImagen("usuarios", datos.id_usuario, cameraUri);
+                    }
+                    #region Actualizar usuario
+                    usuarios.foto = datos.foto;
+                    var json = new StringContent(JsonConvert.SerializeObject(usuarios), Encoding.UTF8, "application/json");
+                    var tok = await new ShareInside().ConsultarToken();
+                    cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tok);
+                    var respuesta = await cliente.PutAsync(url, json);
+                    contenido = await respuesta.Content.ReadAsStringAsync();
+                    //respuesta.EnsureSuccessStatusCode();
+                    if (respuesta.IsSuccessStatusCode)
+                    {
+                        new ShareInside().Guardar_DatosUsuario(usuarios);
+                        new ShareInside().Guardar_Email_Contrasena(usuarios.email, usuarios.contrasena);
+                        progress.Visibility = Android.Views.ViewStates.Invisible;
+                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                        Console.WriteLine("Datos Guardados");
+                    }
+                    else
+                    {
+                        Console.WriteLine(contenido);
+                        progress.Visibility = Android.Views.ViewStates.Invisible;
+                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                    }
+                    #endregion
+
+                }
+                else
+                    Toast.MakeText(this, "Tu conexion es inestable", ToastLength.Short).Show();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(contenido);
+                Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+                progress.Visibility = Android.Views.ViewStates.Invisible;
+                Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+            }
+        }
+
         private void openCamara()
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);

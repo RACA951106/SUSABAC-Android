@@ -19,12 +19,13 @@ namespace CABASUS
             SetContentView(Resource.Layout.layout_IniciarSesion);
             Window.SetStatusBarColor(Color.Black);
             Window.SetNavigationBarColor(Color.Black);
-
             var txtCorreo = FindViewById<EditText>(Resource.Id.txtUserNameLogIn);
             var txtContrasena = FindViewById<EditText>(Resource.Id.txtContrasenaLogIn);
             var RecuperarContrasena = FindViewById<TextView>(Resource.Id.txtRecuperarContrasena);
             var txtIniciarSesion = FindViewById<TextView>(Resource.Id.btnIniciarSesionLogIn);
             var progress= FindViewById<ProgressBar>(Resource.Id.progressBar);
+            progress.IndeterminateDrawable.SetColorFilter(Android.Graphics.Color.Rgb(203,30,30), Android.Graphics.PorterDuff.Mode.Multiply);
+
             GradientDrawable gd = new GradientDrawable();
             gd.SetColor(Color.Rgb(203,30,30));
             gd.SetCornerRadius(500);
@@ -33,31 +34,36 @@ namespace CABASUS
             txtIniciarSesion.Click +=async delegate {
                 try
                 {
-                    login log = new login()
+                    if (!string.IsNullOrWhiteSpace(txtContrasena.Text) && !string.IsNullOrWhiteSpace(txtCorreo.Text))
                     {
-                        usuario = txtCorreo.Text,
-                        contrasena = txtContrasena.Text,
-                        id_dispositivo = Build.Serial,
-                        SO = "Android",
-                        TokenFB = "algo"
-                    };
-                    progress.Visibility = Android.Views.ViewStates.Visible;
-                    Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                    var mensaje = await new ShareInside().LogearUsuario(log);
-                    progress.Visibility = Android.Views.ViewStates.Invisible;
-                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                    if (mensaje == "Logeado")
-                    {
-                        StartActivity(typeof(ActivityPrincipal));
-                        Finish();
+                        login log = new login()
+                        {
+                            usuario = txtCorreo.Text,
+                            contrasena = txtContrasena.Text,
+                            id_dispositivo = Build.Serial,
+                            SO = "Android",
+                            TokenFB = "algo"
+                        };
+                        progress.Visibility = Android.Views.ViewStates.Visible;
+                        Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                        var mensaje = await new ShareInside().LogearUsuario(log);
+                        progress.Visibility = Android.Views.ViewStates.Invisible;
+                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                        if (mensaje == "Logeado")
+                        {
+                            StartActivity(typeof(ActivityPrincipal));
+                            Finish();
+                        }
+                        else
+                            Toast.MakeText(this, mensaje, ToastLength.Short).Show();
+
                     }
                     else
-                        Toast.MakeText(this, mensaje, ToastLength.Short).Show();
+                        Toast.MakeText(this, "Campos vacios", ToastLength.Short).Show();
 
 
                 }
-                catch (Exception) { }
-              
+                catch (System.Exception) { }
             };
 
             RecuperarContrasena.Click += delegate {
@@ -68,7 +74,7 @@ namespace CABASUS
                 var btnSendPassword = alertar.FindViewById<TextView>(Resource.Id.btnSendPassword);
                 var txtEmail = alertar.FindViewById<TextView>(Resource.Id.txtEmailRecuperarContrasena);
                 GradientDrawable gdCreate = new GradientDrawable();
-                gdCreate.SetColor(Color.Rgb(246, 128, 25));
+                gdCreate.SetColor(Color.Rgb(203,30,30));
                 gdCreate.SetCornerRadius(500);
                 btnSendPassword.SetBackgroundDrawable(gdCreate);
                 btnSendPassword.Click += async delegate {
@@ -78,7 +84,7 @@ namespace CABASUS
                         ProgressBar progressBar = new ProgressBar(this, null, Android.Resource.Attribute.ProgressBarStyleLarge);
                         RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(100, 100);
                         p.AddRule(LayoutRules.CenterInParent);
-                        progressBar.IndeterminateDrawable.SetColorFilter(Color.Rgb(246, 128, 25), PorterDuff.Mode.Multiply);
+                        progressBar.IndeterminateDrawable.SetColorFilter(Color.Rgb(203,30,30), PorterDuff.Mode.Multiply);
                         alertar.FindViewById<RelativeLayout>(Resource.Id.dialogoRecuperarContrasena).AddView(progressBar, p);
                         progressBar.Visibility = Android.Views.ViewStates.Visible;
                         Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);

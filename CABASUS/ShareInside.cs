@@ -85,7 +85,6 @@ namespace CABASUS
                 return "No hay conexion";
             }
         }
-
         public void FormatoFecha(EditText txtDOB)
         {
             var noLetras = txtDOB.Text.Replace("/", "");
@@ -121,7 +120,6 @@ namespace CABASUS
                 txtDOB.Hint = "DD/MM/YYYY";
             }
         }
-        
         public void Guardar_Email_Contrasena(string email, string contrasena)
         {
             var guardartoken = new ConsultarEmail();
@@ -158,7 +156,7 @@ namespace CABASUS
             Lectura.Close();
             return datos.expiration;
         }
-        public async Task<string> ConsultarTokenAsync()
+        public async Task<string> ConsultarToken()
         {
             try
             {
@@ -207,6 +205,9 @@ namespace CABASUS
                     {
                         contenido = await respuesta.Content.ReadAsStringAsync();
                         var cont = JsonConvert.DeserializeObject<Token>(contenido);
+                        var datosusuario = JsonConvert.DeserializeObject<usuarios>(contenido);
+                        datosusuario.contrasena = log.contrasena;
+                        Guardar_DatosUsuario(datosusuario);
                         GuardarToken(cont);
                         Guardar_Email_Contrasena(log.usuario, log.contrasena);
                         return "Logeado";
@@ -219,12 +220,11 @@ namespace CABASUS
                 else
                     return "No hay conexion";
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                return "Usuario o contraseña incorrecto";
+                return ex.Message;
             }
         }
-
         public void CopyDocuments(string FileName, string AssetsFileName)
         {
             string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
@@ -252,6 +252,28 @@ namespace CABASUS
             {
 
             }
+        }
+        public void Guardar_DatosUsuario(usuarios user)
+        {
+            var guardarususario = new usuarios();
+            guardarususario.id_usuario = user.id_usuario;
+            guardarususario.email = user.email;
+            guardarususario.contrasena = user.contrasena;
+            guardarususario.fecha_nacimiento = user.fecha_nacimiento;
+            guardarususario.nombre = user.nombre;
+            guardarususario.foto = user.foto;
+            var serializador = new XmlSerializer(typeof(usuarios));
+            var Escritura = new StreamWriter(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "DatosUsuario.xml"));
+            serializador.Serialize(Escritura, guardarususario);
+            Escritura.Close();
+        }
+        public usuarios Consultar_DatosUsuario()
+        {
+            var serializador = new XmlSerializer(typeof(usuarios));
+            var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "DatosUsuario.xml"));
+            var datos = (usuarios)serializador.Deserialize(Lectura);
+            Lectura.Close();
+            return datos;
         }
     }
     public class ObtenerDialogFecha

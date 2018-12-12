@@ -17,6 +17,7 @@ using Android.Text;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static CABASUS.ObtenerDialogFecha;
 
 namespace CABASUS
 {
