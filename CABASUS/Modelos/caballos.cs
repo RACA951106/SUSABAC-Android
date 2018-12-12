@@ -16,6 +16,6 @@ namespace CABASUS.Modelos
         public int genero { get; set; }
         public string foto { get; set; }
         public string fk_usuario { get; set; }
-        public int avena { get; set; }
+        public double avena { get; set; }
     }
 }

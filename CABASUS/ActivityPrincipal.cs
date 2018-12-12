@@ -59,5 +59,8 @@ namespace CABASUS
 
 
         }
+        public override void OnBackPressed()
+        {
+        }
     }
 }

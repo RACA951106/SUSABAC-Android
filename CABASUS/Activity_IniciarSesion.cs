@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Android.App;
+using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
@@ -35,8 +37,8 @@ namespace CABASUS
                 {
                     login log = new login()
                     {
-                        usuario = txtCorreo.Text,
-                        contrasena = txtContrasena.Text,
+                        usuario = "javier-cordova@hotmail.com",
+                        contrasena = "fa6af0adff",
                         id_dispositivo = Build.Serial,
                         SO = "Android",
                         TokenFB = "algo"
@@ -48,8 +50,25 @@ namespace CABASUS
                     Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                     if (mensaje == "Logeado")
                     {
-                        StartActivity(typeof(ActivityPrincipal));
-                        Finish();
+                        var consultaCaballos = await new ConsumoAPIS().ConsultarCompartidos();
+                        if (consultaCaballos == "No hay conexion")
+                            Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
+                        else
+                        {
+                            if (bool.Parse(consultaCaballos))
+                            {
+                                StartActivity(typeof(ActivityPrincipal));
+                                Finish();
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(this, (typeof(Activity_RegistroCaballos)));
+                                intent.PutExtra("ActuaizarCaballo", "false");
+                                intent.PutExtra("PrimerCaballo", "true");
+                                this.StartActivity(intent);
+                                Finish();
+                            }
+                        }
                     }
                     else
                         Toast.MakeText(this, mensaje, ToastLength.Short).Show();
@@ -68,7 +87,7 @@ namespace CABASUS
                 var btnSendPassword = alertar.FindViewById<TextView>(Resource.Id.btnSendPassword);
                 var txtEmail = alertar.FindViewById<TextView>(Resource.Id.txtEmailRecuperarContrasena);
                 GradientDrawable gdCreate = new GradientDrawable();
-                gdCreate.SetColor(Color.Rgb(246, 128, 25));
+                gdCreate.SetColor(Color.Rgb(203, 30, 30));
                 gdCreate.SetCornerRadius(500);
                 btnSendPassword.SetBackgroundDrawable(gdCreate);
                 btnSendPassword.Click += async delegate {

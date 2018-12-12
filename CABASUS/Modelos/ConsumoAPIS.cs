@@ -1,23 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace CABASUS.Modelos
 {
     public class ConsumoAPIS
     {
-        public async System.Threading.Tasks.Task<string> RegistrarCaballos(Modelos.caballos modeloCaballos)
+        public async Task<string> RegistrarCaballos(Modelos.caballos modeloCaballos)
         {
             if (new ShareInside().HayConexion())
             {
-                string server = "http://192.168.1.76:523/api/caballo/registrar";
+                string server = "http://192.168.0.22:5001/api/caballo/registrar";
                 string jsonContent = "application/json";
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 var json = JsonConvert.SerializeObject(modeloCaballos);
-                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFyZUBnbWFpbC5jb20iLCJpZCI6ImYyZGUwYmE0MGIwYjQzZGI4NTY2YzFhZDBhOGRkMyIsImV4cCI6MTU0NDE5Njg2MCwiaXNzIjoiZG9taW5pby5jb20iLCJhdWQiOiJkb21pbmlvLmNvbSJ9.x6j2ZAjA3j1oG7jaJuvBHBbl8NnU_4lxukocBgifSUE");
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
                 var respuesta = await cliente.PostAsync(server, new StringContent(json, Encoding.UTF8, jsonContent));
                 respuesta.EnsureSuccessStatusCode();
                 if (respuesta.IsSuccessStatusCode)
@@ -29,16 +31,16 @@ namespace CABASUS.Modelos
                 return "No hay conexion";
         }
 
-        public async System.Threading.Tasks.Task<string> ActualizarFotoCaballo(Modelos.caballos modeloCaballos)
+        public async Task<string> ActualizarFotoCaballo(Modelos.caballos modeloCaballos)
         {
             if (new ShareInside().HayConexion())
             {
-                string server = " http://192.168.1.76:523/api/caballo/actualizarFoto";
+                string server = "http://192.168.0.22:5001/api/caballo/actualizarFoto";
                 string jsonContent = "application/json";
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 var json = JsonConvert.SerializeObject(modeloCaballos);
-                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFyZUBnbWFpbC5jb20iLCJpZCI6ImYyZGUwYmE0MGIwYjQzZGI4NTY2YzFhZDBhOGRkMyIsImV4cCI6MTU0NDE5Njg2MCwiaXNzIjoiZG9taW5pby5jb20iLCJhdWQiOiJkb21pbmlvLmNvbSJ9.x6j2ZAjA3j1oG7jaJuvBHBbl8NnU_4lxukocBgifSUE");
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
                 var respuesta = await cliente.PostAsync(server, new StringContent(json, Encoding.UTF8, jsonContent));
                 respuesta.EnsureSuccessStatusCode();
                 if (respuesta.IsSuccessStatusCode)
@@ -50,7 +52,7 @@ namespace CABASUS.Modelos
                 return "No hay conexion";
         }
 
-        public async System.Threading.Tasks.Task<string> RecuperarContrasena(string email, int idioma)
+        public async Task<string> RecuperarContrasena(string email, int idioma)
         {
             if (new ShareInside().HayConexion())
             {
@@ -66,6 +68,79 @@ namespace CABASUS.Modelos
             }
             else
                 return "No hay conexion";
+        }
+
+        public async Task<string> ConsultarCompartidos()
+        {
+            if (new ShareInside().HayConexion())
+            {
+                string server = "http://192.168.0.22:5001/api/Compartir/consultarcompartidos";
+                HttpClient cliente = new HttpClient();
+                cliente.Timeout = TimeSpan.FromSeconds(20);
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
+                var consulta = await cliente.GetAsync(server);
+                consulta.EnsureSuccessStatusCode();
+                if (consulta.IsSuccessStatusCode)
+                {
+                    var ConsultaJson = await consulta.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject<List<consultacompartidos>>(ConsultaJson);
+                    if (data.Count > 0)
+                    {
+                        new ShareInside().GuardarCaballos(data);
+                        return "true";
+                    }
+                    else
+                        return "false";
+                }
+                else
+                    return "No hay conexion";
+            }
+            else
+                return "No hay conexion";
+        }
+
+        public async Task<caballos> ConsultarCaballo_Id(string Id_Caballo)
+        {
+            if (new ShareInside().HayConexion())
+            {
+                string server = "http://192.168.0.22:5001/api/Caballo/consultaridcaballo/"+Id_Caballo;
+                HttpClient cliente = new HttpClient();
+                cliente.Timeout = TimeSpan.FromSeconds(20);
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
+                var consulta = await cliente.GetAsync(server);
+                consulta.EnsureSuccessStatusCode();
+                if (consulta.IsSuccessStatusCode)
+                {
+                    var datos = await consulta.Content.ReadAsStringAsync();
+                    var modelo = JsonConvert.DeserializeObject<List<caballos>>(datos);
+                    return modelo[0];
+                }
+                else
+                    return new caballos() { id_caballo = "No hay conexion" };
+            }
+            else
+                return new caballos() { id_caballo = "No hay conexion" };
+        }
+
+        public async Task<string> ActualizarCaballo(Modelos.caballos modeloCaballos)
+        {
+            if (new ShareInside().HayConexion())
+            {
+                string server = "http://192.168.0.22:5001/api/caballo/actualizar";
+                string jsonContent = "application/json";
+                HttpClient cliente = new HttpClient();
+                cliente.Timeout = TimeSpan.FromSeconds(20);
+                var json = JsonConvert.SerializeObject(modeloCaballos);
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
+                var respuesta = await cliente.PutAsync(server, new StringContent(json, Encoding.UTF8, jsonContent));
+                respuesta.EnsureSuccessStatusCode();
+                if (respuesta.IsSuccessStatusCode)
+                    return await respuesta.Content.ReadAsStringAsync();
+                else
+                    return "No hay conexion";
+            }
+            else
+                return "No hay conexion" ;
         }
     }
 }

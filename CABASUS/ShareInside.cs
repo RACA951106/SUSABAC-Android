@@ -197,7 +197,7 @@ namespace CABASUS
             {
                 if (HayConexion())
                 {
-                    string url = "http://192.168.0.10:5001/api/account/Login";
+                    string url = "http://192.168.0.22:5001/api/account/Login";
                     var json = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
                     HttpClient cliente = new HttpClient();
                     cliente.Timeout = TimeSpan.FromSeconds(20);
@@ -253,7 +253,43 @@ namespace CABASUS
 
             }
         }
+
+        public void GuardarCaballos(List<consultacompartidos> ListaCaballos)
+        {
+            var serializador = new XmlSerializer(typeof(List<consultacompartidos>));
+            var Escritura = new StreamWriter(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
+            serializador.Serialize(Escritura, ListaCaballos);
+            Escritura.Close();
+        }
+        
+        public async Task<string> DownloadImageAsync(string imageUrl, string id_caballo)
+        {
+            if (HayConexion())
+            {
+                const int _downloadImageTimeoutInSeconds = 15;
+                HttpClient _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(_downloadImageTimeoutInSeconds) };
+                using (var httpResponse = await _httpClient.GetAsync(imageUrl))
+                {
+                    if (httpResponse.StatusCode == HttpStatusCode.OK)
+                    {
+                        var img = await httpResponse.Content.ReadAsByteArrayAsync();
+                        Java.IO.File _dir = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "CABASUS");
+                        if (!_dir.Exists())
+                            _dir.Mkdirs();
+                        Java.IO.File _file = new Java.IO.File(_dir, id_caballo + ".jpg");
+                        Android.Net.Uri Uri_Save = Android.Net.Uri.FromFile(_file);
+                        File.WriteAllBytes(Uri_Save.Path, img);
+                        return Uri_Save.Path;
+                    }
+                    else
+                        return "No hay conexion";
+                }
+            }
+            else
+                return "No hay conexion";
+        }
     }
+
     public class ObtenerDialogFecha
     {
         public class BaseActivity : AppCompatActivity

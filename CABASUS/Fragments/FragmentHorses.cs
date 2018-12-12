@@ -29,6 +29,8 @@ namespace CABASUS.Fragments
             btnAgregar.SetBackgroundDrawable(gd);
             btnAgregar.Click += delegate {
                 var intent = new Intent(Activity, typeof(Activity_RegistroCaballos));
+                intent.PutExtra("ActuaizarCaballo", "true");
+                intent.PutExtra("PrimerCaballo", "false");
                 StartActivity(intent);
             };
             return Vista;
