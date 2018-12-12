@@ -264,29 +264,36 @@ namespace CABASUS
         
         public async Task<string> DownloadImageAsync(string imageUrl, string id_caballo)
         {
-            if (HayConexion())
+            try
             {
-                const int _downloadImageTimeoutInSeconds = 15;
-                HttpClient _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(_downloadImageTimeoutInSeconds) };
-                using (var httpResponse = await _httpClient.GetAsync(imageUrl))
+                if (HayConexion())
                 {
-                    if (httpResponse.StatusCode == HttpStatusCode.OK)
+                    const int _downloadImageTimeoutInSeconds = 15;
+                    HttpClient _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(_downloadImageTimeoutInSeconds) };
+                    using (var httpResponse = await _httpClient.GetAsync(imageUrl))
                     {
-                        var img = await httpResponse.Content.ReadAsByteArrayAsync();
-                        Java.IO.File _dir = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "CABASUS");
-                        if (!_dir.Exists())
-                            _dir.Mkdirs();
-                        Java.IO.File _file = new Java.IO.File(_dir, id_caballo + ".jpg");
-                        Android.Net.Uri Uri_Save = Android.Net.Uri.FromFile(_file);
-                        File.WriteAllBytes(Uri_Save.Path, img);
-                        return Uri_Save.Path;
+                        if (httpResponse.StatusCode == HttpStatusCode.OK)
+                        {
+                            var img = await httpResponse.Content.ReadAsByteArrayAsync();
+                            Java.IO.File _dir = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "CABASUS");
+                            if (!_dir.Exists())
+                                _dir.Mkdirs();
+                            Java.IO.File _file = new Java.IO.File(_dir, id_caballo + ".jpg");
+                            Android.Net.Uri Uri_Save = Android.Net.Uri.FromFile(_file);
+                            File.WriteAllBytes(Uri_Save.Path, img);
+                            return Uri_Save.Path;
+                        }
+                        else
+                            return "No hay conexion";
                     }
-                    else
-                        return "No hay conexion";
                 }
+                else
+                    return "No hay conexion";
             }
-            else
+            catch (System.Exception)
+            {
                 return "No hay conexion";
+            }
         }
         public void Guardar_DatosUsuario(usuarios user)
         {

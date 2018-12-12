@@ -207,16 +207,13 @@ namespace CABASUS
                     }
                     else
                     {
-                        var descargarFoto = await new ShareInside().DownloadImageAsync(datos_caballo.foto, "b80ebed26ac1454597376cacbe9993");
+                        var descargarFoto = await new ShareInside().DownloadImageAsync(datos_caballo.foto,"");
                         if (descargarFoto == "No hay conexion")
                         {
                             Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
                         }
                         else
-                        {
                             Foto.SetImageURI(Android.Net.Uri.Parse(descargarFoto));
-                            cameraUri = Android.Net.Uri.Parse(descargarFoto);
-                        }
                     }
                 }
             }

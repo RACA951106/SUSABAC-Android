@@ -19,7 +19,7 @@ namespace CABASUS.Modelos
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 var json = JsonConvert.SerializeObject(modeloCaballos);
-                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarToken());
                 var respuesta = await cliente.PostAsync(server, new StringContent(json, Encoding.UTF8, jsonContent));
                 respuesta.EnsureSuccessStatusCode();
                 if (respuesta.IsSuccessStatusCode)
@@ -40,7 +40,7 @@ namespace CABASUS.Modelos
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 var json = JsonConvert.SerializeObject(modeloCaballos);
-                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarToken());
                 var respuesta = await cliente.PostAsync(server, new StringContent(json, Encoding.UTF8, jsonContent));
                 respuesta.EnsureSuccessStatusCode();
                 if (respuesta.IsSuccessStatusCode)
@@ -77,7 +77,7 @@ namespace CABASUS.Modelos
                 string server = "http://192.168.0.22:5001/api/Compartir/consultarcompartidos";
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
-                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarToken());
                 var consulta = await cliente.GetAsync(server);
                 consulta.EnsureSuccessStatusCode();
                 if (consulta.IsSuccessStatusCode)
@@ -106,7 +106,7 @@ namespace CABASUS.Modelos
                 string server = "http://192.168.0.22:5001/api/Caballo/consultaridcaballo/"+Id_Caballo;
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
-                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarToken());
                 var consulta = await cliente.GetAsync(server);
                 consulta.EnsureSuccessStatusCode();
                 if (consulta.IsSuccessStatusCode)
@@ -131,7 +131,7 @@ namespace CABASUS.Modelos
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 var json = JsonConvert.SerializeObject(modeloCaballos);
-                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarTokenAsync());
+                cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarToken());
                 var respuesta = await cliente.PutAsync(server, new StringContent(json, Encoding.UTF8, jsonContent));
                 respuesta.EnsureSuccessStatusCode();
                 if (respuesta.IsSuccessStatusCode)

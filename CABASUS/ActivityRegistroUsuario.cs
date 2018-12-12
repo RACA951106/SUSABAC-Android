@@ -47,7 +47,7 @@ namespace CABASUS
 
         #endregion
         string actualizar="1";
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.layout_RegistroUsuario);
@@ -216,7 +216,7 @@ namespace CABASUS
                             }
                             else
                             {
-                                ActualizarDatosUsuario(usuarios);
+                               await ActualizarDatosUsuario(usuarios);
                             }
                         }
                         else
@@ -242,6 +242,20 @@ namespace CABASUS
                 txtEmail.Alpha = 0.5f;
                 txtContrasena.Text = datos.contrasena;
                 txtEdad.Text = datos.fecha_nacimiento;
+                if (datos.foto == "")
+                {
+                    //foto 
+                }
+                else
+                {
+                    var descargarFoto = await new ShareInside().DownloadImageAsync(datos.foto,datos.id_usuario);
+                    if (descargarFoto == "No hay conexion")
+                    {
+                        Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
+                    }
+                    else
+                        Foto.SetImageURI(Android.Net.Uri.Parse(descargarFoto));
+                }
 
             }
         }

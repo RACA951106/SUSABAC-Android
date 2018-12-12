@@ -36,49 +36,50 @@ namespace CABASUS
             txtIniciarSesion.Click +=async delegate {
                 try
                 {
-                    login log = new login()
+                   
+                    if (!string.IsNullOrWhiteSpace(txtContrasena.Text) && !string.IsNullOrWhiteSpace(txtCorreo.Text))
                     {
-                        usuario = "javier-cordova@hotmail.com",
-                        contrasena = "fa6af0adff",
-                        id_dispositivo = Build.Serial,
-                        SO = "Android",
-                        TokenFB = "algo"
-                    };
-                    progress.Visibility = Android.Views.ViewStates.Visible;
-                    Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                    var mensaje = await new ShareInside().LogearUsuario(log);
-                    progress.Visibility = Android.Views.ViewStates.Invisible;
-                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                    if (mensaje == "Logeado")
-                    {
-                        var consultaCaballos = await new ConsumoAPIS().ConsultarCompartidos();
-                        if (consultaCaballos == "No hay conexion")
-                            Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
-                        else
+                        login log = new login()
                         {
-                            if (bool.Parse(consultaCaballos))
-                            {
-                                StartActivity(typeof(ActivityPrincipal));
-                                Finish();
-                            }
+                            usuario = txtCorreo.Text,
+                            contrasena = txtContrasena.Text,
+                            id_dispositivo = Build.Serial,
+                            SO = "Android",
+                            TokenFB = "algo"
+                        };
+                        progress.Visibility = Android.Views.ViewStates.Visible;
+                        Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                        var mensaje = await new ShareInside().LogearUsuario(log);
+                        progress.Visibility = Android.Views.ViewStates.Invisible;
+                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                        if (mensaje == "Logeado")
+                        {
+                            var consultaCaballos = await new ConsumoAPIS().ConsultarCompartidos();
+                            if (consultaCaballos == "No hay conexion")
+                                Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
                             else
                             {
-                                Intent intent = new Intent(this, (typeof(Activity_RegistroCaballos)));
-                                intent.PutExtra("ActuaizarCaballo", "false");
-                                intent.PutExtra("PrimerCaballo", "true");
-                                this.StartActivity(intent);
-                                Finish();
+                                if (bool.Parse(consultaCaballos))
+                                {
+                                    StartActivity(typeof(ActivityPrincipal));
+                                    Finish();
+                                }
+                                else
+                                {
+                                    Intent intent = new Intent(this, (typeof(Activity_RegistroCaballos)));
+                                    intent.PutExtra("ActuaizarCaballo", "false");
+                                    intent.PutExtra("PrimerCaballo", "true");
+                                    this.StartActivity(intent);
+                                    Finish();
+                                }
                             }
                         }
-                    }
-                    else
-                        Toast.MakeText(this, mensaje, ToastLength.Short).Show();
+                        else
+                            Toast.MakeText(this, mensaje, ToastLength.Short).Show();
 
                     }
                     else
                         Toast.MakeText(this, "Campos vacios", ToastLength.Short).Show();
-
-
                 }
                 catch (System.Exception) { }
             };
