@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Android.App;
+using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
@@ -34,28 +36,43 @@ namespace CABASUS
             txtIniciarSesion.Click +=async delegate {
                 try
                 {
-                    if (!string.IsNullOrWhiteSpace(txtContrasena.Text) && !string.IsNullOrWhiteSpace(txtCorreo.Text))
+                    login log = new login()
                     {
-                        login log = new login()
-                        {
-                            usuario = txtCorreo.Text,
-                            contrasena = txtContrasena.Text,
-                            id_dispositivo = Build.Serial,
-                            SO = "Android",
-                            TokenFB = "algo"
-                        };
-                        progress.Visibility = Android.Views.ViewStates.Visible;
-                        Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                        var mensaje = await new ShareInside().LogearUsuario(log);
-                        progress.Visibility = Android.Views.ViewStates.Invisible;
-                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                        if (mensaje == "Logeado")
-                        {
-                            StartActivity(typeof(ActivityPrincipal));
-                            Finish();
-                        }
+                        usuario = "javier-cordova@hotmail.com",
+                        contrasena = "fa6af0adff",
+                        id_dispositivo = Build.Serial,
+                        SO = "Android",
+                        TokenFB = "algo"
+                    };
+                    progress.Visibility = Android.Views.ViewStates.Visible;
+                    Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                    var mensaje = await new ShareInside().LogearUsuario(log);
+                    progress.Visibility = Android.Views.ViewStates.Invisible;
+                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                    if (mensaje == "Logeado")
+                    {
+                        var consultaCaballos = await new ConsumoAPIS().ConsultarCompartidos();
+                        if (consultaCaballos == "No hay conexion")
+                            Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
                         else
-                            Toast.MakeText(this, mensaje, ToastLength.Short).Show();
+                        {
+                            if (bool.Parse(consultaCaballos))
+                            {
+                                StartActivity(typeof(ActivityPrincipal));
+                                Finish();
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(this, (typeof(Activity_RegistroCaballos)));
+                                intent.PutExtra("ActuaizarCaballo", "false");
+                                intent.PutExtra("PrimerCaballo", "true");
+                                this.StartActivity(intent);
+                                Finish();
+                            }
+                        }
+                    }
+                    else
+                        Toast.MakeText(this, mensaje, ToastLength.Short).Show();
 
                     }
                     else
@@ -74,7 +91,7 @@ namespace CABASUS
                 var btnSendPassword = alertar.FindViewById<TextView>(Resource.Id.btnSendPassword);
                 var txtEmail = alertar.FindViewById<TextView>(Resource.Id.txtEmailRecuperarContrasena);
                 GradientDrawable gdCreate = new GradientDrawable();
-                gdCreate.SetColor(Color.Rgb(203,30,30));
+                gdCreate.SetColor(Color.Rgb(203, 30, 30));
                 gdCreate.SetCornerRadius(500);
                 btnSendPassword.SetBackgroundDrawable(gdCreate);
                 btnSendPassword.Click += async delegate {

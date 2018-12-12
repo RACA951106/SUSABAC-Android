@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static CABASUS.ObtenerDialogFecha;
+using System.Net;
 
 namespace CABASUS
 {
@@ -25,22 +26,23 @@ namespace CABASUS
     public class Activity_RegistroCaballos : BaseActivity
     {
         Refractored.Controls.CircleImageView Foto;
-        private const int REQUEST_SELECT_PICTURE = 0x01;
+        private const int REQUEST_SELECT_PICTURE = 0x01, camrequestcode = 100;
         Uri cameraUri;
-        int camrequestcode = 100;
         Stream fotogaleria;
-        bool IsGalery = false;
         ListView textListView;
         EditText buscar;
-
-        protected override void OnCreate(Bundle savedInstanceState)
+        bool IsGalery = false, PrimerCaballo, ActuaizarCaballo;
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             #region FindViewById Elementos generales
             SetContentView(Resource.Layout.layout_RegistrarCaballos);
             Window.SetStatusBarColor(Color.Black);
             Window.SetNavigationBarColor(Color.Black);
-
+            #region variables de otro activity
+            PrimerCaballo = bool.Parse(Intent.GetStringExtra("PrimerCaballo"));
+            ActuaizarCaballo = bool.Parse(Intent.GetStringExtra("ActuaizarCaballo"));
+            #endregion
             new ShareInside().CopyDocuments("RazasGender.sqlite", "RazasGender.db");
             var txtListo = FindViewById<TextView>(Resource.Id.btnListoRegistroCaballos);
             GradientDrawable gdCreate = new GradientDrawable();
@@ -148,52 +150,10 @@ namespace CABASUS
                         };
                         try
                         {
-                            string id_caballo = await new Modelos.ConsumoAPIS().RegistrarCaballos(ModeloCaballos);
-                            if (id_caballo == "No hay conexion")
-                            {
-                                progressBar.Visibility = Android.Views.ViewStates.Invisible;
-                                Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                                Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
-                            }
+                            if (ActuaizarCaballo)
+                                await ActualizacionCaballo(ModeloCaballos, progressBar);
                             else
-                            {
-                                if (cameraUri != null)
-                                {
-                                    string url_imagen = await new ShareInside().SubirImagen("caballos", id_caballo, cameraUri);
-                                    if (url_imagen == "No hay conexion")
-                                    {
-                                        progressBar.Visibility = Android.Views.ViewStates.Invisible;
-                                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                                        Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
-                                    }
-                                    else
-                                    {
-                                        Modelos.caballos FotoCaballo = new Modelos.caballos()
-                                        {
-                                            id_caballo = id_caballo,
-                                            foto = url_imagen
-                                        };
-                                        if (await new Modelos.ConsumoAPIS().ActualizarFotoCaballo(FotoCaballo) == "No hay conexion")
-                                        {
-                                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
-                                            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                                            Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
-                                        }
-                                        else
-                                        {
-                                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
-                                            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                                            Toast.MakeText(this, "Datos del caballo guardados correctamente", ToastLength.Short).Show();
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    progressBar.Visibility = Android.Views.ViewStates.Invisible;
-                                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                                    Toast.MakeText(this, "Datos guardados con foto por default", ToastLength.Short).Show();
-                                }
-                            }
+                                await RegistrarCaballo(ModeloCaballos, progressBar);
                         }
                         catch (System.Exception ex)
                         {
@@ -211,6 +171,156 @@ namespace CABASUS
                 }
             };
             #endregion
+            if (ActuaizarCaballo)
+            {
+                var datos_caballo = await new Modelos.ConsumoAPIS().ConsultarCaballo_Id("b80ebed26ac1454597376cacbe9993");
+                if (datos_caballo.id_caballo == "No hay conexion")
+                {
+                    StartActivity(typeof(ActivityPrincipal));
+                    Finish();
+                    Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
+                }
+                else
+                {
+                    txtHorseName.Text = datos_caballo.nombre;
+                    txtWeight.Text = datos_caballo.peso.ToString();
+                    txtHeight.Text = datos_caballo.altura.ToString();
+                    var con = new SQLiteConnection(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "RazasGender.sqlite"));
+                    var consultaBreed = con.Query<Modelos.Razas>("select * from razas where id_raza = "+ datos_caballo.raza, new Modelos.Razas().id_raza);
+                    txtBreed.Text = consultaBreed[0].raza;
+                    txtBreed.Tag = consultaBreed[0].id_raza;
+                    txtDOB.Text = Convert.ToDateTime(datos_caballo.fecha_nacimiento).ToString("dd / MM / yyyy");
+                    if (datos_caballo.genero == 1)
+                        txtGender.Text = GetText(Resource.String.Filly);
+                    else if (datos_caballo.genero == 2)
+                        txtGender.Text = GetText(Resource.String.Gelding);
+                    else if (datos_caballo.genero == 3)
+                        txtGender.Text = GetText(Resource.String.Mare);
+                    else if (datos_caballo.genero == 4)
+                        txtGender.Text = GetText(Resource.String.Stallion);
+                    txtGender.Tag = datos_caballo.genero;
+                    txtOat.Text = datos_caballo.avena.ToString();
+
+                    if (datos_caballo.foto == "")
+                    {
+                        //foto 
+                    }
+                    else
+                    {
+                        var descargarFoto = await new ShareInside().DownloadImageAsync(datos_caballo.foto, "b80ebed26ac1454597376cacbe9993");
+                        if (descargarFoto == "No hay conexion")
+                        {
+                            Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
+                        }
+                        else
+                        {
+                            Foto.SetImageURI(Android.Net.Uri.Parse(descargarFoto));
+                            cameraUri = Android.Net.Uri.Parse(descargarFoto);
+                        }
+                    }
+                }
+            }
+        }
+
+        public async Task RegistrarCaballo(Modelos.caballos ModeloCaballos, ProgressBar progressBar)
+        {
+            string id_caballo = await new Modelos.ConsumoAPIS().RegistrarCaballos(ModeloCaballos);
+            if (id_caballo == "No hay conexion")
+            {
+                progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+            }
+            else
+            {
+                if (cameraUri != null)
+                {
+                    string url_imagen = await new ShareInside().SubirImagen("caballos", id_caballo, cameraUri);
+                    if (url_imagen == "No hay conexion")
+                    {
+                        progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                        Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+                    }
+                    else
+                    {
+                        Modelos.caballos FotoCaballo = new Modelos.caballos()
+                        {
+                            id_caballo = id_caballo,
+                            foto = url_imagen
+                        };
+                        if (await new Modelos.ConsumoAPIS().ActualizarFotoCaballo(FotoCaballo) == "No hay conexion")
+                        {
+                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                            Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+                        }
+                        else
+                        {
+                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                            StartActivity(typeof(ActivityPrincipal));
+                            Finish();
+                        }
+                    }
+                }
+                else
+                {
+                    progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                    Toast.MakeText(this, "Datos guardados con foto por default", ToastLength.Short).Show();
+                }
+            }
+        }
+        public async Task ActualizacionCaballo(Modelos.caballos ModeloCaballos, ProgressBar progressBar)
+        {
+            string id_caballo = await new Modelos.ConsumoAPIS().ActualizarCaballo(ModeloCaballos);
+            if (id_caballo == "No hay conexion")
+            {
+                progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+            }
+            else
+            {
+                //if (cameraUri != null)
+                //{
+                //    string url_imagen = await new ShareInside().SubirImagen("caballos", id_caballo, cameraUri);
+                //    if (url_imagen == "No hay conexion")
+                //    {
+                //        progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                //        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                //        Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+                //    }
+                //    else
+                //    {
+                //        Modelos.caballos FotoCaballo = new Modelos.caballos()
+                //        {
+                //            id_caballo = id_caballo,
+                //            foto = url_imagen
+                //        };
+                //        if (await new Modelos.ConsumoAPIS().ActualizarFotoCaballo(FotoCaballo) == "No hay conexion")
+                //        {
+                //            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                //            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                //            Toast.MakeText(this, "No hay conexion", ToastLength.Short).Show();
+                //        }
+                //        else
+                //        {
+                //            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                //            Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                //            StartActivity(typeof(ActivityPrincipal));
+                //            Finish();
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                //    Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                //    Toast.MakeText(this, "Datos guardados con foto por default", ToastLength.Short).Show();
+                //}
+            }
         }
 
         private void openCamara()
@@ -347,6 +457,15 @@ namespace CABASUS
             else
             {
                 Toast.MakeText(this, Resource.String.The_information, ToastLength.Short).Show();
+            }
+        }
+
+        public override void OnBackPressed()
+        {
+            if (PrimerCaballo.Equals(false))
+            {
+                StartActivity(typeof(ActivityPrincipal));
+                Finish();
             }
         }
     }
