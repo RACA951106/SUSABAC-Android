@@ -33,10 +33,12 @@ namespace CABASUS
             gd.SetCornerRadius(500);
             txtIniciarSesion.SetBackgroundDrawable(gd);
 
+            txtCorreo.Text = "javier-cordova@hotmail.com";
+            txtContrasena.Text = "fa6af0adff";
+            
             txtIniciarSesion.Click +=async delegate {
                 try
                 {
-                   
                     if (!string.IsNullOrWhiteSpace(txtContrasena.Text) && !string.IsNullOrWhiteSpace(txtCorreo.Text))
                     {
                         login log = new login()

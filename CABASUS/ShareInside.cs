@@ -329,6 +329,15 @@ namespace CABASUS
             Log.Debug("tag", token);
             return token;
         }
+
+        public List<consultacompartidos> ConsultarCaballos()
+        {
+            var serializador = new XmlSerializer(typeof(List<consultacompartidos>));
+            var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
+            var datos = (List<consultacompartidos>)serializador.Deserialize(Lectura);
+            Lectura.Close();
+            return datos;
+        }
     }
 
     public class ObtenerDialogFecha

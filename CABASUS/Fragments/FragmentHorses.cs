@@ -5,21 +5,19 @@ using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
+using System.Collections.Generic;
 
 namespace CABASUS.Fragments
 {
     public class FragmentHorses : Fragment
     {
-        public override void OnCreate(Bundle savedInstanceState)
+        public override async void OnActivityCreated(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
+            base.OnActivityCreated(savedInstanceState);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
             View Vista = inflater.Inflate(Resource.Layout.LayoutFragmentHorses, container, false);
             GradientDrawable gd = new GradientDrawable();
             gd.SetColor(Color.Rgb(246, 128, 25));
@@ -29,10 +27,13 @@ namespace CABASUS.Fragments
             btnAgregar.SetBackgroundDrawable(gd);
             btnAgregar.Click += delegate {
                 var intent = new Intent(Activity, typeof(Activity_RegistroCaballos));
-                intent.PutExtra("ActuaizarCaballo", "true");
+                intent.PutExtra("ActuaizarCaballo", "false");
                 intent.PutExtra("PrimerCaballo", "false");
                 StartActivity(intent);
             };
+
+            var ListaCaballos = new ShareInside().ConsultarCaballos();
+
             return Vista;
         }
     }
