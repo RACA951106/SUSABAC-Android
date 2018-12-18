@@ -6,6 +6,7 @@ using com.refractored;
 using CABASUS.Adaptadores;
 using Android.Widget;
 using CABASUS.Fragments;
+using Android.Graphics;
 
 namespace CABASUS
 {
@@ -23,6 +24,8 @@ namespace CABASUS
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LayoutActivityPrincipal);
+            Window.SetStatusBarColor(Color.Black);
+            Window.SetNavigationBarColor(Color.Black);
 
             TabsPrincipales = FindViewById<PagerSlidingTabStrip>(Resource.Id.TabsPrincipales);
             ViewPagerPrincipal = FindViewById<ViewPager>(Resource.Id.ViewPagerPrincipal);

@@ -63,6 +63,7 @@
     <Compile Include="ActivityRegistroUsuario.cs" />
     <Compile Include="Activity_IniciarSesion.cs" />
     <Compile Include="Activity_RegistroCaballos.cs" />
+    <Compile Include="Adaptadores\AdaptadorCaballos.cs" />
     <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
     <Compile Include="Adaptadores\AdaptadorGender.cs" />
     <Compile Include="Adaptadores\AdaptadorRazas.cs" />
@@ -277,6 +278,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\DialogoRecuperarContrasena.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\RowCaballos.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

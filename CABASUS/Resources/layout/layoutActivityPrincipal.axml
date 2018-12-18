@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:background="#f68019"
+            android:background="#CB1E1E"
             android:textColorPrimary="#FFF"
             android:textSize="15dp"
             app:pstsDividerPadding="0dp"
