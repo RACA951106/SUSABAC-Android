@@ -195,7 +195,7 @@ namespace CABASUS
             {
                 if (HayConexion())
                 {
-                    string url = "http://192.168.0.22:5001/api/account/Login";
+                    string url = "http://192.168.1.76:5001/api/account/Login";
                     var json = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
                     HttpClient cliente = new HttpClient();
                     cliente.Timeout = TimeSpan.FromSeconds(20);
@@ -314,6 +314,15 @@ namespace CABASUS
             var serializador = new XmlSerializer(typeof(usuarios));
             var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "DatosUsuario.xml"));
             var datos = (usuarios)serializador.Deserialize(Lectura);
+            Lectura.Close();
+            return datos;
+        }
+
+        public List<consultacompartidos> ConsultarCaballos()
+        {
+            var serializador = new XmlSerializer(typeof(List<consultacompartidos>));
+            var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
+            var datos = (List<consultacompartidos>)serializador.Deserialize(Lectura);
             Lectura.Close();
             return datos;
         }
