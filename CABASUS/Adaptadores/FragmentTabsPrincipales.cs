@@ -48,7 +48,7 @@ namespace CABASUS.Adaptadores
                     break;
                 case 4:
                     Vista = inflater.Inflate(Resource.Layout.layoutPagina1, container, false);
-                    Vista.FindViewById<LinearLayout>(Resource.Id.linear).SetBackgroundColor(Color.Chartreuse);
+                    Vista.FindViewById<LinearLayout>(Resource.Id.linear).SetBackgroundColor(Color.White);
                     break;
             }
 

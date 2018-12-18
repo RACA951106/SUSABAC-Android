@@ -109,6 +109,8 @@ namespace CABASUS
             };
             #endregion
 
+            actualizar = this.Intent.GetStringExtra("actualizar");
+
             btnaceptar.Click += async delegate 
             {
                 var contenido = "";

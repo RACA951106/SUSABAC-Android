@@ -33,12 +33,16 @@ namespace CABASUS
             gd.SetCornerRadius(500);
             txtIniciarSesion.SetBackgroundDrawable(gd);
 
-            txtCorreo.Text = "javier-cordova@hotmail.com";
-            txtContrasena.Text = "fa6af0adff";
+            txtCorreo.Text = "arelicsantos@gmail.com";
+            txtContrasena.Text = "1234";
             
             txtIniciarSesion.Click +=async delegate {
+                progress.Visibility = Android.Views.ViewStates.Visible;
+                Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                await Task.Delay(500);
                 try
                 {
+                   
                     if (!string.IsNullOrWhiteSpace(txtContrasena.Text) && !string.IsNullOrWhiteSpace(txtCorreo.Text))
                     {
                         login log = new login()
@@ -49,11 +53,8 @@ namespace CABASUS
                             SO = "Android",
                             TokenFB = await new ShareInside().GenerarTokenFirebase()
                     };
-                        progress.Visibility = Android.Views.ViewStates.Visible;
-                        Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                        var mensaje = await new ShareInside().LogearUsuario(log);
-                        progress.Visibility = Android.Views.ViewStates.Invisible;
-                        Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
+                       var mensaje = await new ShareInside().LogearUsuario(log);
+                      
                         if (mensaje == "Logeado")
                         {
                             var consultaCaballos = await new ConsumoAPIS().ConsultarCompartidos();
@@ -87,6 +88,8 @@ namespace CABASUS
                 {
                     Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
                 }
+                progress.Visibility = Android.Views.ViewStates.Invisible;
+                Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
             };
 
             RecuperarContrasena.Click += delegate {
@@ -104,19 +107,14 @@ namespace CABASUS
                     if (!string.IsNullOrEmpty(txtEmail.Text))
                     {
                         #region progress
-                        ProgressBar progressBar = new ProgressBar(this, null, Android.Resource.Attribute.ProgressBarStyleLarge);
-                        RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(100, 100);
-                        p.AddRule(LayoutRules.CenterInParent);
-                        progressBar.IndeterminateDrawable.SetColorFilter(Color.Rgb(203,30,30), PorterDuff.Mode.Multiply);
-                        alertar.FindViewById<RelativeLayout>(Resource.Id.dialogoRecuperarContrasena).AddView(progressBar, p);
-                        progressBar.Visibility = Android.Views.ViewStates.Visible;
+                        progress.Visibility = Android.Views.ViewStates.Visible;
                         Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
                         await Task.Delay(500);
                         #endregion
                         var sendEmail = await new Modelos.ConsumoAPIS().RecuperarContrasena(txtEmail.Text, 1);
                         if (sendEmail == "No hay conexion")
                         {
-                            progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                            progress.Visibility = Android.Views.ViewStates.Invisible;
                             Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                             Toast.MakeText(this, GetText(Resource.String.No_internet_connection), ToastLength.Short).Show();
                         }
@@ -124,14 +122,14 @@ namespace CABASUS
                         {
                             if (bool.Parse(sendEmail))
                             {
-                                progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                progress.Visibility = Android.Views.ViewStates.Invisible;
                                 Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                                 alertar.Dismiss();
                                 Toast.MakeText(this, GetText(Resource.String.New_password_sent), ToastLength.Short).Show();
                             }
                             else
                             {
-                                progressBar.Visibility = Android.Views.ViewStates.Invisible;
+                                progress.Visibility = Android.Views.ViewStates.Invisible;
                                 Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                                 Toast.MakeText(this, GetText(Resource.String.The_mail_could_not_be_sent), ToastLength.Short).Show();
                             }

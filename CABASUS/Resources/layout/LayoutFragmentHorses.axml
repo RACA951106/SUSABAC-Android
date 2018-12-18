@@ -82,7 +82,7 @@
 			android:background="#f680"
 			android:scrollbarStyle="insideOverlay"
 			android:overScrollMode="never"
-			android:id="@+id/lstCaballos">
+			android:id="@+id/lstCaballos"/>
 	</LinearLayout>
     <ImageView
         android:id="@+id/btnAdd"

@@ -39,8 +39,9 @@ namespace CABASUS.Adaptadores
                     Vista = FragmentTabsPrincipales.NuevaInstancia(position);
                     break;
                 case 4:
-                    Vista = FragmentTabsPrincipales.NuevaInstancia(position);
+                    Vista = new FragmentAjustes();
                     break;
+
             }
             return Vista;
         }

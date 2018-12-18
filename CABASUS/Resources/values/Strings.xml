@@ -58,4 +58,16 @@
   <string name="The_mail_could_not_be_sent">The mail could not be sent</string>
   <string name="New_password_sent">New password sent, check your email</string>
   
+  <!--Ajustes de la aplicacion-->
+  <string name="Horses"> Settings	</string>
+  <string name="Account">	Account	</string>
+  <string name="About">	About	</string>
+  <string name="Languaje">	Language	</string>
+  <string name="Terms_and_Conditions">	Terms and Conditions	</string>
+  <string name="Log_out">	Log out	</string>
+  <string name="Cabasus_was_designed">	Cabasus was designed by passionate riders who want to keep everything related to the horse in one place, and bring the community together in one digital platform	</string>
+  <string name="For_more_information_visit">	For more information visit	</string>
+  <string name="Are_you_sure">	Are you sure?	</string>
+  <string name="Yes">	Yes	</string>
+  <string name="No">	No	</string>
 </resources>

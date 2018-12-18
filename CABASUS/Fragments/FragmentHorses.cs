@@ -20,7 +20,7 @@ namespace CABASUS.Fragments
         {
             View Vista = inflater.Inflate(Resource.Layout.LayoutFragmentHorses, container, false);
             GradientDrawable gd = new GradientDrawable();
-            gd.SetColor(Color.Rgb(246, 128, 25));
+            gd.SetColor(Color.Rgb(203,30, 30));
             gd.SetCornerRadius(1000);
 
             var btnAgregar = Vista.FindViewById<ImageView>(Resource.Id.btnAdd);
