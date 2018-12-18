@@ -22,7 +22,7 @@ using System.Net;
 
 namespace CABASUS
 {
-    [Activity(Label = "Activity_RegistroCaballos")]
+    [Activity(Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     public class Activity_RegistroCaballos : BaseActivity
     {
         Refractored.Controls.CircleImageView Foto;
