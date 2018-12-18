@@ -2,7 +2,7 @@
     <string name="app_name">CABASUS</string>
     <string name="action_settings">Settings</string>
     <string name="Cancel">	Cancel	</string>
-
+    <string name="No_internet_connection">No internet connection</string>
   <!--Login-->
   <string name="create_account">CREATE ACCOUNT</string>
   <string name="log_in">LOG IN</string>
@@ -12,12 +12,13 @@
   <string name="User_name">User Name</string>
   <string name="Email">Email</string>
   <string name="Password">Password</string>
-  <string name="Age">DOB</string>
   <string name="Phone">Phone</string>
   <string name="Accept">Accept</string>
   <string name="Conditions">By registering you agree to the terms and conditions of use and privacy policies of CABASUS</string>
   <string name="Having_trouble">Having trouble logging in? Get help here.</string>
-
+  <string name="This_email_is_not_valid">This email is not valid</string>
+  <string name="The_date_is_not_valid">This date is not valid</string>
+  
   <!--Camara-->
   <string name="Image_too_small"> Image too small </string>
   <string name="image_with_192"> You need an image with 192 pixels high and width </string>
@@ -33,7 +34,7 @@
   <string name="Weight">Weight</string>
   <string name="Height">Height</string>
   <string name="Breed">Breed</string>
-  <string name="DOB">DOB</string>
+  <string name="DOB">Day of birth</string>
   <string name="Gender">Gender</string>
   <string name="Oat">Oat</string>
   <string name="Kg">Kg</string>
@@ -56,5 +57,5 @@
   <string name="Empty_email_field">Empty email field</string>
   <string name="The_mail_could_not_be_sent">The mail could not be sent</string>
   <string name="New_password_sent">New password sent, check your email</string>
-  <string name="No_internet_connection">No internet connection</string>
+  
 </resources>

@@ -17,10 +17,12 @@ using Android.Provider;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V7.App;
+using Android.Util;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
 using CABASUS.Modelos;
+using Firebase.Iid;
 using Java.Lang;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
@@ -195,7 +197,7 @@ namespace CABASUS
             {
                 if (HayConexion())
                 {
-                    string url = "http://192.168.0.22:5001/api/account/Login";
+                    string url = "http://192.168.1.73:5001/api/account/Login";
                     var json = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
                     HttpClient cliente = new HttpClient();
                     cliente.Timeout = TimeSpan.FromSeconds(20);
@@ -316,6 +318,16 @@ namespace CABASUS
             var datos = (usuarios)serializador.Deserialize(Lectura);
             Lectura.Close();
             return datos;
+        }
+
+        public async Task<string> GenerarTokenFirebase()
+        {
+            HttpClient Clientelogin = new HttpClient(new System.Net.Http.HttpClientHandler());
+            await Task.Delay(1000);
+            string token = FirebaseInstanceId.Instance.Token;
+            await Task.Delay(3000);
+            Log.Debug("tag", token);
+            return token;
         }
     }
 

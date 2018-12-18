@@ -12,6 +12,9 @@ namespace CABASUS
     [Activity(Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
     public class ActivityPrincipal : AppCompatActivity
     {
+        internal static readonly string CHANNEL_ID = "my_notification_channel";
+        internal static readonly int NOTIFICATION_ID = 100;
+
         PagerSlidingTabStrip TabsPrincipales;
         ViewPager ViewPagerPrincipal;
         FrameLayout SelectorCaballos;
@@ -56,8 +59,7 @@ namespace CABASUS
                     ViewPagerPrincipal.LayoutParameters = new TableLayout.LayoutParams(-1, 0, 90f - RelacionInversa);
                 }
             };
-
-
+            
         }
         public override void OnBackPressed()
         {

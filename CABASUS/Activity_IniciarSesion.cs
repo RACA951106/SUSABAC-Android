@@ -45,8 +45,8 @@ namespace CABASUS
                             contrasena = txtContrasena.Text,
                             id_dispositivo = Build.Serial,
                             SO = "Android",
-                            TokenFB = "algo"
-                        };
+                            TokenFB = await new ShareInside().GenerarTokenFirebase()
+                    };
                         progress.Visibility = Android.Views.ViewStates.Visible;
                         Window.AddFlags(Android.Views.WindowManagerFlags.NotTouchable);
                         var mensaje = await new ShareInside().LogearUsuario(log);
@@ -79,9 +79,12 @@ namespace CABASUS
 
                     }
                     else
-                        Toast.MakeText(this, "Campos vacios", ToastLength.Short).Show();
+                        Toast.MakeText(this, Resource.String.There_are_empty_fields, ToastLength.Short).Show();
                 }
-                catch (System.Exception) { }
+                catch (System.Exception ex)
+                {
+                    Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+                }
             };
 
             RecuperarContrasena.Click += delegate {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Android.App;
@@ -46,7 +45,7 @@ namespace CABASUS
         private const string SAMPLE_CROPPED_IMAGE_NAME = "SampleCropImage";
 
         #endregion
-        string actualizar="1";
+        string actualizar="0";
         protected async override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -119,11 +118,11 @@ namespace CABASUS
                 {
                     if (string.IsNullOrWhiteSpace(txtUserName.Text) || string.IsNullOrWhiteSpace(txtContrasena.Text) || string.IsNullOrWhiteSpace(txtEmail.Text))
                     {
-                        Toast.MakeText(this, "Campos vacios verifica la información", ToastLength.Short).Show();
+                        Toast.MakeText(this, Resource.String.There_are_empty_fields, ToastLength.Short).Show();
                     }
                     else if (!validar_email(txtEmail))
                     {
-                        Toast.MakeText(this, "Verifica Email", ToastLength.Short).Show();
+                        Toast.MakeText(this, Resource.String.This_email_is_not_valid, ToastLength.Short).Show();
                     }
                     else 
                     {
@@ -140,10 +139,11 @@ namespace CABASUS
                                 fechavalidacion = false;
                             }
                         }
+
                         #region Insertar datos y foto de usuario
                         if (fechavalidacion == true)
                         {
-                            string url = "http://192.168.0.10:5001/api/Account/registrar";
+                            string url = "http://192.168.1.73:5001/api/Account/registrar";
                             string formato = "application/json";
                             usuarios usuarios = new usuarios()
                             {
@@ -152,8 +152,8 @@ namespace CABASUS
                                 contrasena = txtContrasena.Text,
                                 id_dispositivo = Build.Serial,
                                 SO = "Android",
-                                tokenFB = "algo",
-                                fecha_nacimiento = txtEdad.Text
+                                tokenFB = await new ShareInside().GenerarTokenFirebase(),
+                            fecha_nacimiento = txtEdad.Text
                             };
                             var json = new StringContent(JsonConvert.SerializeObject(usuarios), Encoding.UTF8, formato);
                             HttpClient cliente = new HttpClient();
@@ -173,24 +173,24 @@ namespace CABASUS
                                         if (cameraUri != null)
                                         {
                                             url_foto = await new ShareInside().SubirImagen("usuarios", Obtener_idusuario(cont.token), cameraUri);
-                                            var server = "http://192.168.0.10:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
+                                            var server = "http://192.168.1.73:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
                                             cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", cont.token);
                                             respuesta = await cliente.GetAsync(server);
                                             var content = await respuesta.Content.ReadAsStringAsync();
                                             if (respuesta.IsSuccessStatusCode)
                                             {
-                                                Console.WriteLine("Datos Guardados");
+                                               // Console.WriteLine("Datos Guardados");
                                             }
                                             else
                                             {
-                                                Console.WriteLine("no se pudo actualizar la foto");
+                                                //Console.WriteLine("no se pudo actualizar la foto");
                                                 url_foto = "foto";
                                             }
                                         }
                                         else
                                         {
                                             url_foto = "foto";
-                                            Console.WriteLine("Campo imagen null");
+                                            //Console.WriteLine("Campo imagen null");
                                         }
                                         usuarios.foto = url_foto;
                                         usuarios.id_usuario = Obtener_idusuario(cont.token);
@@ -212,7 +212,7 @@ namespace CABASUS
                                     }
                                 }
                                 else
-                                    Toast.MakeText(this, "Tu conexion es inestable", ToastLength.Short).Show();
+                                    Toast.MakeText(this, Resource.String.No_internet_connection, ToastLength.Short).Show();
                             }
                             else
                             {
@@ -221,7 +221,7 @@ namespace CABASUS
                         }
                         else
                         {
-                            Toast.MakeText(this, "La fecha no es valida", ToastLength.Short).Show();
+                            Toast.MakeText(this, Resource.String.The_date_is_not_valid, ToastLength.Short).Show();
                         }
                         #endregion
                     }
@@ -266,7 +266,7 @@ namespace CABASUS
             try
             {
                 var datos = new ShareInside().Consultar_DatosUsuario();
-                string url = "http://192.168.0.10:5001/api/Usuario/actualizar";
+                string url = "http://192.168.1.73:5001/api/Usuario/actualizar";
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 if (new ShareInside().HayConexion())
@@ -276,9 +276,12 @@ namespace CABASUS
                     if (cameraUri != null)
                     {
                         var url_foto = await new ShareInside().SubirImagen("usuarios", datos.id_usuario, cameraUri);
+                        usuarios.foto = url_foto;
                     }
+                    else
+                        usuarios.foto = datos.foto;
                     #region Actualizar usuario
-                    usuarios.foto = datos.foto;
+
                     var json = new StringContent(JsonConvert.SerializeObject(usuarios), Encoding.UTF8, "application/json");
                     var tok = await new ShareInside().ConsultarToken();
                     cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tok);
@@ -291,7 +294,7 @@ namespace CABASUS
                         new ShareInside().Guardar_Email_Contrasena(usuarios.email, usuarios.contrasena);
                         progress.Visibility = Android.Views.ViewStates.Invisible;
                         Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
-                        Console.WriteLine("Datos Guardados");
+                       // Console.WriteLine("Datos Guardados");
                     }
                     else
                     {
@@ -303,7 +306,7 @@ namespace CABASUS
 
                 }
                 else
-                    Toast.MakeText(this, "Tu conexion es inestable", ToastLength.Short).Show();
+                    Toast.MakeText(this, Resource.String.No_internet_connection, ToastLength.Short).Show();
             }
             catch (System.Exception ex)
             {

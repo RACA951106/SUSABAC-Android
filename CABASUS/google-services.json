@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "126425213696",
+    "firebase_url": "https://notificacionsusabac.firebaseio.com",
+    "project_id": "notificacionsusabac",
+    "storage_bucket": "notificacionsusabac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126425213696:android:858821cf0723dd48",
+        "android_client_info": {
+          "package_name": "com.cabasus.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126425213696-9qd9ujba5o7artmeo5796o3k9evo3inn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgoL-aIZFUnZbHeJz_jKlgEq8rACZHtdU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

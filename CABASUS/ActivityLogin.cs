@@ -9,6 +9,7 @@ using Android.Support.Design.Widget;
 using System.Timers;
 using CABASUS.Adaptadores;
 using Android.Media;
+using System.IO;
 
 namespace CABASUS
 {
@@ -29,9 +30,13 @@ namespace CABASUS
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LayoutActivityLogin);
             Window.SetStatusBarColor(Color.Black);
+            if (File.Exists(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Token.xml")))
+            {
+                StartActivity(typeof(ActivityPrincipal));
+            }
 
             #region Casamiento
-            var btnCreateAccount = FindViewById<TextView>(Resource.Id.btnCreateAccount);
+                var btnCreateAccount = FindViewById<TextView>(Resource.Id.btnCreateAccount);
             var btnLogIn = FindViewById<TextView>(Resource.Id.btnLogIn);
             var VideoFondo = FindViewById<VideoView>(Resource.Id.FondoVideo);
 
