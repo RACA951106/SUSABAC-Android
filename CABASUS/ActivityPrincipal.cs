@@ -7,19 +7,19 @@ using CABASUS.Adaptadores;
 using Android.Widget;
 using CABASUS.Fragments;
 using Android.Graphics;
+using Android.Support.Design.Widget;
+using Android.Views;
 
 namespace CABASUS
 {
     [Activity(Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
-    public class ActivityPrincipal : AppCompatActivity
+    public class ActivityPrincipal : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         internal static readonly string CHANNEL_ID = "my_notification_channel";
         internal static readonly int NOTIFICATION_ID = 100;
-
-        PagerSlidingTabStrip TabsPrincipales;
-        ViewPager ViewPagerPrincipal;
-        FrameLayout SelectorCaballos;
-
+        FragmentTransaction transaccion;
+        FragmentHorses _FragmentHorses = new FragmentHorses();
+        FragmentAjustes _FragmentAjustes = new FragmentAjustes();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -27,45 +27,47 @@ namespace CABASUS
             Window.SetStatusBarColor(Color.Black);
             Window.SetNavigationBarColor(Color.Black);
 
-            TabsPrincipales = FindViewById<PagerSlidingTabStrip>(Resource.Id.TabsPrincipales);
-            ViewPagerPrincipal = FindViewById<ViewPager>(Resource.Id.ViewPagerPrincipal);
-            SelectorCaballos = FindViewById<FrameLayout>(Resource.Id.SelectorCaballos);
+            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+            navigation.SetOnNavigationItemSelectedListener(this);
 
-            ViewPagerPrincipal.Adapter = new AdaptadorTabsPrincipales(SupportFragmentManager, this);
-            TabsPrincipales.SetViewPager(ViewPagerPrincipal);
-            TabsPrincipales.GetChildAt(0).SetMinimumWidth(10);
-
-            FragmentTransaction transaccion = FragmentManager.BeginTransaction();
-            transaccion.Add(Resource.Id.SelectorCaballos, new FragmentCycleHorses());
+            transaccion = FragmentManager.BeginTransaction();
+            transaccion.Add(Resource.Id.Pantallas, _FragmentHorses, "Caballos");
+            transaccion.Add(Resource.Id.Pantallas, _FragmentAjustes, "Ajustes");
+            transaccion.Hide(_FragmentAjustes);
+            transaccion.Show(_FragmentHorses);
             transaccion.Commit();
-
-            ViewPagerPrincipal.PageScrolled += delegate 
-            {
-                var x = ViewPagerPrincipal.ScrollX;
-
-                var metrics = Resources.DisplayMetrics;
-                var width = metrics.WidthPixels;
-
-                //regla de 3 para saber cuanto crecer 
-
-                var Relacion = (x * 20f) / (float)width;
-
-                if (Relacion < 20f)
-                {
-                    SelectorCaballos.LayoutParameters = new TableLayout.LayoutParams(-1, 0, Relacion);
-                    ViewPagerPrincipal.LayoutParameters = new TableLayout.LayoutParams(-1, 0, 90f - Relacion);
-                }
-                if (Relacion >= 40f && Relacion <= 60f)  
-                {
-                    var RelacionInversa = 60f - Relacion;
-                    SelectorCaballos.LayoutParameters = new TableLayout.LayoutParams(-1, 0, RelacionInversa);
-                    ViewPagerPrincipal.LayoutParameters = new TableLayout.LayoutParams(-1, 0, 90f - RelacionInversa);
-                }
-            };
-            
         }
         public override void OnBackPressed()
         {
+        }
+        public bool OnNavigationItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.navigation_home:
+                    transaccion = FragmentManager.BeginTransaction();
+                    transaccion.Hide(_FragmentAjustes);
+                    transaccion.Show(_FragmentHorses);
+                    transaccion.Commit();
+                    return true;
+                case Resource.Id.navigation_team_journal:
+                    
+                    return true;
+                case Resource.Id.navigation_activities:
+                    
+                    return true;
+                case Resource.Id.navigation_notifications:
+
+                    return true;
+                case Resource.Id.navigation_settings:
+                    transaccion = FragmentManager.BeginTransaction();
+                    transaccion.Hide(_FragmentHorses);
+                    transaccion.Show(_FragmentAjustes);
+                    transaccion.Commit();
+                    return true;
+            }
+            
+            return false;
         }
     }
 }

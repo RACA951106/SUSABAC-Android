@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 using System.Threading;
 using System.Threading.Tasks;
+using Android.App;
+using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using CABASUS.Fragments;
@@ -11,14 +14,20 @@ namespace CABASUS.Adaptadores
     public class AdaptadorCaballos : BaseAdapter<consultacompartidos>
     {
         private List<consultacompartidos> _listaCaballos;
-        private FragmentHorses _fragmentHorses;
+        private Activity _fragmentHorses;
         List<string> _url_local;
+        FragmentTransaction _transaccion;
+        FragmentBarraBusqueda _fragmentBarraBusqueda;
+        FragmentEliminarCaballo _fragmentEliminarCaballo;
 
-        public AdaptadorCaballos(List<consultacompartidos> listaCaballos, List<string> url_local, FragmentHorses fragmentHorses)
+        public AdaptadorCaballos(List<consultacompartidos> listaCaballos, List<string> url_local, Activity fragmentHorses, FragmentTransaction transaccion, FragmentBarraBusqueda _FragmentBarraBusqueda, FragmentEliminarCaballo _FragmentEliminarCaballo)
         {
             _listaCaballos = listaCaballos;
             _fragmentHorses = fragmentHorses;
             _url_local = url_local;
+            _transaccion = transaccion;
+            _fragmentBarraBusqueda = _FragmentBarraBusqueda;
+            _fragmentEliminarCaballo = _FragmentEliminarCaballo;
         }
 
         public override consultacompartidos this[int position] { get { return _listaCaballos[position]; } }
@@ -34,10 +43,24 @@ namespace CABASUS.Adaptadores
             view = _fragmentHorses.LayoutInflater.Inflate(Resource.Layout.RowCaballos, null);
             var Foto = view.FindViewById<Refractored.Controls.CircleImageView>(Resource.Id.btnfotoCaballo);
 
-            if (url_item == "No hay conexion")
+            try
+            {
+                if (url_item == "No hay conexion")
+                    Foto.SetImageResource(Resource.Drawable.SetiBreed);
+                else
+                    Foto.SetImageURI(Android.Net.Uri.Parse(url_item));
+            }
+            catch (System.Exception)
+            {
                 Foto.SetImageResource(Resource.Drawable.SetiBreed);
-            else
-                Foto.SetImageURI(Android.Net.Uri.Parse(url_item));
+            }
+            view.LongClick += delegate {
+                _transaccion = _fragmentHorses.FragmentManager.BeginTransaction();
+                _transaccion.Hide(_fragmentBarraBusqueda);
+                _transaccion.Show(_fragmentEliminarCaballo);
+                _transaccion.Commit();
+                view.SetBackgroundColor(new Color(15, 20, 30));
+            };
 
             return view;
         }

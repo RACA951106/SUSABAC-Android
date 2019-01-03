@@ -67,12 +67,12 @@
     <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
     <Compile Include="Adaptadores\AdaptadorGender.cs" />
     <Compile Include="Adaptadores\AdaptadorRazas.cs" />
-    <Compile Include="Adaptadores\ApadtadorTabsPrincipales.cs" />
-    <Compile Include="Adaptadores\FragmentTabsPrincipales.cs" />
     <Compile Include="ActivityPrincipal.cs" />
     <Compile Include="Adaptadores\PagerAdapterLogin.cs" />
     <Compile Include="Fragments\FragmentAjustes.cs" />
+    <Compile Include="Fragments\FragmentBarraBusqueda.cs" />
     <Compile Include="Fragments\FragmentCycleHorses.cs" />
+    <Compile Include="Fragments\FragmentEliminarCaballo.cs" />
     <Compile Include="Fragments\FragmentHorses.cs" />
     <Compile Include="Modelos\actividades.cs" />
     <Compile Include="Modelos\caballos.cs" />
@@ -300,6 +300,19 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\CustomAlertLogOut.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\navigation.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layout_BarraBusqueda.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\layout_EliminarCaballos.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

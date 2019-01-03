@@ -15,7 +15,7 @@ using Android.Widget;
 using Android.Support.V4.App;
 namespace CABASUS.Fragments
 {
-    public class FragmentAjustes : Android.Support.V4.App.Fragment
+    public class FragmentAjustes : Android.App.Fragment
     {
         public override async void OnActivityCreated(Bundle savedInstanceState)
         {
