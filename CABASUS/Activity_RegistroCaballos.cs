@@ -19,6 +19,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using static CABASUS.ObtenerDialogFecha;
 using System.Net;
+using System.Xml.Serialization;
+using CABASUS.Modelos;
+using System.Xml;
 
 namespace CABASUS
 {
@@ -245,7 +248,7 @@ namespace CABASUS
                         {
                             id_caballo = id_caballo,
                             foto = url_imagen
-                        };
+                        };;
                         if (await new Modelos.ConsumoAPIS().ActualizarFotoCaballo(FotoCaballo) == "No hay conexion")
                         {
                             progressBar.Visibility = Android.Views.ViewStates.Invisible;
@@ -254,6 +257,56 @@ namespace CABASUS
                         }
                         else
                         {
+                            //XmlDocument doc = new XmlDocument();
+                            //doc.Load(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
+                            //XmlNode nodo = doc.CreateElement("consultacompartidos");
+                            
+                            //XmlElement _id_caballo = doc.CreateElement("id_caballo");
+                            //_id_caballo.InnerText = id_caballo;
+                            //nodo.AppendChild(_id_caballo);
+
+                            //XmlElement nombre_caballo = doc.CreateElement("nombre_caballo");
+                            //nombre_caballo.InnerText = ModeloCaballos.nombre;
+                            //nodo.AppendChild(nombre_caballo);
+
+                            //XmlElement foto_caballo = doc.CreateElement("foto_caballo");
+                            //foto_caballo.InnerText = url_imagen;
+                            //nodo.AppendChild(foto_caballo);
+
+                            //XmlElement id_usuario = doc.CreateElement("id_usuario");
+                            //id_usuario.InnerText = new ShareInside().Consultar_DatosUsuario().id_usuario;
+                            //nodo.AppendChild(id_usuario);
+
+                            //XmlElement nombre_usuario = doc.CreateElement("nombre_usuario");
+                            //nombre_usuario.InnerText = new ShareInside().Consultar_DatosUsuario().nombre;
+                            //nodo.AppendChild(nombre_usuario);
+
+                            //XmlElement foto_usuario = doc.CreateElement("foto_usuario");
+                            //foto_usuario.InnerText = new ShareInside().Consultar_DatosUsuario().foto;
+                            //nodo.AppendChild(foto_usuario);
+
+                            //XmlNode refNodo = doc.DocumentElement;
+                            //refNodo.InsertAfter(nodo, refNodo.LastChild);
+
+                            //doc.Save(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
+
+
+                            //try
+                            //{
+                            //    XmlDocument docurl = new XmlDocument();
+                            //    docurl.Load(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml"));
+                            //    XmlElement url_local = docurl.CreateElement("url");
+                            //    url_local.InnerText = await new ShareInside().DownloadImageAsync(url_imagen, id_caballo);
+                            //    docurl.AppendChild(url_local);
+                            //    docurl.InsertAfter(url_local, docurl.LastChild);
+                            //    docurl.Save(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml"));
+                            //}
+                            //catch (System.Exception ex)
+                            //{
+                            //    var x = "";
+                            //}
+
+
                             progressBar.Visibility = Android.Views.ViewStates.Invisible;
                             Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                             StartActivity(typeof(ActivityPrincipal));

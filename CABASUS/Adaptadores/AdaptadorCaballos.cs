@@ -3,6 +3,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Content;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
@@ -19,7 +20,8 @@ namespace CABASUS.Adaptadores
         FragmentTransaction _transaccion;
         FragmentBarraBusqueda _fragmentBarraBusqueda;
         FragmentEliminarCaballo _fragmentEliminarCaballo;
-
+        int cantidad = 0;
+        
         public AdaptadorCaballos(List<consultacompartidos> listaCaballos, List<string> url_local, Activity fragmentHorses, FragmentTransaction transaccion, FragmentBarraBusqueda _FragmentBarraBusqueda, FragmentEliminarCaballo _FragmentEliminarCaballo)
         {
             _listaCaballos = listaCaballos;
@@ -39,10 +41,10 @@ namespace CABASUS.Adaptadores
             var item = _listaCaballos[position];
             var url_item = _url_local[position];
             View view = convertView;
-
+            
             view = _fragmentHorses.LayoutInflater.Inflate(Resource.Layout.RowCaballos, null);
             var Foto = view.FindViewById<Refractored.Controls.CircleImageView>(Resource.Id.btnfotoCaballo);
-
+            
             try
             {
                 if (url_item == "No hay conexion")
@@ -55,11 +57,26 @@ namespace CABASUS.Adaptadores
                 Foto.SetImageResource(Resource.Drawable.SetiBreed);
             }
             view.LongClick += delegate {
-                _transaccion = _fragmentHorses.FragmentManager.BeginTransaction();
-                _transaccion.Hide(_fragmentBarraBusqueda);
-                _transaccion.Show(_fragmentEliminarCaballo);
-                _transaccion.Commit();
-                view.SetBackgroundColor(new Color(15, 20, 30));
+                if (cantidad>0)
+                {
+                    view.SetBackgroundColor(new Color(15, 20, 30));
+                }
+                else
+                {
+                    _transaccion = _fragmentHorses.FragmentManager.BeginTransaction();
+                    _transaccion.Hide(_fragmentBarraBusqueda);
+                    _transaccion.Show(_fragmentEliminarCaballo);
+                    _transaccion.Commit();
+                    view.SetBackgroundColor(new Color(15, 20, 30));
+                    cantidad++;
+                }
+            };
+            view.Click += delegate {
+                if (cantidad > 0)
+                {
+                    view.SetBackgroundColor(new Color(15, 20, 30));
+                    cantidad++;
+                }
             };
 
             return view;

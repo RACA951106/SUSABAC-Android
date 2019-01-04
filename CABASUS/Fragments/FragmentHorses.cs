@@ -22,6 +22,7 @@ namespace CABASUS.Fragments
         {
             base.OnActivityCreated(savedInstanceState);
             await Task.Delay(1000);
+            
             var ListaCaballos = new ShareInside().ConsultarCaballos();
             List<string> url_local = new List<string>();
             if (File.Exists(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml")))

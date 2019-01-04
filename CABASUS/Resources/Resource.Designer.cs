@@ -5164,26 +5164,26 @@ namespace CABASUS
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f070068
-			public const int About = 2131165288;
+			// aapt resource value: 0x7f070069
+			public const int About = 2131165289;
 			
 			// aapt resource value: 0x7f070040
 			public const int Accept = 2131165248;
 			
-			// aapt resource value: 0x7f070067
-			public const int Account = 2131165287;
+			// aapt resource value: 0x7f070068
+			public const int Account = 2131165288;
 			
-			// aapt resource value: 0x7f070071
-			public const int Age = 2131165297;
+			// aapt resource value: 0x7f070072
+			public const int Age = 2131165298;
 			
-			// aapt resource value: 0x7f07006e
-			public const int Are_you_sure = 2131165294;
+			// aapt resource value: 0x7f07006f
+			public const int Are_you_sure = 2131165295;
 			
 			// aapt resource value: 0x7f070050
 			public const int Breed = 2131165264;
 			
-			// aapt resource value: 0x7f07006c
-			public const int Cabasus_was_designed = 2131165292;
+			// aapt resource value: 0x7f07006d
+			public const int Cabasus_was_designed = 2131165293;
 			
 			// aapt resource value: 0x7f07004b
 			public const int Camera = 2131165259;
@@ -5203,17 +5203,20 @@ namespace CABASUS
 			// aapt resource value: 0x7f07003d
 			public const int Email = 2131165245;
 			
-			// aapt resource value: 0x7f070063
-			public const int Empty_email_field = 2131165283;
+			// aapt resource value: 0x7f070064
+			public const int Empty_email_field = 2131165284;
 			
-			// aapt resource value: 0x7f070061
-			public const int Enter_the_email_address = 2131165281;
+			// aapt resource value: 0x7f070062
+			public const int Enter_the_email_address = 2131165282;
+			
+			// aapt resource value: 0x7f070060
+			public const int Error_loading_horse_list = 2131165280;
 			
 			// aapt resource value: 0x7f07005c
 			public const int Filly = 2131165276;
 			
-			// aapt resource value: 0x7f07006d
-			public const int For_more_information_visit = 2131165293;
+			// aapt resource value: 0x7f07006e
+			public const int For_more_information_visit = 2131165294;
 			
 			// aapt resource value: 0x7f07004c
 			public const int Galery = 2131165260;
@@ -5236,8 +5239,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f07004d
 			public const int Horse_Name = 2131165261;
 			
-			// aapt resource value: 0x7f070066
-			public const int Horses = 2131165286;
+			// aapt resource value: 0x7f070067
+			public const int Horses = 2131165287;
 			
 			// aapt resource value: 0x7f070045
 			public const int Image_too_small = 2131165253;
@@ -5248,11 +5251,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f070054
 			public const int Kg = 2131165268;
 			
-			// aapt resource value: 0x7f070069
-			public const int Languaje = 2131165289;
+			// aapt resource value: 0x7f07006a
+			public const int Languaje = 2131165290;
 			
-			// aapt resource value: 0x7f07006b
-			public const int Log_out = 2131165291;
+			// aapt resource value: 0x7f07006c
+			public const int Log_out = 2131165292;
 			
 			// aapt resource value: 0x7f07005e
 			public const int Mare = 2131165278;
@@ -5260,11 +5263,11 @@ namespace CABASUS
 			// aapt resource value: 0x7f070055
 			public const int Mts = 2131165269;
 			
-			// aapt resource value: 0x7f070065
-			public const int New_password_sent = 2131165285;
+			// aapt resource value: 0x7f070066
+			public const int New_password_sent = 2131165286;
 			
-			// aapt resource value: 0x7f070070
-			public const int No = 2131165296;
+			// aapt resource value: 0x7f070071
+			public const int No = 2131165297;
 			
 			// aapt resource value: 0x7f070038
 			public const int No_internet_connection = 2131165240;
@@ -5281,8 +5284,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f07003f
 			public const int Phone = 2131165247;
 			
-			// aapt resource value: 0x7f070060
-			public const int Reset_your_password = 2131165280;
+			// aapt resource value: 0x7f070061
+			public const int Reset_your_password = 2131165281;
 			
 			// aapt resource value: 0x7f070059
 			public const int Search = 2131165273;
@@ -5290,14 +5293,14 @@ namespace CABASUS
 			// aapt resource value: 0x7f07004a
 			public const int Select_an_option = 2131165258;
 			
-			// aapt resource value: 0x7f070062
-			public const int Send = 2131165282;
+			// aapt resource value: 0x7f070063
+			public const int Send = 2131165283;
 			
 			// aapt resource value: 0x7f07005f
 			public const int Stallion = 2131165279;
 			
-			// aapt resource value: 0x7f07006a
-			public const int Terms_and_Conditions = 2131165290;
+			// aapt resource value: 0x7f07006b
+			public const int Terms_and_Conditions = 2131165291;
 			
 			// aapt resource value: 0x7f070044
 			public const int The_date_is_not_valid = 2131165252;
@@ -5305,8 +5308,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f070049
 			public const int The_information = 2131165257;
 			
-			// aapt resource value: 0x7f070064
-			public const int The_mail_could_not_be_sent = 2131165284;
+			// aapt resource value: 0x7f070065
+			public const int The_mail_could_not_be_sent = 2131165285;
 			
 			// aapt resource value: 0x7f07005a
 			public const int There_are_empty_fields = 2131165274;
@@ -5320,8 +5323,8 @@ namespace CABASUS
 			// aapt resource value: 0x7f07004e
 			public const int Weight = 2131165262;
 			
-			// aapt resource value: 0x7f07006f
-			public const int Yes = 2131165295;
+			// aapt resource value: 0x7f070070
+			public const int Yes = 2131165296;
 			
 			// aapt resource value: 0x7f070047
 			public const int You_cant_recover_image = 2131165255;

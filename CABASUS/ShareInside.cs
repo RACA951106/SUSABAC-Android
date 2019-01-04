@@ -277,12 +277,22 @@ namespace CABASUS
                         if (httpResponse.StatusCode == HttpStatusCode.OK)
                         {
                             var img = await httpResponse.Content.ReadAsByteArrayAsync();
-                            Java.IO.File _dir = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "CABASUS");
+
+                            var bitmap = Bitmap.CreateScaledBitmap(BitmapFactory.DecodeByteArray(img, 0, img.Length), 100, 100, false);
+
+                            byte[] newImg;
+                            using (var stream = new MemoryStream())
+                            {
+                                bitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, stream);
+                                newImg = stream.ToArray();
+                            }
+
+                            Java.IO.File _dir = new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)), "TemporalCaballos");
                             if (!_dir.Exists())
                                 _dir.Mkdirs();
                             Java.IO.File _file = new Java.IO.File(_dir, id_caballo + ".jpg");
                             Android.Net.Uri Uri_Save = Android.Net.Uri.FromFile(_file);
-                            File.WriteAllBytes(Uri_Save.Path, img);
+                            File.WriteAllBytes(Uri_Save.Path, newImg);
                             return Uri_Save.Path;
                         }
                         else
@@ -297,6 +307,7 @@ namespace CABASUS
                 return "No hay conexion";
             }
         }
+        
         public void Guardar_DatosUsuario(usuarios user)
         {
             var guardarususario = new usuarios();
