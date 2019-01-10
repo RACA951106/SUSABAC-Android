@@ -6,9 +6,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace CABASUS.Fragments
 {
@@ -16,41 +14,26 @@ namespace CABASUS.Fragments
     {
         ListView ListViewCaballos;
         FragmentTransaction transaccion;
+        List<string> selecccion = new List<string>();
         FragmentBarraBusqueda _FragmentBarraBusqueda = new FragmentBarraBusqueda();
-        FragmentEliminarCaballo _FragmentEliminarCaballo = new FragmentEliminarCaballo();
+        FragmentEliminarCaballo _FragmentEliminarCaballo;
+        
         public override async void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
             await Task.Delay(1000);
             
             var ListaCaballos = new ShareInside().ConsultarCaballos();
-            List<string> url_local = new List<string>();
-            if (File.Exists(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml")))
-            {
-                var serializador = new XmlSerializer(typeof(List<string>));
-                var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml"));
-                url_local = (List<string>)serializador.Deserialize(Lectura);
-                Lectura.Close();
-            }
-            else
-            {
-                foreach (var item in ListaCaballos)
-                {
-                    url_local.Add(await new ShareInside().DownloadImageAsync(item.foto_caballo, item.id_caballo));
-                }
-                var serializador = new XmlSerializer(typeof(List<string>));
-                var Escritura = new StreamWriter(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml"));
-                serializador.Serialize(Escritura, url_local);
-                Escritura.Close();
-            }
-
-            ListViewCaballos.Adapter = new Adaptadores.AdaptadorCaballos(ListaCaballos, url_local, Activity, transaccion, _FragmentBarraBusqueda, _FragmentEliminarCaballo);
+            var ListaUrl_Local = await new ShareInside().ConsultarUrl_LocalAsync(ListaCaballos);
+            ListViewCaballos.Adapter = new Adaptadores.AdaptadorCaballos(ListaCaballos, ListaUrl_Local, Activity, transaccion, _FragmentBarraBusqueda, _FragmentEliminarCaballo, selecccion);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View Vista = inflater.Inflate(Resource.Layout.LayoutFragmentHorses, container, false);
-            
+
+            _FragmentEliminarCaballo = new FragmentEliminarCaballo(selecccion);
+
             transaccion = FragmentManager.BeginTransaction();
             transaccion.Add(Resource.Id.BarraBusqueda, _FragmentBarraBusqueda, "BusquedaCaballos");
             transaccion.Add(Resource.Id.BarraBusqueda, _FragmentEliminarCaballo, "EliminarCaballos");

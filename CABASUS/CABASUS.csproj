@@ -93,8 +93,8 @@
     <Compile Include="VerificarInternet.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\RazasGender.db" />
     <GoogleServicesJson Include="google-services.json" />
+    <AndroidAsset Include="Assets\RazasGender.db" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
@@ -313,6 +313,12 @@
     <AndroidResource Include="Resources\layout\layout_EliminarCaballos.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Edith.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

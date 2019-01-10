@@ -50,6 +50,7 @@
   <string name="Mare">Mare</string>
   <string name="Stallion">Stallion</string>
   <string name="Error_loading_horse_list">Error loading horse list</string>
+  <string name="Owner">Owner</string>
 
   <!--Recuperar contraseña-->
   <string name="Reset_your_password">Reset your password</string>

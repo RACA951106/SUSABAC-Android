@@ -27,6 +27,7 @@ using Java.Lang;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Newtonsoft.Json;
+using SQLite;
 using static Android.App.DatePickerDialog;
 
 namespace CABASUS
@@ -197,7 +198,7 @@ namespace CABASUS
             {
                 if (HayConexion())
                 {
-                    string url = "http://192.168.0.10:5001/api/account/Login";
+                    string url = "http://192.168.1.74:5001/api/account/Login";
                     var json = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
                     HttpClient cliente = new HttpClient();
                     cliente.Timeout = TimeSpan.FromSeconds(20);
@@ -256,12 +257,13 @@ namespace CABASUS
             }
         }
 
-        public void GuardarCaballos(List<consultacompartidos> ListaCaballos)
+        public async Task GuardarCaballos(List<consultacompartidos> ListaCaballos)
         {
-            var serializador = new XmlSerializer(typeof(List<consultacompartidos>));
-            var Escritura = new StreamWriter(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
-            serializador.Serialize(Escritura, ListaCaballos);
-            Escritura.Close();
+            var con = new SQLiteConnection(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "RazasGender.sqlite"));
+            foreach (var item in ListaCaballos)
+            {
+                con.Query<Modelos.consultacompartidos>("insert into DescargarCaballos values ('"+item.id_caballo+"', '"+item.nombre_caballo+"', '"+item.foto_caballo+"', '"+item.id_usuario+"', '"+item.nombre_usuario+"', '"+item.foto_usuario+"');", new Modelos.consultacompartidos().id_caballo);
+            }
         }
         
         public async Task<string> DownloadImageAsync(string imageUrl, string id_caballo)
@@ -343,11 +345,27 @@ namespace CABASUS
 
         public List<consultacompartidos> ConsultarCaballos()
         {
-            var serializador = new XmlSerializer(typeof(List<consultacompartidos>));
-            var Lectura = new StreamReader(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
-            var datos = (List<consultacompartidos>)serializador.Deserialize(Lectura);
-            Lectura.Close();
-            return datos;
+            var con = new SQLiteConnection(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "RazasGender.sqlite"));
+            return con.Query<Modelos.consultacompartidos>("select * from DescargarCaballos", new Modelos.consultacompartidos().id_caballo);
+        }
+
+        public async Task<List<url_local>> ConsultarUrl_LocalAsync(List<consultacompartidos> ListaCaballos)
+        {
+            var con = new SQLiteConnection(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "RazasGender.sqlite"));
+
+            var consulta = con.Query<Modelos.url_local>("select * from url_local", new Modelos.url_local().id_caballo);
+
+            if (consulta.Count == ListaCaballos.Count)
+                return consulta;
+            else
+            {
+                foreach (var item in ListaCaballos)
+                {
+                    var foto = await DownloadImageAsync(item.foto_caballo, item.id_caballo);
+                    con.Query<url_local>("insert into url_local values('" + item.id_caballo + "', '" + foto + "', '" + "no" + "')", new url_local().id_caballo);
+                }
+                return con.Query<Modelos.url_local>("select * from url_local", new Modelos.url_local().id_caballo); 
+            }
         }
     }
 
@@ -355,8 +373,6 @@ namespace CABASUS
     {
         public class BaseActivity : AppCompatActivity
         {
-
-
             protected const int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
             protected const int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
 

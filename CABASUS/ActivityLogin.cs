@@ -35,8 +35,10 @@ namespace CABASUS
                 StartActivity(typeof(ActivityPrincipal));
             }
 
+            new ShareInside().CopyDocuments("RazasGender.sqlite", "RazasGender.db");
+
             #region Casamiento
-                var btnCreateAccount = FindViewById<TextView>(Resource.Id.btnCreateAccount);
+            var btnCreateAccount = FindViewById<TextView>(Resource.Id.btnCreateAccount);
             var btnLogIn = FindViewById<TextView>(Resource.Id.btnLogIn);
             var VideoFondo = FindViewById<VideoView>(Resource.Id.FondoVideo);
 

@@ -46,7 +46,7 @@ namespace CABASUS
             PrimerCaballo = bool.Parse(Intent.GetStringExtra("PrimerCaballo"));
             ActuaizarCaballo = bool.Parse(Intent.GetStringExtra("ActuaizarCaballo"));
             #endregion
-            new ShareInside().CopyDocuments("RazasGender.sqlite", "RazasGender.db");
+            
             var txtListo = FindViewById<TextView>(Resource.Id.btnListoRegistroCaballos);
             GradientDrawable gdCreate = new GradientDrawable();
             gdCreate.SetColor(Color.Rgb(246, 128, 25));
@@ -257,56 +257,10 @@ namespace CABASUS
                         }
                         else
                         {
-                            //XmlDocument doc = new XmlDocument();
-                            //doc.Load(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
-                            //XmlNode nodo = doc.CreateElement("consultacompartidos");
-                            
-                            //XmlElement _id_caballo = doc.CreateElement("id_caballo");
-                            //_id_caballo.InnerText = id_caballo;
-                            //nodo.AppendChild(_id_caballo);
-
-                            //XmlElement nombre_caballo = doc.CreateElement("nombre_caballo");
-                            //nombre_caballo.InnerText = ModeloCaballos.nombre;
-                            //nodo.AppendChild(nombre_caballo);
-
-                            //XmlElement foto_caballo = doc.CreateElement("foto_caballo");
-                            //foto_caballo.InnerText = url_imagen;
-                            //nodo.AppendChild(foto_caballo);
-
-                            //XmlElement id_usuario = doc.CreateElement("id_usuario");
-                            //id_usuario.InnerText = new ShareInside().Consultar_DatosUsuario().id_usuario;
-                            //nodo.AppendChild(id_usuario);
-
-                            //XmlElement nombre_usuario = doc.CreateElement("nombre_usuario");
-                            //nombre_usuario.InnerText = new ShareInside().Consultar_DatosUsuario().nombre;
-                            //nodo.AppendChild(nombre_usuario);
-
-                            //XmlElement foto_usuario = doc.CreateElement("foto_usuario");
-                            //foto_usuario.InnerText = new ShareInside().Consultar_DatosUsuario().foto;
-                            //nodo.AppendChild(foto_usuario);
-
-                            //XmlNode refNodo = doc.DocumentElement;
-                            //refNodo.InsertAfter(nodo, refNodo.LastChild);
-
-                            //doc.Save(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "ListaCaballosPropiosYCompartidos.xml"));
-
-
-                            //try
-                            //{
-                            //    XmlDocument docurl = new XmlDocument();
-                            //    docurl.Load(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml"));
-                            //    XmlElement url_local = docurl.CreateElement("url");
-                            //    url_local.InnerText = await new ShareInside().DownloadImageAsync(url_imagen, id_caballo);
-                            //    docurl.AppendChild(url_local);
-                            //    docurl.InsertAfter(url_local, docurl.LastChild);
-                            //    docurl.Save(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml"));
-                            //}
-                            //catch (System.Exception ex)
-                            //{
-                            //    var x = "";
-                            //}
-
-
+                            var con = new SQLiteConnection(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "RazasGender.sqlite"));
+                            con.Query<Modelos.consultacompartidos>("insert into DescargarCaballos values ('" + id_caballo + "', '" + ModeloCaballos.nombre + "', '" + FotoCaballo.foto + "', '" + new ShareInside().Consultar_DatosUsuario().id_usuario + "', '" + new ShareInside().Consultar_DatosUsuario().nombre + "', '" + new ShareInside().Consultar_DatosUsuario().foto + "');", new Modelos.consultacompartidos().id_caballo);
+                            var foto = await new ShareInside().DownloadImageAsync(FotoCaballo.foto, id_caballo);
+                            con.Query<url_local>("insert into url_local values('" + id_caballo + "', '" + foto + "', '" + "no" + "')", new url_local().id_caballo);
                             progressBar.Visibility = Android.Views.ViewStates.Invisible;
                             Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                             StartActivity(typeof(ActivityPrincipal));
@@ -316,6 +270,9 @@ namespace CABASUS
                 }
                 else
                 {
+                    var con = new SQLiteConnection(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "RazasGender.sqlite"));
+                    con.Query<Modelos.consultacompartidos>("insert into DescargarCaballos values ('" + id_caballo + "', '" + ModeloCaballos.nombre + "', '" + "No hay conexion" + "', '" + new ShareInside().Consultar_DatosUsuario().id_usuario + "', '" + new ShareInside().Consultar_DatosUsuario().nombre + "', '" + new ShareInside().Consultar_DatosUsuario().foto + "');", new Modelos.consultacompartidos().id_caballo);
+                    con.Query<url_local>("insert into url_local values('" + id_caballo + "', '" + "No hay conexion" + "', '" + "no" + "')", new url_local().id_caballo);
                     progressBar.Visibility = Android.Views.ViewStates.Invisible;
                     Window.ClearFlags(Android.Views.WindowManagerFlags.NotTouchable);
                     Toast.MakeText(this, "Datos guardados con foto por default", ToastLength.Short).Show();

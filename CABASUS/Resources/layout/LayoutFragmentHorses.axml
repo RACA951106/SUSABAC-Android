@@ -19,7 +19,8 @@
 			android:layout_height="match_parent"
 			android:scrollbarStyle="insideOverlay"
 			android:overScrollMode="never"
-			android:id="@+id/lstCaballos"/>
+			android:id="@+id/lstCaballos"
+			android:choiceMode="multipleChoice"/>
 	</LinearLayout>
     <ImageView
         android:id="@+id/btnAdd"

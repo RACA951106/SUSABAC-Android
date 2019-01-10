@@ -145,7 +145,7 @@ namespace CABASUS
                         #region Insertar datos y foto de usuario
                         if (fechavalidacion == true)
                         {
-                            string url = "http://192.168.0.10:5001/api/Account/registrar";
+                            string url = "http://192.168.1.74:5001/api/Account/registrar";
                             string formato = "application/json";
                             usuarios usuarios = new usuarios()
                             {
@@ -175,7 +175,7 @@ namespace CABASUS
                                         if (cameraUri != null)
                                         {
                                             url_foto = await new ShareInside().SubirImagen("usuarios", Obtener_idusuario(cont.token), cameraUri);
-                                            var server = "http://192.168.0.10:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
+                                            var server = "http://192.168.1.74:5001/api/Usuario/actualizarFoto?URL=" + url_foto;
                                             cliente.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", cont.token);
                                             respuesta = await cliente.GetAsync(server);
                                             var content = await respuesta.Content.ReadAsStringAsync();
@@ -268,7 +268,7 @@ namespace CABASUS
             try
             {
                 var datos = new ShareInside().Consultar_DatosUsuario();
-                string url = "http://192.168.0.10:5001/api/Usuario/actualizar";
+                string url = "http://192.168.1.74:5001/api/Usuario/actualizar";
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 if (new ShareInside().HayConexion())

@@ -16,7 +16,7 @@ namespace CABASUS.Modelos
         {
             if (new ShareInside().HayConexion())
             {
-                string server = "http://192.168.0.10:5001/api/caballo/registrar";
+                string server = "http://192.168.1.74:5001/api/caballo/registrar";
                 string jsonContent = "application/json";
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
@@ -37,7 +37,7 @@ namespace CABASUS.Modelos
         {
             if (new ShareInside().HayConexion())
             {
-                string server = "http://192.168.0.10:5001/api/caballo/actualizarFoto";
+                string server = "http://192.168.1.74:5001/api/caballo/actualizarFoto";
                 string jsonContent = "application/json";
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
@@ -58,7 +58,7 @@ namespace CABASUS.Modelos
         {
             if (new ShareInside().HayConexion())
             {
-                string server = "http://192.168.0.10:5001/api/Account/recuperarPass?email=" + email+"&idioma="+idioma;
+                string server = "http://192.168.1.74:5001/api/Account/recuperarPass?email=" + email+"&idioma="+idioma;
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 var consulta = await cliente.GetAsync(server);
@@ -76,7 +76,7 @@ namespace CABASUS.Modelos
         {
             if (new ShareInside().HayConexion())
             {
-                string server = "http://192.168.0.10:5001/api/Compartir/consultarcompartidos";
+                string server = "http://192.168.1.74:5001/api/Compartir/consultarcompartidos";
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarToken());
@@ -88,7 +88,7 @@ namespace CABASUS.Modelos
                     var data = JsonConvert.DeserializeObject<List<consultacompartidos>>(ConsultaJson);
                     if (data.Count > 0)
                     {
-                        new ShareInside().GuardarCaballos(data);
+                        await new ShareInside().GuardarCaballos(data);
                         return "true";
                     }
                     else
@@ -105,7 +105,7 @@ namespace CABASUS.Modelos
         {
             if (new ShareInside().HayConexion())
             {
-                string server = "http://192.168.0.10:5001/api/Caballo/consultaridcaballo/"+Id_Caballo;
+                string server = "http://192.168.1.74:5001/api/Caballo/consultaridcaballo/"+Id_Caballo;
                 HttpClient cliente = new HttpClient();
                 cliente.Timeout = TimeSpan.FromSeconds(20);
                 cliente.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await new ShareInside().ConsultarToken());
