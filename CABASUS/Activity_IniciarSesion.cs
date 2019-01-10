@@ -33,8 +33,8 @@ namespace CABASUS
             gd.SetCornerRadius(500);
             txtIniciarSesion.SetBackgroundDrawable(gd);
 
-            txtCorreo.Text = "arelicsantos@gmail.com";
-            txtContrasena.Text = "1234";
+            txtCorreo.Text = "a@a.com";
+            txtContrasena.Text = "q";
             
             txtIniciarSesion.Click +=async delegate {
                 progress.Visibility = Android.Views.ViewStates.Visible;

@@ -66,6 +66,7 @@
     <Compile Include="Adaptadores\AdaptadorCaballos.cs" />
     <Compile Include="Adaptadores\AdaptadorCycleHorses.cs" />
     <Compile Include="Adaptadores\AdaptadorGender.cs" />
+    <Compile Include="Adaptadores\AdaptadorGrid.cs" />
     <Compile Include="Adaptadores\AdaptadorRazas.cs" />
     <Compile Include="ActivityPrincipal.cs" />
     <Compile Include="Adaptadores\PagerAdapterLogin.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Fragments\FragmentCycleHorses.cs" />
     <Compile Include="Fragments\FragmentEliminarCaballo.cs" />
     <Compile Include="Fragments\FragmentHorses.cs" />
+    <Compile Include="GaleriaBuscarCaballos.cs" />
     <Compile Include="Modelos\actividades.cs" />
     <Compile Include="Modelos\caballos.cs" />
     <Compile Include="Modelos\compartidos.cs" />
@@ -158,6 +160,9 @@
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v4">
       <Version>27.0.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading">
+      <Version>2.4.5.860-pre</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Firebase.Messaging">
       <Version>60.1142.1</Version>
@@ -311,6 +316,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\layout_EliminarCaballos.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\GridLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ItemGrid.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

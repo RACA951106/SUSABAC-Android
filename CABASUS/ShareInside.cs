@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,7 @@ using Android.Views;
 using Android.Webkit;
 using Android.Widget;
 using CABASUS.Modelos;
+using FFImageLoading;
 using Firebase.Iid;
 using Java.Lang;
 using Microsoft.WindowsAzure.Storage;
@@ -324,6 +326,7 @@ namespace CABASUS
             serializador.Serialize(Escritura, guardarususario);
             Escritura.Close();
         }
+
         public usuarios Consultar_DatosUsuario()
         {
             var serializador = new XmlSerializer(typeof(usuarios));
