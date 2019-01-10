@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,7 @@ using Android.Views;
 using Android.Webkit;
 using Android.Widget;
 using CABASUS.Modelos;
+using FFImageLoading;
 using Firebase.Iid;
 using Java.Lang;
 using Microsoft.WindowsAzure.Storage;
@@ -197,7 +199,7 @@ namespace CABASUS
             {
                 if (HayConexion())
                 {
-                    string url = "http://192.168.0.10:5001/api/account/Login";
+                    string url = "http://192.168.1.74:5001/api/account/Login";
                     var json = new StringContent(JsonConvert.SerializeObject(log), Encoding.UTF8, "application/json");
                     HttpClient cliente = new HttpClient();
                     cliente.Timeout = TimeSpan.FromSeconds(20);
@@ -322,6 +324,7 @@ namespace CABASUS
             serializador.Serialize(Escritura, guardarususario);
             Escritura.Close();
         }
+
         public usuarios Consultar_DatosUsuario()
         {
             var serializador = new XmlSerializer(typeof(usuarios));

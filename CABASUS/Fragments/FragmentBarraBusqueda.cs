@@ -22,8 +22,12 @@ namespace CABASUS.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View Vista = inflater.Inflate(Resource.Layout.layout_BarraBusqueda, container, false);
-            
-            return Vista;
+            EditText buscador = Vista.FindViewById<EditText>(Resource.Id.editText);
+            buscador.Click += delegate
+            {
+               Activity.StartActivity(typeof(GaleriaBuscarCaballos));
+            };
+                return Vista;
         }
     }
 }

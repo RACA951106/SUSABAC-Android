@@ -5,8 +5,13 @@ using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using Galeria;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -15,14 +20,15 @@ namespace CABASUS.Fragments
     public class FragmentHorses : Fragment
     {
         ListView ListViewCaballos;
+  
         FragmentTransaction transaccion;
         FragmentBarraBusqueda _FragmentBarraBusqueda = new FragmentBarraBusqueda();
         FragmentEliminarCaballo _FragmentEliminarCaballo = new FragmentEliminarCaballo();
+        
         public override async void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
             await Task.Delay(1000);
-            
             var ListaCaballos = new ShareInside().ConsultarCaballos();
             List<string> url_local = new List<string>();
             if (File.Exists(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Url_FotosCaballos.xml")))
@@ -50,7 +56,7 @@ namespace CABASUS.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View Vista = inflater.Inflate(Resource.Layout.LayoutFragmentHorses, container, false);
-            
+
             transaccion = FragmentManager.BeginTransaction();
             transaccion.Add(Resource.Id.BarraBusqueda, _FragmentBarraBusqueda, "BusquedaCaballos");
             transaccion.Add(Resource.Id.BarraBusqueda, _FragmentEliminarCaballo, "EliminarCaballos");
@@ -63,7 +69,8 @@ namespace CABASUS.Fragments
             gd.SetCornerRadius(1000);
             var btnAgregar = Vista.FindViewById<ImageView>(Resource.Id.btnAdd);
             btnAgregar.SetBackgroundDrawable(gd);
-            btnAgregar.Click += delegate {
+            btnAgregar.Click += delegate
+            {
                 var intent = new Intent(Activity, typeof(Activity_RegistroCaballos));
                 intent.PutExtra("ActuaizarCaballo", "false");
                 intent.PutExtra("PrimerCaballo", "false");
