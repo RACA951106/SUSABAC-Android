@@ -9,65 +9,79 @@ using CABASUS.Fragments;
 using Android.Graphics;
 using Android.Support.Design.Widget;
 using Android.Views;
+using Android.Support.V4.Widget;
 
 namespace CABASUS
 {
     [Activity(Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
-    public class ActivityPrincipal : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class ActivityPrincipal : AppCompatActivity, NavigationView.IOnNavigationItemSelectedListener
     {
         internal static readonly string CHANNEL_ID = "my_notification_channel";
         internal static readonly int NOTIFICATION_ID = 100;
         FragmentTransaction transaccion;
-        FragmentHorses _FragmentHorses = new FragmentHorses();
         FragmentAjustes _FragmentAjustes = new FragmentAjustes();
+
+        public bool OnNavigationItemSelected(IMenuItem item)
+        {
+            int id = item.ItemId;
+            if (id == Resource.Id.nav_diary)
+            {
+                
+            }
+            else if (id == Resource.Id.nav_activities)
+            {
+                
+            }
+            else if (id == Resource.Id.nav_calendar)
+            {
+            }
+            else if (id == Resource.Id.nav_chat)
+            {
+
+            }
+            else if (id == Resource.Id.nav_settings)
+            {
+                transaccion = FragmentManager.BeginTransaction();
+                transaccion.Add(Resource.Id.FrameContent, _FragmentAjustes, "Ajustes");
+                transaccion.Show(_FragmentAjustes);
+                transaccion.Commit();
+            }
+            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            drawer.CloseDrawer(GravityCompat.Start);
+            return true;
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.LayoutActivityPrincipal);
-            Window.SetStatusBarColor(Color.Black);
-            Window.SetNavigationBarColor(Color.Black);
+            SetContentView(Resource.Layout.Navigation);
+            //Window.SetStatusBarColor(Color.Black);
+            //Window.SetNavigationBarColor(Color.Black);
 
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            navigation.SetOnNavigationItemSelectedListener(this);
+            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, Resource.String.navigation_drawer_open, Resource.String.navigation_drawer_close);
+            drawer.AddDrawerListener(toggle);
+            toggle.SyncState();
 
-            transaccion = FragmentManager.BeginTransaction();
-            transaccion.Add(Resource.Id.Pantallas, _FragmentHorses, "Caballos");
-            transaccion.Add(Resource.Id.Pantallas, _FragmentAjustes, "Ajustes");
-            transaccion.Hide(_FragmentAjustes);
-            transaccion.Show(_FragmentHorses);
-            transaccion.Commit();
+            NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            navigationView.SetNavigationItemSelectedListener(this);
+            var btnMenu = FindViewById<ImageView>(Resource.Id.imgMenu);
+            btnMenu.Click += delegate {
+                drawer.OpenDrawer(GravityCompat.Start);
+            };
         }
+
         public override void OnBackPressed()
         {
-        }
-        public bool OnNavigationItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
+            DrawerLayout drawer = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            if (drawer.IsDrawerOpen(GravityCompat.Start))
             {
-                case Resource.Id.navigation_home:
-                    transaccion = FragmentManager.BeginTransaction();
-                    transaccion.Hide(_FragmentAjustes);
-                    transaccion.Show(_FragmentHorses);
-                    transaccion.Commit();
-                    return true;
-                case Resource.Id.navigation_team_journal:
-                    
-                    return true;
-                case Resource.Id.navigation_activities:
-                    
-                    return true;
-                case Resource.Id.navigation_notifications:
-
-                    return true;
-                case Resource.Id.navigation_settings:
-                    transaccion = FragmentManager.BeginTransaction();
-                    transaccion.Hide(_FragmentHorses);
-                    transaccion.Show(_FragmentAjustes);
-                    transaccion.Commit();
-                    return true;
+                drawer.CloseDrawer(GravityCompat.Start);
             }
-            
-            return false;
+            else
+            {
+                base.OnBackPressed();
+            }
         }
     }
 }
